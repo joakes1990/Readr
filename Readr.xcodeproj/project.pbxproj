@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */; };
+		D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014FCCD1F3E66AA000B906B /* ImportFeed.swift */; };
 		D084B42A1F3E17E80091EAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B4291F3E17E80091EAFF /* AppDelegate.swift */; };
 		D084B42C1F3E17E80091EAFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B42B1F3E17E80091EAFF /* ViewController.swift */; };
 		D084B42F1F3E17E80091EAFF /* Readr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D084B42D1F3E17E80091EAFF /* Readr.xcdatamodeld */; };
@@ -26,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedViewController.swift; sourceTree = "<group>"; };
+		D014FCCD1F3E66AA000B906B /* ImportFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeed.swift; sourceTree = "<group>"; };
 		D084B4261F3E17E80091EAFF /* Readr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Readr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D084B4291F3E17E80091EAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D084B42B1F3E17E80091EAFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +61,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D014FCC81F3E63E7000B906B /* Feed Management */ = {
+			isa = PBXGroup;
+			children = (
+				D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */,
+				D014FCCD1F3E66AA000B906B /* ImportFeed.swift */,
+			);
+			path = "Feed Management";
+			sourceTree = "<group>";
+		};
 		D084B41D1F3E17E80091EAFF = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +91,7 @@
 		D084B4281F3E17E80091EAFF /* Readr */ = {
 			isa = PBXGroup;
 			children = (
+				D014FCC81F3E63E7000B906B /* Feed Management */,
 				D084B4291F3E17E80091EAFF /* AppDelegate.swift */,
 				D084B42B1F3E17E80091EAFF /* ViewController.swift */,
 				D084B4301F3E17E80091EAFF /* Assets.xcassets */,
@@ -200,6 +214,8 @@
 			files = (
 				D084B42F1F3E17E80091EAFF /* Readr.xcdatamodeld in Sources */,
 				D084B42C1F3E17E80091EAFF /* ViewController.swift in Sources */,
+				D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */,
+				D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */,
 				D084B42A1F3E17E80091EAFF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

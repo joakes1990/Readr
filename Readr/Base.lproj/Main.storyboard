@@ -678,7 +678,109 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="53" y="-93"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="Bjs-lp-xV2">
+            <objects>
+                <windowController id="NMC-bt-aC2" sceneMemberID="viewController">
+                    <window key="window" title="Add Feed" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Rxi-sy-Pyc">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="516" y="564" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1669"/>
+                        <connections>
+                            <outlet property="delegate" destination="NMC-bt-aC2" id="CoV-EN-usy"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="yfo-vp-hBL" kind="relationship" relationship="window.shadowedContentViewController" id="UjI-C8-M7b"/>
+                    </connections>
+                </windowController>
+                <customObject id="w36-7J-uTS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="703" y="237"/>
+        </scene>
+        <!--Add Feed View Controller-->
+        <scene sceneID="IwL-6E-voG">
+            <objects>
+                <viewController showSeguePresentationStyle="single" id="yfo-vp-hBL" customClass="AddFeedViewController" customModule="Readr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="kou-Hu-zcc">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="190"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wwS-0U-523">
+                                <rect key="frame" x="20" y="106" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="OBt-Ep-iHj"/>
+                                    <constraint firstAttribute="width" constant="64" id="mam-Me-FEj"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="reardlogomac" id="oj2-gF-i9e"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RVy-0j-FYq">
+                                <rect key="frame" x="90" y="129" width="311" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Enter a URL of a feed you would like Readr to track" id="efN-GS-eK7">
+                                    <font key="font" metaFont="titleBar"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U4h-Kx-ZjJ">
+                                <rect key="frame" x="302" y="13" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="D0r-Vh-2Yd">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancelClicked:" target="yfo-vp-hBL" id="hMC-Ld-HQs"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DGR-I6-JlN">
+                                <rect key="frame" x="384" y="13" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ihK-ye-5S0">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                            </button>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wGW-V1-R2W">
+                                <rect key="frame" x="92" y="76" width="307" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="http://example.com" drawsBackground="YES" id="zKd-O9-blV">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="wGW-V1-R2W" firstAttribute="top" secondItem="RVy-0j-FYq" secondAttribute="bottom" constant="31" id="FrX-g8-HQN"/>
+                            <constraint firstAttribute="bottom" secondItem="DGR-I6-JlN" secondAttribute="bottom" constant="20" id="Fz8-Fi-bl6"/>
+                            <constraint firstItem="wGW-V1-R2W" firstAttribute="trailing" secondItem="RVy-0j-FYq" secondAttribute="trailing" id="LSa-ip-tUf"/>
+                            <constraint firstItem="U4h-Kx-ZjJ" firstAttribute="centerY" secondItem="DGR-I6-JlN" secondAttribute="centerY" id="M3r-Gl-mPU"/>
+                            <constraint firstItem="RVy-0j-FYq" firstAttribute="centerY" secondItem="wwS-0U-523" secondAttribute="centerY" id="Ugf-JU-wDK"/>
+                            <constraint firstItem="wGW-V1-R2W" firstAttribute="leading" secondItem="RVy-0j-FYq" secondAttribute="leading" id="UvM-mt-c6e"/>
+                            <constraint firstItem="U4h-Kx-ZjJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kou-Hu-zcc" secondAttribute="leading" constant="20" symbolic="YES" id="VLc-Dg-hw4"/>
+                            <constraint firstItem="RVy-0j-FYq" firstAttribute="leading" secondItem="wwS-0U-523" secondAttribute="trailing" constant="8" id="Y3M-Xb-o49"/>
+                            <constraint firstItem="wwS-0U-523" firstAttribute="leading" secondItem="kou-Hu-zcc" secondAttribute="leading" constant="20" id="ZUQ-nF-01V"/>
+                            <constraint firstItem="DGR-I6-JlN" firstAttribute="leading" secondItem="U4h-Kx-ZjJ" secondAttribute="trailing" constant="12" id="ai3-W9-yXZ"/>
+                            <constraint firstItem="wwS-0U-523" firstAttribute="top" secondItem="kou-Hu-zcc" secondAttribute="top" constant="20" id="leC-Wd-2GS"/>
+                            <constraint firstItem="DGR-I6-JlN" firstAttribute="width" secondItem="U4h-Kx-ZjJ" secondAttribute="width" id="pZn-9x-4Em"/>
+                            <constraint firstAttribute="trailing" secondItem="DGR-I6-JlN" secondAttribute="trailing" constant="20" id="qTr-zx-8pz"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RVy-0j-FYq" secondAttribute="trailing" constant="8" id="sP0-uR-INx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="urlTextField" destination="wGW-V1-R2W" id="EQp-st-GK5"/>
+                    </connections>
+                </viewController>
+                <customObject id="Wi8-ZA-pfk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="703" y="672"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -693,7 +795,11 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="K3y-cX-GXf"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Iik-O3-yAl"/>
-                                <toolbarItem implicitItemIdentifier="3B41B897-AB91-43A3-9951-1672C7EA98E6" label="Add Feed" paletteLabel="Add Feed" tag="-1" image="add" id="COj-A5-Qx6"/>
+                                <toolbarItem implicitItemIdentifier="3B41B897-AB91-43A3-9951-1672C7EA98E6" label="Add Feed" paletteLabel="Add Feed" tag="-1" image="add" id="COj-A5-Qx6">
+                                    <connections>
+                                        <segue destination="NMC-bt-aC2" kind="modal" id="jTy-GF-rTD"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="D7085B76-BDE6-434A-A2FA-16C86240B552" label="Sidebar" paletteLabel="Sidebar" tag="-1" image="sidebar" id="VU7-zO-2SS"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -711,7 +817,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="66" y="266"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -724,11 +830,12 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="88" y="712"/>
         </scene>
     </scenes>
     <resources>
         <image name="add" width="24" height="24"/>
+        <image name="reardlogomac" width="128" height="128"/>
         <image name="sidebar" width="48" height="48"/>
     </resources>
 </document>
