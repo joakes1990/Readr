@@ -15,6 +15,9 @@
 		D084B4311F3E17E80091EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D084B4301F3E17E80091EAFF /* Assets.xcassets */; };
 		D084B4341F3E17E80091EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D084B4321F3E17E80091EAFF /* Main.storyboard */; };
 		D084B4401F3E17E80091EAFF /* ReadrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B43F1F3E17E80091EAFF /* ReadrTests.swift */; };
+		D0D06A851F4BB585008E0112 /* ImportFeedObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */; };
+		D0D7107C1F4BBF4100062D11 /* OklasoftRSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D7107A1F4BBF1D00062D11 /* OklasoftRSS.framework */; };
+		D0D7107D1F4BBF4100062D11 /* OklasoftRSS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0D7107A1F4BBF1D00062D11 /* OklasoftRSS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +29,20 @@
 			remoteInfo = Readr;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D0D7107E1F4BBF4100062D11 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D0D7107D1F4BBF4100062D11 /* OklasoftRSS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +58,8 @@
 		D084B43B1F3E17E80091EAFF /* ReadrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReadrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D084B43F1F3E17E80091EAFF /* ReadrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadrTests.swift; sourceTree = "<group>"; };
 		D084B4411F3E17E80091EAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeedObserver.swift; sourceTree = "<group>"; };
+		D0D7107A1F4BBF1D00062D11 /* OklasoftRSS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OklasoftRSS.framework; path = System/Library/Frameworks/OklasoftRSS.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0D7107C1F4BBF4100062D11 /* OklasoftRSS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +86,7 @@
 			children = (
 				D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */,
 				D014FCCD1F3E66AA000B906B /* ImportFeed.swift */,
+				D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */,
 			);
 			path = "Feed Management";
 			sourceTree = "<group>";
@@ -74,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				D084B4281F3E17E80091EAFF /* Readr */,
+				D0D06A861F4BBB3D008E0112 /* Frameworks */,
 				D084B43E1F3E17E80091EAFF /* ReadrTests */,
 				D084B4271F3E17E80091EAFF /* Products */,
 			);
@@ -112,6 +134,14 @@
 			path = ReadrTests;
 			sourceTree = "<group>";
 		};
+		D0D06A861F4BBB3D008E0112 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0D7107A1F4BBF1D00062D11 /* OklasoftRSS.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,6 +152,7 @@
 				D084B4221F3E17E80091EAFF /* Sources */,
 				D084B4231F3E17E80091EAFF /* Frameworks */,
 				D084B4241F3E17E80091EAFF /* Resources */,
+				D0D7107E1F4BBF4100062D11 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -212,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0D06A851F4BB585008E0112 /* ImportFeedObserver.swift in Sources */,
 				D084B42F1F3E17E80091EAFF /* Readr.xcdatamodeld in Sources */,
 				D084B42C1F3E17E80091EAFF /* ViewController.swift in Sources */,
 				D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */,

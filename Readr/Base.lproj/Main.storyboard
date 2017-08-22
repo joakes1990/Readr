@@ -747,6 +747,9 @@ Gw
 DQ
 </string>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="addFeed:" target="yfo-vp-hBL" id="LsS-jj-kzg"/>
+                                </connections>
                             </button>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wGW-V1-R2W">
                                 <rect key="frame" x="92" y="76" width="307" height="22"/>
