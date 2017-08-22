@@ -15,9 +15,8 @@
 		D084B4311F3E17E80091EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D084B4301F3E17E80091EAFF /* Assets.xcassets */; };
 		D084B4341F3E17E80091EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D084B4321F3E17E80091EAFF /* Main.storyboard */; };
 		D084B4401F3E17E80091EAFF /* ReadrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B43F1F3E17E80091EAFF /* ReadrTests.swift */; };
+		D0C0EED61F4CC0AB009FB66F /* OklasoftRSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C0EECF1F4CC05A009FB66F /* OklasoftRSS.framework */; };
 		D0D06A851F4BB585008E0112 /* ImportFeedObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */; };
-		D0D7107C1F4BBF4100062D11 /* OklasoftRSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D7107A1F4BBF1D00062D11 /* OklasoftRSS.framework */; };
-		D0D7107D1F4BBF4100062D11 /* OklasoftRSS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0D7107A1F4BBF1D00062D11 /* OklasoftRSS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,16 +27,43 @@
 			remoteGlobalIDString = D084B4251F3E17E80091EAFF;
 			remoteInfo = Readr;
 		};
+		D0C0EECE1F4CC05A009FB66F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D088D3B11F0861E20048B95A;
+			remoteInfo = OklasoftRSS;
+		};
+		D0C0EED01F4CC05A009FB66F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D088D3BA1F0861E20048B95A;
+			remoteInfo = OklasoftRSSTests;
+		};
+		D0C0EED21F4CC05A009FB66F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D07D700C1F2418A800FE25C1;
+			remoteInfo = "OklasoftRSS(iOS)";
+		};
+		D0C0EED41F4CC05A009FB66F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D07D70141F2418A800FE25C1;
+			remoteInfo = "OklasoftRSS(iOS)Tests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D0D7107E1F4BBF4100062D11 /* Embed Frameworks */ = {
+		D0C0EEC41F4CC005009FB66F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D0D7107D1F4BBF4100062D11 /* OklasoftRSS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,8 +84,8 @@
 		D084B43B1F3E17E80091EAFF /* ReadrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReadrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D084B43F1F3E17E80091EAFF /* ReadrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadrTests.swift; sourceTree = "<group>"; };
 		D084B4411F3E17E80091EAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OklasoftRSS.xcodeproj; path = ../../Frameworks/OklasoftRSS/OklasoftRSS.xcodeproj; sourceTree = "<group>"; };
 		D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeedObserver.swift; sourceTree = "<group>"; };
-		D0D7107A1F4BBF1D00062D11 /* OklasoftRSS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OklasoftRSS.framework; path = System/Library/Frameworks/OklasoftRSS.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0D7107C1F4BBF4100062D11 /* OklasoftRSS.framework in Frameworks */,
+				D0C0EED61F4CC0AB009FB66F /* OklasoftRSS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,10 +160,21 @@
 			path = ReadrTests;
 			sourceTree = "<group>";
 		};
+		D0C0EEC61F4CC05A009FB66F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0C0EECF1F4CC05A009FB66F /* OklasoftRSS.framework */,
+				D0C0EED11F4CC05A009FB66F /* OklasoftRSSTests.xctest */,
+				D0C0EED31F4CC05A009FB66F /* OklasoftRSS_iOS_.framework */,
+				D0C0EED51F4CC05A009FB66F /* OklasoftRSS(iOS)Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D0D06A861F4BBB3D008E0112 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D0D7107A1F4BBF1D00062D11 /* OklasoftRSS.framework */,
+				D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -152,7 +189,7 @@
 				D084B4221F3E17E80091EAFF /* Sources */,
 				D084B4231F3E17E80091EAFF /* Frameworks */,
 				D084B4241F3E17E80091EAFF /* Resources */,
-				D0D7107E1F4BBF4100062D11 /* Embed Frameworks */,
+				D0C0EEC41F4CC005009FB66F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,6 +248,12 @@
 			mainGroup = D084B41D1F3E17E80091EAFF;
 			productRefGroup = D084B4271F3E17E80091EAFF /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D0C0EEC61F4CC05A009FB66F /* Products */;
+					ProjectRef = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D084B4251F3E17E80091EAFF /* Readr */,
@@ -218,6 +261,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D0C0EECF1F4CC05A009FB66F /* OklasoftRSS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OklasoftRSS.framework;
+			remoteRef = D0C0EECE1F4CC05A009FB66F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0C0EED11F4CC05A009FB66F /* OklasoftRSSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OklasoftRSSTests.xctest;
+			remoteRef = D0C0EED01F4CC05A009FB66F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0C0EED31F4CC05A009FB66F /* OklasoftRSS_iOS_.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OklasoftRSS_iOS_.framework;
+			remoteRef = D0C0EED21F4CC05A009FB66F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0C0EED51F4CC05A009FB66F /* OklasoftRSS(iOS)Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "OklasoftRSS(iOS)Tests.xctest";
+			remoteRef = D0C0EED41F4CC05A009FB66F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D084B4241F3E17E80091EAFF /* Resources */ = {

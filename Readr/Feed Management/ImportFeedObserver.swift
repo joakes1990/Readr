@@ -20,7 +20,7 @@ class ImportFeedObserver {
     }
     
     class func urlIsUnique(_ url: String) {
-    
+        //TODO: check CoreData for matches
     }
     
     @objc func feedIsValid(aNotification: Notification) -> Bool {
@@ -30,6 +30,7 @@ class ImportFeedObserver {
             else {
                 return false
         }
+        //TODO: insert new managed object into Coredate
         return true
     }
 }

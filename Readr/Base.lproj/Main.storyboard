@@ -772,12 +772,13 @@ DQ
                             <constraint firstItem="wwS-0U-523" firstAttribute="leading" secondItem="kou-Hu-zcc" secondAttribute="leading" constant="20" id="ZUQ-nF-01V"/>
                             <constraint firstItem="DGR-I6-JlN" firstAttribute="leading" secondItem="U4h-Kx-ZjJ" secondAttribute="trailing" constant="12" id="ai3-W9-yXZ"/>
                             <constraint firstItem="wwS-0U-523" firstAttribute="top" secondItem="kou-Hu-zcc" secondAttribute="top" constant="20" id="leC-Wd-2GS"/>
+                            <constraint firstAttribute="trailing" secondItem="RVy-0j-FYq" secondAttribute="trailing" constant="81" id="pL3-9F-ryV"/>
                             <constraint firstItem="DGR-I6-JlN" firstAttribute="width" secondItem="U4h-Kx-ZjJ" secondAttribute="width" id="pZn-9x-4Em"/>
                             <constraint firstAttribute="trailing" secondItem="DGR-I6-JlN" secondAttribute="trailing" constant="20" id="qTr-zx-8pz"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RVy-0j-FYq" secondAttribute="trailing" constant="8" id="sP0-uR-INx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="label" destination="RVy-0j-FYq" id="jq8-Ji-aqg"/>
                         <outlet property="urlTextField" destination="wGW-V1-R2W" id="EQp-st-GK5"/>
                     </connections>
                 </viewController>
