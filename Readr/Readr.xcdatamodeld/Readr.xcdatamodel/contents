@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13221.4" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Feed" representedClassName="Feed" syncable="YES" codeGenerationType="class">
+    <entity name="Feed" representedClassName="ManagedFeed" syncable="YES">
         <attribute name="canonicalURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="favIcon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -9,7 +9,7 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Story" inverseName="feed" inverseEntity="Story" syncable="YES"/>
     </entity>
-    <entity name="Story" representedClassName="Story" syncable="YES" codeGenerationType="class">
+    <entity name="Story" representedClassName="ManagedStory" syncable="YES">
         <attribute name="audioContent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feedURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,7 +24,7 @@
         <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Feed" inverseName="stories" inverseEntity="Feed" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Feed" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="Story" positionX="-54" positionY="36" width="128" height="225"/>
+        <element name="Feed" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Story" positionX="108" positionY="9" width="128" height="223"/>
     </elements>
 </model>
