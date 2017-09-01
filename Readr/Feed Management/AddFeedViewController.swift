@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import OklasoftRSS
+import OklasoftNetworking
 
 class AddFeedViewController: NSViewController, NSTextFieldDelegate {
 
@@ -23,10 +25,31 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
         if let clipBoardURL: String = ImportFeed.urlFromClipboard() {
             urlTextField.stringValue = clipBoardURL
         }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(errorFindingFeed(aNotification:)),
+                                               name: .feedIdentificationError,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(foundFeeds(aNotification:)),
+                                               name: .foundFeedURLs,
+                                               object: nil)
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
         view.window?.close()
+    }
+    
+    func shake() {
+        let animation: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "transform")
+        animation.values = [
+            NSValue( caTransform3D:CATransform3DMakeTranslation(-5, 0, 0 ) ),
+            NSValue( caTransform3D:CATransform3DMakeTranslation( 5, 0, 0 ) )]
+        
+        animation.autoreverses = true
+        animation.repeatCount = 2
+        animation.duration = 7/100
+        
+        urlTextField.layer?.add(animation, forKey: nil)
     }
     
     @IBAction func addFeed(_ sender: Any) {
@@ -36,16 +59,7 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
             print("Good to go")
         } else {
             label.stringValue = failureMessage as String
-            let animation: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "transform")
-            animation.values = [
-                NSValue( caTransform3D:CATransform3DMakeTranslation(-5, 0, 0 ) ),
-                NSValue( caTransform3D:CATransform3DMakeTranslation( 5, 0, 0 ) )]
-            
-            animation.autoreverses = true
-            animation.repeatCount = 2
-            animation.duration = 7/100
-            
-            urlTextField.layer?.add(animation, forKey: nil)
+            shake()
         }
     }
     
@@ -53,5 +67,20 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
         if label.stringValue != defaultmessage {
             label.stringValue = defaultmessage
         }
+    }
+    
+    @objc func errorFindingFeed(aNotification: Notification) {
+        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
+        let error: Error = userinfo[errorInfoKey] as? Error ?? nil else {
+            urlTextField.stringValue = NSLocalizedString("Oops, We didn't find your news feed. ¯\\_(ツ)_/¯", comment: "Oops, We didn't find your news feed. ¯\\_(ツ)_/¯")
+            shake()
+            return
+        }
+        urlTextField.stringValue = error.localizedDescription
+        shake()
+    }
+    
+    @objc func foundFeeds(aNotification: Notification) {
+        
     }
 }

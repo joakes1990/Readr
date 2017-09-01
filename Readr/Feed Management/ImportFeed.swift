@@ -55,7 +55,7 @@ class ImportFeed {
     
     class func identifyFeed(at url: String) {
         guard let feedURL: URL = URL(string: url) else {
-            
+            return
         }
     }
 }
