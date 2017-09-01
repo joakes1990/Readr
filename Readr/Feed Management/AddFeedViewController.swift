@@ -30,8 +30,10 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
     }
     
     @IBAction func addFeed(_ sender: Any) {
+        let url: String = ImportFeed.validProtocol(urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)) ? urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines) : "http://\(urlTextField.stringValue)".trimmingCharacters(in: .whitespacesAndNewlines)
         if ImportFeed.validProtocol(urlTextField.stringValue) {
             // Start trying to add url
+            print("Good to go")
         } else {
             label.stringValue = failureMessage as String
             let animation: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "transform")

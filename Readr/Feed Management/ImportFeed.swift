@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-
+import OklasoftRSS
 class ImportFeed {
     
     class func validProtocol(_ latestClip: String) -> Bool {
@@ -50,6 +50,12 @@ class ImportFeed {
             return latestClip
         } else {
             return nil
+        }
+    }
+    
+    class func identifyFeed(at url: String) {
+        guard let feedURL: URL = URL(string: url) else {
+            
         }
     }
 }

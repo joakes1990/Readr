@@ -9,17 +9,17 @@
 /* Begin PBXBuildFile section */
 		D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */; };
 		D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014FCCD1F3E66AA000B906B /* ImportFeed.swift */; };
+		D019B3EC1F58897F00DDE26A /* Readr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D084B42D1F3E17E80091EAFF /* Readr.xcdatamodeld */; };
+		D019B3F11F588A3000DDE26A /* ManagedStory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3ED1F588A3000DDE26A /* ManagedStory+CoreDataClass.swift */; };
+		D019B3F21F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3EE1F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift */; };
+		D019B3F31F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3EF1F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift */; };
+		D019B3F41F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3F01F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift */; };
 		D084B42A1F3E17E80091EAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B4291F3E17E80091EAFF /* AppDelegate.swift */; };
 		D084B42C1F3E17E80091EAFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B42B1F3E17E80091EAFF /* ViewController.swift */; };
-		D084B42F1F3E17E80091EAFF /* Readr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D084B42D1F3E17E80091EAFF /* Readr.xcdatamodeld */; };
 		D084B4311F3E17E80091EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D084B4301F3E17E80091EAFF /* Assets.xcassets */; };
 		D084B4341F3E17E80091EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D084B4321F3E17E80091EAFF /* Main.storyboard */; };
 		D084B4401F3E17E80091EAFF /* ReadrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B43F1F3E17E80091EAFF /* ReadrTests.swift */; };
 		D0C0EED61F4CC0AB009FB66F /* OklasoftRSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C0EECF1F4CC05A009FB66F /* OklasoftRSS.framework */; };
-		D0C37C621F4D2E9000FC0C77 /* ManagedFeed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C37C5E1F4D2E9000FC0C77 /* ManagedFeed+CoreDataClass.swift */; };
-		D0C37C631F4D2E9000FC0C77 /* ManagedFeed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C37C5F1F4D2E9000FC0C77 /* ManagedFeed+CoreDataProperties.swift */; };
-		D0C37C641F4D2E9000FC0C77 /* ManagedStory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C37C601F4D2E9000FC0C77 /* ManagedStory+CoreDataClass.swift */; };
-		D0C37C651F4D2E9000FC0C77 /* ManagedStory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C37C611F4D2E9000FC0C77 /* ManagedStory+CoreDataProperties.swift */; };
 		D0D06A851F4BB585008E0112 /* ImportFeedObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +77,10 @@
 /* Begin PBXFileReference section */
 		D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedViewController.swift; sourceTree = "<group>"; };
 		D014FCCD1F3E66AA000B906B /* ImportFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeed.swift; sourceTree = "<group>"; };
+		D019B3ED1F588A3000DDE26A /* ManagedStory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedStory+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D019B3EE1F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedStory+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D019B3EF1F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedFeed+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D019B3F01F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedFeed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D084B4261F3E17E80091EAFF /* Readr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Readr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D084B4291F3E17E80091EAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D084B42B1F3E17E80091EAFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,10 +93,6 @@
 		D084B43F1F3E17E80091EAFF /* ReadrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadrTests.swift; sourceTree = "<group>"; };
 		D084B4411F3E17E80091EAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OklasoftRSS.xcodeproj; path = ../../Frameworks/OklasoftRSS/OklasoftRSS.xcodeproj; sourceTree = "<group>"; };
-		D0C37C5E1F4D2E9000FC0C77 /* ManagedFeed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedFeed+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D0C37C5F1F4D2E9000FC0C77 /* ManagedFeed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedFeed+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D0C37C601F4D2E9000FC0C77 /* ManagedStory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedStory+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D0C37C611F4D2E9000FC0C77 /* ManagedStory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedStory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeedObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,10 +183,10 @@
 		D0C37C6A1F4D2E9A00FC0C77 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				D0C37C5E1F4D2E9000FC0C77 /* ManagedFeed+CoreDataClass.swift */,
-				D0C37C5F1F4D2E9000FC0C77 /* ManagedFeed+CoreDataProperties.swift */,
-				D0C37C601F4D2E9000FC0C77 /* ManagedStory+CoreDataClass.swift */,
-				D0C37C611F4D2E9000FC0C77 /* ManagedStory+CoreDataProperties.swift */,
+				D019B3ED1F588A3000DDE26A /* ManagedStory+CoreDataClass.swift */,
+				D019B3EE1F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift */,
+				D019B3EF1F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift */,
+				D019B3F01F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -338,12 +338,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0D06A851F4BB585008E0112 /* ImportFeedObserver.swift in Sources */,
-				D0C37C651F4D2E9000FC0C77 /* ManagedStory+CoreDataProperties.swift in Sources */,
-				D084B42F1F3E17E80091EAFF /* Readr.xcdatamodeld in Sources */,
-				D0C37C621F4D2E9000FC0C77 /* ManagedFeed+CoreDataClass.swift in Sources */,
-				D0C37C631F4D2E9000FC0C77 /* ManagedFeed+CoreDataProperties.swift in Sources */,
+				D019B3F21F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift in Sources */,
+				D019B3F31F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift in Sources */,
+				D019B3F11F588A3000DDE26A /* ManagedStory+CoreDataClass.swift in Sources */,
 				D084B42C1F3E17E80091EAFF /* ViewController.swift in Sources */,
-				D0C37C641F4D2E9000FC0C77 /* ManagedStory+CoreDataClass.swift in Sources */,
+				D019B3F41F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift in Sources */,
+				D019B3EC1F58897F00DDE26A /* Readr.xcdatamodeld in Sources */,
 				D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */,
 				D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */,
 				D084B42A1F3E17E80091EAFF /* AppDelegate.swift in Sources */,
@@ -495,6 +495,7 @@
 				DEVELOPMENT_TEAM = 26VT895967;
 				INFOPLIST_FILE = Readr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oklasoft.Readr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -510,6 +511,7 @@
 				DEVELOPMENT_TEAM = 26VT895967;
 				INFOPLIST_FILE = Readr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oklasoft.Readr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

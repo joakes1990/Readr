@@ -19,8 +19,18 @@ class ImportFeedObserver {
                                                object: nil)
     }
     
-    class func urlIsUnique(_ url: String) {
-        //TODO: check CoreData for matches
+    class func urlIsUnique(_ url: String) -> Bool {
+        var unique: Bool = true
+        let context: NSManagedObjectContext = (NSApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
+        let fetchRequest: NSFetchRequest<ManagedFeed> = NSFetchRequest(entityName: ManagedFeed.feedEntitty)
+        fetchRequest.predicate = NSPredicate(format: "url = %@", url)
+        do {
+            let feeds: [NSManagedObject] = try context.fetch(fetchRequest)
+            unique = feeds.count < 1
+        } catch {
+            unique = false
+        }
+        return unique
     }
     
     @objc func feedIsValid(aNotification: Notification) -> Bool {

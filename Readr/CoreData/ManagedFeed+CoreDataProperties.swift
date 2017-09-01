@@ -2,7 +2,7 @@
 //  ManagedFeed+CoreDataProperties.swift
 //  Readr
 //
-//  Created by Justin Oakes on 8/22/17.
+//  Created by Justin Oakes on 8/31/17.
 //  Copyright © 2017 Oklasoft LLC. All rights reserved.
 //
 //
@@ -14,7 +14,7 @@ import CoreData
 extension ManagedFeed {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ManagedFeed> {
-        return NSFetchRequest<ManagedFeed>(entityName: "Feed")
+        return NSFetchRequest<ManagedFeed>(entityName: "ManagedFeed")
     }
 
     @NSManaged public var canonicalURL: String?

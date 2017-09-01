@@ -2,7 +2,7 @@
 //  ManagedStory+CoreDataProperties.swift
 //  Readr
 //
-//  Created by Justin Oakes on 8/22/17.
+//  Created by Justin Oakes on 8/31/17.
 //  Copyright © 2017 Oklasoft LLC. All rights reserved.
 //
 //
@@ -14,7 +14,7 @@ import CoreData
 extension ManagedStory {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ManagedStory> {
-        return NSFetchRequest<ManagedStory>(entityName: "Story")
+        return NSFetchRequest<ManagedStory>(entityName: "ManagedStory")
     }
 
     @NSManaged public var audioContent: String?
