@@ -52,6 +52,10 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
         urlTextField.layer?.add(animation, forKey: nil)
     }
     
+    func toggleModal(enable: Bool, message: String?) {
+        
+    }
+    
     @IBAction func addFeed(_ sender: Any) {
         let url: String = ImportFeed.validProtocol(urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)) ? urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines) : "http://\(urlTextField.stringValue)".trimmingCharacters(in: .whitespacesAndNewlines)
         if ImportFeed.validProtocol(urlTextField.stringValue) {
@@ -81,6 +85,12 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
     }
     
     @objc func foundFeeds(aNotification: Notification) {
+        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
+            let url: String = userinfo.keys.first as? String,
+            let links: [Link] = userinfo[url] as? [Link] ?? nil else {
+                toggleModal(enable: true, message: NSLocalizedString("No feeds where found on that site.", comment: "No feed where found for this site"))
+                return
+        }
         
     }
 }
