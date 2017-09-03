@@ -9,13 +9,14 @@
 import Cocoa
 import OklasoftRSS
 import OklasoftNetworking
+import OklasoftError
 
 class AddFeedViewController: NSViewController, NSTextFieldDelegate {
 
     let defaultmessage: String = NSString.localizedStringWithFormat("Enter a URL of a feed you would like Readr to track") as String
-    let failureMessage: String = NSString.localizedStringWithFormat("This is not a valid URL") as String
     @IBOutlet weak var urlTextField: NSTextField!
     @IBOutlet weak var label: NSTextField!
+    @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,10 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
                                                selector: #selector(foundFeeds(aNotification:)),
                                                name: .foundFeedURLs,
                                                object: nil)
+    }
+    
+    override func viewDidDisappear() {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
@@ -53,23 +58,32 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
     }
     
     func toggleModal(enable: Bool, message: String?) {
-        
+        if enable {
+            progressIndicator.isHidden = false
+            progressIndicator.startAnimation(self)
+        } else {
+            progressIndicator.isHidden = true
+            progressIndicator.stopAnimation(self)
+        }
+        label.stringValue = message ?? "Readr"
     }
+    
     
     @IBAction func addFeed(_ sender: Any) {
         let url: String = ImportFeed.validProtocol(urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)) ? urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines) : "http://\(urlTextField.stringValue)".trimmingCharacters(in: .whitespacesAndNewlines)
-        if ImportFeed.validProtocol(urlTextField.stringValue) {
-            // Start trying to add url
-            print("Good to go")
+        if ImportFeed.validProtocol(url) {
+            let message: String = NSLocalizedString("Looking for feeds 👀", comment: "Looking for feeds 👀")
+            toggleModal(enable: true, message: message)
+            ImportFeed.identifyFeed(at: url)
         } else {
-            label.stringValue = failureMessage as String
+            toggleModal(enable: false, message: invalidURLError.localizedDescription)
             shake()
         }
     }
     
     override func controlTextDidChange(_ obj: Notification) {
         if label.stringValue != defaultmessage {
-            label.stringValue = defaultmessage
+            toggleModal(enable: false, message: defaultmessage)
         }
     }
     

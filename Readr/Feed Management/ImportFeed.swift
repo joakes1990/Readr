@@ -55,7 +55,12 @@ class ImportFeed {
     
     class func identifyFeed(at url: String) {
         guard let feedURL: URL = URL(string: url) else {
+            let error: Error = invalidURLError as Error
+            NotificationCenter.default.post(name: .feedIdentificationError,
+                                            object: nil,
+                                            userInfo: [url : error])
             return
         }
+        URLSession.shared.getReturnedDataFrom(url: feedURL, with: URLSession.identifyFeedsCompletion)
     }
 }

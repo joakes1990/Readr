@@ -700,6 +700,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RVy-0j-FYq">
                                 <rect key="frame" x="90" y="138" width="316" height="17"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="312" id="1A6-db-K9j"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="cOC-Sg-yqb"/>
                                 </constraints>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Enter a URL for a feed you would like Readr to track" id="efN-GS-eK7">
@@ -747,6 +748,8 @@ DQ
                             </progressIndicator>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XWv-oA-5Yi" secondAttribute="trailing" constant="6" id="1cj-qV-WA6"/>
+                            <constraint firstItem="wGW-V1-R2W" firstAttribute="leading" secondItem="wwS-0U-523" secondAttribute="trailing" constant="8" id="5bN-dY-siE"/>
                             <constraint firstItem="XWv-oA-5Yi" firstAttribute="leading" secondItem="RVy-0j-FYq" secondAttribute="trailing" constant="8" id="67X-c7-xtT"/>
                             <constraint firstAttribute="bottom" secondItem="DGR-I6-JlN" secondAttribute="bottom" constant="20" id="Fz8-Fi-bl6"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DGR-I6-JlN" secondAttribute="trailing" id="HfG-yc-hOF"/>
@@ -757,16 +760,15 @@ DQ
                             <constraint firstItem="DGR-I6-JlN" firstAttribute="leading" secondItem="U4h-Kx-ZjJ" secondAttribute="trailing" constant="12" id="bOV-3H-BHK"/>
                             <constraint firstItem="DGR-I6-JlN" firstAttribute="leading" secondItem="kou-Hu-zcc" secondAttribute="leading" constant="329" id="fas-n4-abY"/>
                             <constraint firstItem="wGW-V1-R2W" firstAttribute="top" secondItem="RVy-0j-FYq" secondAttribute="bottom" constant="13" id="giV-hU-m2C"/>
-                            <constraint firstItem="RVy-0j-FYq" firstAttribute="leading" secondItem="wwS-0U-523" secondAttribute="trailing" constant="8" id="hpA-hs-Qvb"/>
                             <constraint firstItem="wwS-0U-523" firstAttribute="top" secondItem="kou-Hu-zcc" secondAttribute="top" constant="20" id="leC-Wd-2GS"/>
                             <constraint firstItem="XWv-oA-5Yi" firstAttribute="centerY" secondItem="RVy-0j-FYq" secondAttribute="centerY" id="myy-Wl-8Xf"/>
                             <constraint firstItem="DGR-I6-JlN" firstAttribute="width" secondItem="U4h-Kx-ZjJ" secondAttribute="width" id="pZn-9x-4Em"/>
                             <constraint firstItem="U4h-Kx-ZjJ" firstAttribute="centerY" secondItem="DGR-I6-JlN" secondAttribute="centerY" id="ubh-LL-w4R"/>
-                            <constraint firstItem="wGW-V1-R2W" firstAttribute="width" secondItem="RVy-0j-FYq" secondAttribute="width" id="wAO-ef-PQ3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="label" destination="RVy-0j-FYq" id="jq8-Ji-aqg"/>
+                        <outlet property="progressIndicator" destination="XWv-oA-5Yi" id="caP-l9-fPq"/>
                         <outlet property="urlTextField" destination="wGW-V1-R2W" id="EQp-st-GK5"/>
                     </connections>
                 </viewController>

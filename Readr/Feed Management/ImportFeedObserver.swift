@@ -34,7 +34,7 @@ class ImportFeedObserver {
     }
     
     @objc func feedIsValid(aNotification: Notification) -> Bool {
-        delegate?.stopAnimation()
+        delegate?.toggleModal()
         guard let userInfo: [AnyHashable:Any] = aNotification.userInfo,
             let newFeed: Feed = userInfo[feedInfoKey] as? Feed
             else {
@@ -46,5 +46,5 @@ class ImportFeedObserver {
 }
 
 protocol ImportProtocol {
-    func stopAnimation()
+    func toggleModal()
 }
