@@ -10,7 +10,11 @@ import Cocoa
 import OklasoftRSS
 class ImportFeed {
     
-    class func validProtocol(_ latestClip: String) -> Bool {
+    static let shared: ImportFeed = ImportFeed()
+    
+    let observer: ImportFeedObserver = ImportFeedObserver()
+    
+    func validProtocol(_ latestClip: String) -> Bool {
         do {
             let httpString: String = "^http://"
             let httpsString: String = "^https://"
@@ -34,7 +38,7 @@ class ImportFeed {
         }
     }
     
-    class func urlFromClipboard() -> String? {
+    func urlFromClipboard() -> String? {
         let pasteBoard: NSPasteboard = NSPasteboard.general
         
         var clipBoardStrings: [String] = []
@@ -53,7 +57,7 @@ class ImportFeed {
         }
     }
     
-    class func identifyFeed(at url: String) {
+    func identifyFeed(at url: String) {
         guard let feedURL: URL = URL(string: url) else {
             let error: Error = invalidURLError as Error
             NotificationCenter.default.post(name: .feedIdentificationError,

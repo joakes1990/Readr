@@ -15,7 +15,8 @@ class ImportFeedObserver {
     
     init() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(feedIsValid(aNotification:)), name: .finishedReceavingFeed,
+                                               selector: #selector(feedIsValid(aNotification:)),
+                                               name: .finishedReceavingFeed,
                                                object: nil)
     }
     
@@ -33,18 +34,18 @@ class ImportFeedObserver {
         return unique
     }
     
-    @objc func feedIsValid(aNotification: Notification) -> Bool {
-        delegate?.toggleModal()
+    @objc func feedIsValid(aNotification: Notification) {
         guard let userInfo: [AnyHashable:Any] = aNotification.userInfo,
             let newFeed: Feed = userInfo[feedInfoKey] as? Feed
             else {
-                return false
+                delegate?.toggleModal(enable: false, message: unrecognizableDataError.localizedDescription)
+                return
         }
         //TODO: insert new managed object into Coredate
-        return true
+        return
     }
 }
 
 protocol ImportProtocol {
-    func toggleModal()
+    func toggleModal(enable: Bool, message: String?)
 }

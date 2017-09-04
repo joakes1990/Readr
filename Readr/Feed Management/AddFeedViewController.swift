@@ -11,8 +11,8 @@ import OklasoftRSS
 import OklasoftNetworking
 import OklasoftError
 
-class AddFeedViewController: NSViewController, NSTextFieldDelegate {
-
+class AddFeedViewController: NSViewController, NSTextFieldDelegate, ImportProtocol {
+    
     let defaultmessage: String = NSString.localizedStringWithFormat("Enter a URL of a feed you would like Readr to track") as String
     @IBOutlet weak var urlTextField: NSTextField!
     @IBOutlet weak var label: NSTextField!
@@ -20,10 +20,9 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
         urlTextField.delegate = self
         urlTextField.wantsLayer = true
-        if let clipBoardURL: String = ImportFeed.urlFromClipboard() {
+        if let clipBoardURL: String = ImportFeed.shared.urlFromClipboard() {
             urlTextField.stringValue = clipBoardURL
         }
         NotificationCenter.default.addObserver(self,
@@ -70,11 +69,11 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate {
     
     
     @IBAction func addFeed(_ sender: Any) {
-        let url: String = ImportFeed.validProtocol(urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)) ? urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines) : "http://\(urlTextField.stringValue)".trimmingCharacters(in: .whitespacesAndNewlines)
-        if ImportFeed.validProtocol(url) {
+        let url: String = ImportFeed.shared.validProtocol(urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)) ? urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines) : "http://\(urlTextField.stringValue)".trimmingCharacters(in: .whitespacesAndNewlines)
+        if ImportFeed.shared.validProtocol(url) {
             let message: String = NSLocalizedString("Looking for feeds 👀", comment: "Looking for feeds 👀")
             toggleModal(enable: true, message: message)
-            ImportFeed.identifyFeed(at: url)
+            ImportFeed.shared.identifyFeed(at: url)
         } else {
             toggleModal(enable: false, message: invalidURLError.localizedDescription)
             shake()
