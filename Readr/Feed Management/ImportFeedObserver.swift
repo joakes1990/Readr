@@ -8,15 +8,20 @@
 
 import Foundation
 import OklasoftRSS
+import OklasoftNetworking
 
 class ImportFeedObserver {
-  
+    
     var delegate: ImportProtocol?
     
     init() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(feedIsValid(aNotification:)),
                                                name: .finishedReceavingFeed,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(networkingErrorOccured(aNotification:)),
+                                               name: .networkingErrorNotification,
                                                object: nil)
     }
     
@@ -44,8 +49,17 @@ class ImportFeedObserver {
         //TODO: insert new managed object into Coredate
         return
     }
+    @objc func networkingErrorOccured(aNotification: Notification) {
+        guard let userInfo: [AnyHashable : Any] = aNotification.userInfo,
+            let error: Error = userInfo[errorInfoKey] as? Error else {
+                delegate?.toggleModal(enable: true, message: NSLocalizedString("Network Error Occured", comment: "Network Error Occured"))
+                return
+        }
+        delegate?.toggleModal(enable: true, message: error.localizedDescription)
+    }
 }
 
 protocol ImportProtocol {
     func toggleModal(enable: Bool, message: String?)
+    
 }
