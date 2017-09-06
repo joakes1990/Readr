@@ -12,7 +12,7 @@ class ImportFeed {
     
     static let shared: ImportFeed = ImportFeed()
     
-    let observer: ImportFeedObserver = ImportFeedObserver()
+    let observer: ImportFeedManager = ImportFeedManager()
     
     func validProtocol(_ latestClip: String) -> Bool {
         do {
@@ -60,11 +60,12 @@ class ImportFeed {
     func identifyFeed(at url: String) {
         guard let feedURL: URL = URL(string: url) else {
             let error: Error = invalidURLError as Error
-            NotificationCenter.default.post(name: .feedIdentificationError,
-                                            object: nil,
-                                            userInfo: [url : error])
+            //TODO: Replace with delegate callback
+//            NotificationCenter.default.post(name: .feedIdentificationError,
+//                                            object: nil,
+//                                            userInfo: [url : error])
             return
         }
-        URLSession.shared.getReturnedDataFrom(url: feedURL, with: URLSession.identifyFeedsCompletion)
+        OKRSSURLSession.rssShared.identifyFeeds(url: feedURL)
     }
 }

@@ -10,21 +10,14 @@ import Foundation
 import OklasoftRSS
 import OklasoftNetworking
 
-class ImportFeedObserver {
+class ImportFeedManager: OKURLRSSSessionDelegate {
     
     var delegate: ImportProtocol?
+    static let addedFeedString: String = NSLocalizedString("New feed added", comment: "New feed added")
     
     init() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(feedIsValid(aNotification:)),
-                                               name: .finishedReceavingFeed,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(networkingErrorOccured(aNotification:)),
-                                               name: .networkingErrorNotification,
-                                               object: nil)
+        OKRSSURLSession.rssShared.RSSURLSessionDelegate = self
     }
-    
     class func urlIsUnique(_ url: String) -> Bool {
         var unique: Bool = true
         let context: NSManagedObjectContext = (NSApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
@@ -46,7 +39,6 @@ class ImportFeedObserver {
                 delegate?.toggleModal(enable: false, message: unrecognizableDataError.localizedDescription)
                 return
         }
-        //TODO: insert new managed object into Coredate
         return
     }
     @objc func networkingErrorOccured(aNotification: Notification) {
@@ -56,6 +48,10 @@ class ImportFeedObserver {
                 return
         }
         delegate?.toggleModal(enable: true, message: error.localizedDescription)
+    }
+    
+    func found(feed: Feed) {
+        print("Look I was found")
     }
 }
 

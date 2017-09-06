@@ -20,7 +20,7 @@
 		D084B4341F3E17E80091EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D084B4321F3E17E80091EAFF /* Main.storyboard */; };
 		D084B4401F3E17E80091EAFF /* ReadrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B43F1F3E17E80091EAFF /* ReadrTests.swift */; };
 		D0C0EED61F4CC0AB009FB66F /* OklasoftRSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C0EECF1F4CC05A009FB66F /* OklasoftRSS.framework */; };
-		D0D06A851F4BB585008E0112 /* ImportFeedObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */; };
+		D0D06A851F4BB585008E0112 /* ImportFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D06A841F4BB585008E0112 /* ImportFeedManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +93,7 @@
 		D084B43F1F3E17E80091EAFF /* ReadrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadrTests.swift; sourceTree = "<group>"; };
 		D084B4411F3E17E80091EAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OklasoftRSS.xcodeproj; path = ../../Frameworks/OklasoftRSS/OklasoftRSS.xcodeproj; sourceTree = "<group>"; };
-		D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeedObserver.swift; sourceTree = "<group>"; };
+		D0D06A841F4BB585008E0112 /* ImportFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeedManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +120,7 @@
 			children = (
 				D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */,
 				D014FCCD1F3E66AA000B906B /* ImportFeed.swift */,
-				D0D06A841F4BB585008E0112 /* ImportFeedObserver.swift */,
+				D0D06A841F4BB585008E0112 /* ImportFeedManager.swift */,
 			);
 			path = "Feed Management";
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0D06A851F4BB585008E0112 /* ImportFeedObserver.swift in Sources */,
+				D0D06A851F4BB585008E0112 /* ImportFeedManager.swift in Sources */,
 				D019B3F21F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift in Sources */,
 				D019B3F31F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift in Sources */,
 				D019B3F11F588A3000DDE26A /* ManagedStory+CoreDataClass.swift in Sources */,
@@ -490,7 +490,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Readr/Readr.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 26VT895967;
 				INFOPLIST_FILE = Readr/Info.plist;
@@ -506,7 +505,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Readr/Readr.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 26VT895967;
 				INFOPLIST_FILE = Readr/Info.plist;
