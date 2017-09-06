@@ -14,7 +14,7 @@ class ImportFeedManager: OKURLRSSSessionDelegate {
     
     var delegate: ImportProtocol?
     static let addedFeedString: String = NSLocalizedString("New feed added", comment: "New feed added")
-    
+    var feeds: [Feed] = []
     init() {
         OKRSSURLSession.rssShared.RSSURLSessionDelegate = self
     }
@@ -52,6 +52,7 @@ class ImportFeedManager: OKURLRSSSessionDelegate {
     
     func found(feed: Feed) {
         print("Look I was found")
+        feeds.append(feed)
     }
 }
 
