@@ -19,8 +19,17 @@
 		D084B4311F3E17E80091EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D084B4301F3E17E80091EAFF /* Assets.xcassets */; };
 		D084B4341F3E17E80091EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D084B4321F3E17E80091EAFF /* Main.storyboard */; };
 		D084B4401F3E17E80091EAFF /* ReadrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B43F1F3E17E80091EAFF /* ReadrTests.swift */; };
-		D0C0EED61F4CC0AB009FB66F /* OklasoftRSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C0EECF1F4CC05A009FB66F /* OklasoftRSS.framework */; };
+		D08CB7591F61B5AC00DFAD5D /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08CB7581F61B5AC00DFAD5D /* URLSession.swift */; };
+		D09B64AD1F60D33F004880AC /* FavIconDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64A91F60D33F004880AC /* FavIconDelegate.swift */; };
+		D09B64AF1F60D33F004880AC /* AtomDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64AB1F60D33F004880AC /* AtomDelegate.swift */; };
+		D09B64CA1F60D5DA004880AC /* RSSmodels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64C91F60D5DA004880AC /* RSSmodels.swift */; };
+		D09B64CC1F60D5EF004880AC /* RSSNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CB1F60D5EF004880AC /* RSSNetworking.swift */; };
+		D09B64CE1F60D605004880AC /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CD1F60D605004880AC /* Errors.swift */; };
+		D09B64D01F60DAC2004880AC /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CF1F60DAC2004880AC /* StringExtensions.swift */; };
 		D0D06A851F4BB585008E0112 /* ImportFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D06A841F4BB585008E0112 /* ImportFeedManager.swift */; };
+		D0E780C51F61E25400C9D356 /* RSSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64A81F60D33F004880AC /* RSSDelegate.swift */; };
+		D0E780C61F61E26F00C9D356 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64C71F60D43A004880AC /* XMLParser.swift */; };
+		D0E780C81F61E41200C9D356 /* HTMLDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64A71F60D33F004880AC /* HTMLDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,34 +39,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = D084B4251F3E17E80091EAFF;
 			remoteInfo = Readr;
-		};
-		D0C0EECE1F4CC05A009FB66F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D088D3B11F0861E20048B95A;
-			remoteInfo = OklasoftRSS;
-		};
-		D0C0EED01F4CC05A009FB66F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D088D3BA1F0861E20048B95A;
-			remoteInfo = OklasoftRSSTests;
-		};
-		D0C0EED21F4CC05A009FB66F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D07D700C1F2418A800FE25C1;
-			remoteInfo = "OklasoftRSS(iOS)";
-		};
-		D0C0EED41F4CC05A009FB66F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D07D70141F2418A800FE25C1;
-			remoteInfo = "OklasoftRSS(iOS)Tests";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -92,7 +73,19 @@
 		D084B43B1F3E17E80091EAFF /* ReadrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReadrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D084B43F1F3E17E80091EAFF /* ReadrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadrTests.swift; sourceTree = "<group>"; };
 		D084B4411F3E17E80091EAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OklasoftRSS.xcodeproj; path = ../../Frameworks/OklasoftRSS/OklasoftRSS.xcodeproj; sourceTree = "<group>"; };
+		D08CB7581F61B5AC00DFAD5D /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		D09B64A51F60D33F004880AC /* AtomDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomDelegate.swift; sourceTree = "<group>"; };
+		D09B64A61F60D33F004880AC /* FavIconDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavIconDelegate.swift; sourceTree = "<group>"; };
+		D09B64A71F60D33F004880AC /* HTMLDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLDelegate.swift; sourceTree = "<group>"; };
+		D09B64A81F60D33F004880AC /* RSSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSDelegate.swift; sourceTree = "<group>"; };
+		D09B64A91F60D33F004880AC /* FavIconDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavIconDelegate.swift; path = ../../Frameworks/OklasoftRSS/OklasoftRSS/Parsers/FavIconDelegate.swift; sourceTree = "<group>"; };
+		D09B64AB1F60D33F004880AC /* AtomDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AtomDelegate.swift; path = ../../Frameworks/OklasoftRSS/OklasoftRSS/Parsers/AtomDelegate.swift; sourceTree = "<group>"; };
+		D09B64C71F60D43A004880AC /* XMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
+		D09B64C81F60D5CB004880AC /* RSSmodels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSmodels.swift; sourceTree = "<group>"; };
+		D09B64C91F60D5DA004880AC /* RSSmodels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RSSmodels.swift; path = ../../Frameworks/OklasoftRSS/OklasoftRSS/Parsers/RSSmodels.swift; sourceTree = "<group>"; };
+		D09B64CB1F60D5EF004880AC /* RSSNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSNetworking.swift; sourceTree = "<group>"; };
+		D09B64CD1F60D605004880AC /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		D09B64CF1F60DAC2004880AC /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		D0D06A841F4BB585008E0112 /* ImportFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeedManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,7 +94,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0C0EED61F4CC0AB009FB66F /* OklasoftRSS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				D084B4281F3E17E80091EAFF /* Readr */,
-				D0D06A861F4BBB3D008E0112 /* Frameworks */,
 				D084B43E1F3E17E80091EAFF /* ReadrTests */,
 				D084B4271F3E17E80091EAFF /* Products */,
 			);
@@ -148,9 +139,17 @@
 			isa = PBXGroup;
 			children = (
 				D0C37C6A1F4D2E9A00FC0C77 /* CoreData */,
+				D09B64C21F60D3E9004880AC /* Extensions */,
+				D09B64A41F60D33F004880AC /* Parsers */,
 				D014FCC81F3E63E7000B906B /* Feed Management */,
+				D09B64C91F60D5DA004880AC /* RSSmodels.swift */,
+				D09B64AB1F60D33F004880AC /* AtomDelegate.swift */,
+				D09B64A91F60D33F004880AC /* FavIconDelegate.swift */,
+				D09B64CB1F60D5EF004880AC /* RSSNetworking.swift */,
 				D084B4291F3E17E80091EAFF /* AppDelegate.swift */,
 				D084B42B1F3E17E80091EAFF /* ViewController.swift */,
+				D09B64CD1F60D605004880AC /* Errors.swift */,
+				D0E780C71F61E31700C9D356 /* Frameworks */,
 				D084B4301F3E17E80091EAFF /* Assets.xcassets */,
 				D084B4321F3E17E80091EAFF /* Main.storyboard */,
 				D084B4351F3E17E80091EAFF /* Info.plist */,
@@ -169,15 +168,27 @@
 			path = ReadrTests;
 			sourceTree = "<group>";
 		};
-		D0C0EEC61F4CC05A009FB66F /* Products */ = {
+		D09B64A41F60D33F004880AC /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
-				D0C0EECF1F4CC05A009FB66F /* OklasoftRSS.framework */,
-				D0C0EED11F4CC05A009FB66F /* OklasoftRSSTests.xctest */,
-				D0C0EED31F4CC05A009FB66F /* OklasoftRSS_iOS_.framework */,
-				D0C0EED51F4CC05A009FB66F /* OklasoftRSS(iOS)Tests.xctest */,
+				D09B64A51F60D33F004880AC /* AtomDelegate.swift */,
+				D09B64A61F60D33F004880AC /* FavIconDelegate.swift */,
+				D09B64A71F60D33F004880AC /* HTMLDelegate.swift */,
+				D09B64A81F60D33F004880AC /* RSSDelegate.swift */,
+				D09B64C81F60D5CB004880AC /* RSSmodels.swift */,
 			);
-			name = Products;
+			name = Parsers;
+			path = ../../Frameworks/OklasoftRSS/OklasoftRSS/Parsers;
+			sourceTree = "<group>";
+		};
+		D09B64C21F60D3E9004880AC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D09B64CF1F60DAC2004880AC /* StringExtensions.swift */,
+				D09B64C71F60D43A004880AC /* XMLParser.swift */,
+				D08CB7581F61B5AC00DFAD5D /* URLSession.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D0C37C6A1F4D2E9A00FC0C77 /* CoreData */ = {
@@ -191,10 +202,9 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		D0D06A861F4BBB3D008E0112 /* Frameworks */ = {
+		D0E780C71F61E31700C9D356 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -268,12 +278,6 @@
 			mainGroup = D084B41D1F3E17E80091EAFF;
 			productRefGroup = D084B4271F3E17E80091EAFF /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = D0C0EEC61F4CC05A009FB66F /* Products */;
-					ProjectRef = D0C0EEC51F4CC05A009FB66F /* OklasoftRSS.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				D084B4251F3E17E80091EAFF /* Readr */,
@@ -281,37 +285,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		D0C0EECF1F4CC05A009FB66F /* OklasoftRSS.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OklasoftRSS.framework;
-			remoteRef = D0C0EECE1F4CC05A009FB66F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D0C0EED11F4CC05A009FB66F /* OklasoftRSSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OklasoftRSSTests.xctest;
-			remoteRef = D0C0EED01F4CC05A009FB66F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D0C0EED31F4CC05A009FB66F /* OklasoftRSS_iOS_.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OklasoftRSS_iOS_.framework;
-			remoteRef = D0C0EED21F4CC05A009FB66F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D0C0EED51F4CC05A009FB66F /* OklasoftRSS(iOS)Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "OklasoftRSS(iOS)Tests.xctest";
-			remoteRef = D0C0EED41F4CC05A009FB66F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D084B4241F3E17E80091EAFF /* Resources */ = {
@@ -337,14 +310,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E780C81F61E41200C9D356 /* HTMLDelegate.swift in Sources */,
+				D0E780C61F61E26F00C9D356 /* XMLParser.swift in Sources */,
+				D0E780C51F61E25400C9D356 /* RSSDelegate.swift in Sources */,
 				D0D06A851F4BB585008E0112 /* ImportFeedManager.swift in Sources */,
 				D019B3F21F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift in Sources */,
 				D019B3F31F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift in Sources */,
+				D09B64AD1F60D33F004880AC /* FavIconDelegate.swift in Sources */,
 				D019B3F11F588A3000DDE26A /* ManagedStory+CoreDataClass.swift in Sources */,
+				D09B64AF1F60D33F004880AC /* AtomDelegate.swift in Sources */,
 				D084B42C1F3E17E80091EAFF /* ViewController.swift in Sources */,
 				D019B3F41F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift in Sources */,
+				D09B64CC1F60D5EF004880AC /* RSSNetworking.swift in Sources */,
+				D08CB7591F61B5AC00DFAD5D /* URLSession.swift in Sources */,
 				D019B3EC1F58897F00DDE26A /* Readr.xcdatamodeld in Sources */,
+				D09B64CA1F60D5DA004880AC /* RSSmodels.swift in Sources */,
+				D09B64D01F60DAC2004880AC /* StringExtensions.swift in Sources */,
 				D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */,
+				D09B64CE1F60D605004880AC /* Errors.swift in Sources */,
 				D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */,
 				D084B42A1F3E17E80091EAFF /* AppDelegate.swift in Sources */,
 			);

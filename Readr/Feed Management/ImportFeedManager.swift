@@ -6,17 +6,16 @@
 //  Copyright © 2017 Oklasoft LLC. All rights reserved.
 //
 
-import Foundation
-import OklasoftRSS
-import OklasoftNetworking
+import Cocoa
+import CoreData
 
-class ImportFeedManager: OKURLRSSSessionDelegate {
+class ImportFeedManager: RSSNetworkingDelegate {
     
     var delegate: ImportProtocol?
     static let addedFeedString: String = NSLocalizedString("New feed added", comment: "New feed added")
     var feeds: [Feed] = []
     init() {
-        OKRSSURLSession.rssShared.RSSURLSessionDelegate = self
+        RSSNetworking.shared.delegate = self
     }
     class func urlIsUnique(_ url: String) -> Bool {
         var unique: Bool = true
@@ -32,27 +31,18 @@ class ImportFeedManager: OKURLRSSSessionDelegate {
         return unique
     }
     
-    @objc func feedIsValid(aNotification: Notification) {
-        guard let userInfo: [AnyHashable:Any] = aNotification.userInfo,
-            let newFeed: Feed = userInfo[feedInfoKey] as? Feed
-            else {
-                delegate?.toggleModal(enable: false, message: unrecognizableDataError.localizedDescription)
-                return
-        }
-        return
-    }
-    @objc func networkingErrorOccured(aNotification: Notification) {
-        guard let userInfo: [AnyHashable : Any] = aNotification.userInfo,
-            let error: Error = userInfo[errorInfoKey] as? Error else {
-                delegate?.toggleModal(enable: true, message: NSLocalizedString("Network Error Occured", comment: "Network Error Occured"))
-                return
-        }
-        delegate?.toggleModal(enable: true, message: error.localizedDescription)
-    }
-    
     func found(feed: Feed) {
         print("Look I was found")
         feeds.append(feed)
+    }
+    
+    func found(html: Data, from url: URL) {
+        let parser: XMLParser = XMLParser(data: html)
+        parser.parse
+    }
+    
+    func receavedNetworkError(error: Error) {
+        //TODO: populate func
     }
 }
 

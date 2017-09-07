@@ -7,9 +7,6 @@
 //
 
 import Cocoa
-import OklasoftRSS
-import OklasoftNetworking
-import OklasoftError
 
 class AddFeedViewController: NSViewController, NSTextFieldDelegate, ImportProtocol {
     
@@ -25,14 +22,14 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, ImportProtoc
         if let clipBoardURL: String = ImportFeed.shared.urlFromClipboard() {
             urlTextField.stringValue = clipBoardURL
         }
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(errorFindingFeed(aNotification:)),
-                                               name: .feedIdentificationError,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(foundFeeds(aNotification:)),
-                                               name: .foundFeedURLs,
-                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(errorFindingFeed(aNotification:)),
+//                                               name: .feedIdentificationError,
+//                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(foundFeeds(aNotification:)),
+//                                               name: .foundFeedURLs,
+//                                               object: nil)
     }
     
     override func viewDidDisappear() {
@@ -86,24 +83,24 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, ImportProtoc
         }
     }
     
-    @objc func errorFindingFeed(aNotification: Notification) {
-        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
-        let error: Error = userinfo[errorInfoKey] as? Error ?? nil else {
-            urlTextField.stringValue = NSLocalizedString("Oops, We didn't find your news feed. ¯\\_(ツ)_/¯", comment: "Oops, We didn't find your news feed. ¯\\_(ツ)_/¯")
-            shake()
-            return
-        }
-        urlTextField.stringValue = error.localizedDescription
-        shake()
-    }
+//    @objc func errorFindingFeed(aNotification: Notification) {
+//        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
+//        let error: Error = userinfo[errorInfoKey] as? Error ?? nil else {
+//            urlTextField.stringValue = NSLocalizedString("Oops, We didn't find your news feed. ¯\\_(ツ)_/¯", comment: "Oops, We didn't find your news feed. ¯\\_(ツ)_/¯")
+//            shake()
+//            return
+//        }
+//        urlTextField.stringValue = error.localizedDescription
+//        shake()
+//    }
     
-    @objc func foundFeeds(aNotification: Notification) {
-        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
-            let url: String = userinfo.keys.first as? String,
-            let links: [Link] = userinfo[url] as? [Link] ?? nil else {
-                toggleModal(enable: true, message: NSLocalizedString("No feeds where found on that site.", comment: "No feed where found for this site"))
-                return
-        }
-        
-    }
+//    @objc func foundFeeds(aNotification: Notification) {
+//        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
+//            let url: String = userinfo.keys.first as? String,
+//            let links: [Link] = userinfo[url] as? [Link] ?? nil else {
+//                toggleModal(enable: true, message: NSLocalizedString("No feeds where found on that site.", comment: "No feed where found for this site"))
+//                return
+//        }
+//        
+//    }
 }

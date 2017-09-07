@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import OklasoftRSS
+
 class ImportFeed {
     
     static let shared: ImportFeed = ImportFeed()
@@ -66,6 +66,6 @@ class ImportFeed {
 //                                            userInfo: [url : error])
             return
         }
-        OKRSSURLSession.rssShared.identifyFeeds(url: feedURL)
+        RSSNetworking.shared.identifyFeeds(url: feedURL)
     }
 }
