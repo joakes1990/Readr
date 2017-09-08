@@ -8,13 +8,12 @@
 
 import Cocoa
 
-class ImportFeed {
+class ImportFeed: RSSNetworkingDelegate {
     
-    static let shared: ImportFeed = ImportFeed()
+    var delegate: AddFeedViewController?
     
-    let observer: ImportFeedManager = ImportFeedManager()
     
-    func validProtocol(_ latestClip: String) -> Bool {
+    class func validProtocol(_ latestClip: String) -> Bool {
         do {
             let httpString: String = "^http://"
             let httpsString: String = "^https://"
@@ -38,7 +37,7 @@ class ImportFeed {
         }
     }
     
-    func urlFromClipboard() -> String? {
+    class func urlFromClipboard() -> String? {
         let pasteBoard: NSPasteboard = NSPasteboard.general
         
         var clipBoardStrings: [String] = []
@@ -50,7 +49,7 @@ class ImportFeed {
         }
         let latestClip: String = clipBoardStrings.count > 0 ? clipBoardStrings[0] : ""
         
-        if validProtocol(latestClip) {
+        if ImportFeed.validProtocol(latestClip) {
             return latestClip
         } else {
             return nil
@@ -59,13 +58,35 @@ class ImportFeed {
     
     func identifyFeed(at url: String) {
         guard let feedURL: URL = URL(string: url) else {
-            let error: Error = invalidURLError as Error
-            //TODO: Replace with delegate callback
-//            NotificationCenter.default.post(name: .feedIdentificationError,
-//                                            object: nil,
-//                                            userInfo: [url : error])
+            let error: oklasoftError = invalidURLError
+            delegate?.returned(error: error)
             return
         }
-        RSSNetworking.shared.identifyFeeds(url: feedURL)
+        let appDellegate: AppDelegate? = NSApplication.shared.delegate as? AppDelegate
+        let netManager: RSSNetworking? = appDellegate?.rssNetwork
+        netManager?.delegate = self
+        netManager?.identifyFeeds(url: feedURL)
+    }
+    
+    func found(feeds: [Feed]) {
+        print("I found feeds")
+    }
+    
+    func found(html: Data, from url: URL) {
+        do {
+        let xmlDocument: XMLDocument = try XMLDocument(data: html, options: .documentTidyXML)
+        let parser: XMLParser = XMLParser(data: xmlDocument.xmlData)
+        parser.parseHTMLforFeeds(fromSite: url, for: self)
+        } catch {
+            receavedNetworkError(error: error)
+        }
+    }
+    
+    func found(links: [Link]?) {
+        print(links)
+    }
+    
+    func receavedNetworkError(error: Error) {
+        print(error.localizedDescription)
     }
 }

@@ -29,8 +29,9 @@ public extension XMLParser {
         parse()
     }
     
-    public func parseHTMLforFeeds(fromSite url: URL) {
+    public func parseHTMLforFeeds(fromSite url: URL, for sender: RSSNetworkingDelegate) {
         let htmlDelegate: HTMLDelegate = HTMLDelegate(with: url)
+        htmlDelegate.caller = sender
         delegate = htmlDelegate
         parse()
     }

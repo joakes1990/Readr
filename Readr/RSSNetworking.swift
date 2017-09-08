@@ -11,7 +11,6 @@ import Foundation
 public class RSSNetworking {
     
     public var delegate: RSSNetworkingDelegate?
-    public static let shared: RSSNetworking = RSSNetworking()
     
     public func identifyFeeds(url: URL) {
         unowned let unownedSelf: RSSNetworking = self
@@ -43,7 +42,7 @@ public class RSSNetworking {
                                          lastUpdated: nil,
                                          mimeType: mimeType,
                                          favIcon: nil)
-                unownedSelf.delegate?.found(feed: newFeed)
+                unownedSelf.delegate?.found(feeds: [newFeed])
                 break
             case .atom, .atomXML:
                 if let hostString: String = url.host,
@@ -56,7 +55,7 @@ public class RSSNetworking {
                                          lastUpdated: nil,
                                          mimeType: mimeType,
                                          favIcon: nil)
-                unownedSelf.delegate?.found(feed: newFeed)
+                unownedSelf.delegate?.found(feeds: [newFeed])
                 break
             case .html:
                 unownedSelf.delegate?.found(html: validData, from: url)
@@ -122,7 +121,7 @@ public class RSSNetworking {
             do {
                 let document: XMLDocument = try XMLDocument(xmlString: htmlString, options: .documentTidyHTML)
                 let parser: XMLParser = XMLParser(data: document.xmlData)
-                parser.parseHTMLforFeeds(fromSite: url)
+//                parser.parseHTMLforFeeds(fromSite: url, for: )
             } catch {
                 //TODO: replace with protocol callback
 //                NotificationCenter.default.post(name: .errorConvertingHTML,
@@ -152,7 +151,8 @@ public class RSSNetworking {
 }
 
 public protocol RSSNetworkingDelegate {
-    func found(feed: Feed)
+    func found(feeds: [Feed])
+    func found(links: [Link]?)
     func found(html: Data, from url: URL)
     func receavedNetworkError(error: Error)
 }

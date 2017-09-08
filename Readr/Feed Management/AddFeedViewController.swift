@@ -8,28 +8,20 @@
 
 import Cocoa
 
-class AddFeedViewController: NSViewController, NSTextFieldDelegate, ImportProtocol {
+class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsViewProtocol {
     
     let defaultmessage: String = NSString.localizedStringWithFormat("Enter a URL of a feed you would like Readr to track") as String
     @IBOutlet weak var urlTextField: NSTextField!
     @IBOutlet weak var label: NSTextField!
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
-    
+    let feedImporter: ImportFeed = ImportFeed()
     override func viewDidLoad() {
         super.viewDidLoad()
         urlTextField.delegate = self
         urlTextField.wantsLayer = true
-        if let clipBoardURL: String = ImportFeed.shared.urlFromClipboard() {
+        if let clipBoardURL: String = ImportFeed.urlFromClipboard() {
             urlTextField.stringValue = clipBoardURL
         }
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(errorFindingFeed(aNotification:)),
-//                                               name: .feedIdentificationError,
-//                                               object: nil)
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(foundFeeds(aNotification:)),
-//                                               name: .foundFeedURLs,
-//                                               object: nil)
     }
     
     override func viewDidDisappear() {
@@ -66,11 +58,11 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, ImportProtoc
     
     
     @IBAction func addFeed(_ sender: Any) {
-        let url: String = ImportFeed.shared.validProtocol(urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)) ? urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines) : "http://\(urlTextField.stringValue)".trimmingCharacters(in: .whitespacesAndNewlines)
-        if ImportFeed.shared.validProtocol(url) {
+        let url: String = urlTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        if ImportFeed.validProtocol(url) {
             let message: String = NSLocalizedString("Looking for feeds 👀", comment: "Looking for feeds 👀")
             toggleModal(enable: true, message: message)
-            ImportFeed.shared.identifyFeed(at: url)
+            feedImporter.identifyFeed(at: url)
         } else {
             toggleModal(enable: false, message: invalidURLError.localizedDescription)
             shake()
@@ -83,24 +75,27 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, ImportProtoc
         }
     }
     
-//    @objc func errorFindingFeed(aNotification: Notification) {
-//        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
-//        let error: Error = userinfo[errorInfoKey] as? Error ?? nil else {
-//            urlTextField.stringValue = NSLocalizedString("Oops, We didn't find your news feed. ¯\\_(ツ)_/¯", comment: "Oops, We didn't find your news feed. ¯\\_(ツ)_/¯")
-//            shake()
-//            return
-//        }
-//        urlTextField.stringValue = error.localizedDescription
-//        shake()
-//    }
+    func foundFeed(feed: Feed?) {
+        let foundMessage: String = NSLocalizedString("New feed added!", comment: "New feed added!")
+        let dismissDate: DispatchTime = DispatchTime(uptimeNanoseconds: DispatchTime.now().rawValue + 3000000000)
+        unowned let unownedSelf: AddFeedViewController = self
+        toggleModal(enable: false, message: foundMessage)
+        DispatchQueue.main.asyncAfter(deadline: dismissDate) {
+            unownedSelf.dismiss(unownedSelf)
+        }
+    }
     
-//    @objc func foundFeeds(aNotification: Notification) {
-//        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
-//            let url: String = userinfo.keys.first as? String,
-//            let links: [Link] = userinfo[url] as? [Link] ?? nil else {
-//                toggleModal(enable: true, message: NSLocalizedString("No feeds where found on that site.", comment: "No feed where found for this site"))
-//                return
-//        }
-//        
-//    }
+    func foundFeeds(feeds: [Feed]) {
+        //TODO: init and present multi feed picker VC
+    }
+    
+    func returned(error: oklasoftError) {
+        let errorMessage: String = NSLocalizedString("Opps, an error occured trying to load this feed", comment: "Opps, an error occured trying to load this feed")
+    }
+}
+
+protocol AddFeedsViewProtocol {
+    func foundFeed(feed: Feed?)
+    func foundFeeds(feeds: [Feed])
+    func returned(error: oklasoftError)
 }

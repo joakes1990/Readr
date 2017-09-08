@@ -9,13 +9,13 @@
 import Cocoa
 import CoreData
 
-class ImportFeedManager: RSSNetworkingDelegate {
+class ImportFeedManager {
     
     var delegate: ImportProtocol?
     static let addedFeedString: String = NSLocalizedString("New feed added", comment: "New feed added")
     var feeds: [Feed] = []
     init() {
-        RSSNetworking.shared.delegate = self
+//        RSSNetworking.shared.delegate = self
     }
     class func urlIsUnique(_ url: String) -> Bool {
         var unique: Bool = true
