@@ -96,6 +96,8 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsView
     
     func returned(error: oklasoftError) {
         let errorMessage: String = NSLocalizedString("Opps, an error occured trying to load this feed", comment: "Opps, an error occured trying to load this feed")
+        //TODO: log error
+        toggleModal(enable: false, message: errorMessage)
     }
     
 }

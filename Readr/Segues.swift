@@ -11,3 +11,7 @@ import Cocoa
 extension NSStoryboardSegue.Identifier {
     static let selectFeedsSegue = NSStoryboardSegue.Identifier(rawValue: "selectFeeds")
 }
+
+extension NSStoryboard.SceneIdentifier {
+    static let selectFeeds = NSStoryboard.SceneIdentifier(rawValue: "selectFeeds")
+}

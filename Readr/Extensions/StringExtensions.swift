@@ -46,12 +46,14 @@ extension String {
         //     decode("&foo;")    --> nil
         func decode(entity : String) -> Character? {
             if entity.hasPrefix("&#x") || entity.hasPrefix("&#X"){
-                print(entity.substring(with: (entity.characters.index(entity.startIndex, offsetBy: 3) ..< entity.characters.index(entity.endIndex, offsetBy: -1))))
-                
-                return decodeNumeric(string: entity.substring(with: (entity.characters.index(entity.startIndex, offsetBy: 3) ..< entity.characters.index(entity.endIndex, offsetBy: -1))), base:16)
+                let range: Range = entity.characters.index(entity.startIndex, offsetBy: 3) ..< entity.characters.endIndex
+                print(entity[range])
+                let charecter: String = String(entity[range])
+                return decodeNumeric(string: charecter, base:16)
                 
             } else if entity.hasPrefix("&#") {
-                return decodeNumeric(string: entity.substring(with: (entity.characters.index(entity.startIndex, offsetBy: 2) ..< entity.characters.index(entity.endIndex, offsetBy: -1))), base:10)
+                let range: Range = entity.characters.index(entity.startIndex, offsetBy: 2) ..< entity.characters.endIndex
+                return decodeNumeric(string: String(entity[range]), base:10)
                 
             } else {
                 return characterEntities[entity]

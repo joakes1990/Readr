@@ -74,9 +74,9 @@ class ImportFeed: RSSNetworkingDelegate {
     
     func found(html: Data, from url: URL) {
         do {
-        let xmlDocument: XMLDocument = try XMLDocument(data: html, options: .documentTidyXML)
-        let parser: XMLParser = XMLParser(data: xmlDocument.xmlData)
-        parser.parseHTMLforFeeds(fromSite: url, for: self)
+            let xmlDocument: XMLDocument = try XMLDocument(data: html, options: .documentTidyXML)
+            let parser: XMLParser = XMLParser(data: xmlDocument.xmlData)
+            parser.parseHTMLforFeeds(fromSite: url, for: self)
         } catch {
             receavedNetworkError(error: error)
         }
@@ -88,6 +88,9 @@ class ImportFeed: RSSNetworkingDelegate {
             DispatchQueue.main.async {
                 unownedSelf.delegate?.foundLinks(links: links)
             }
+        } else {
+            let selectView: SelectFeedsViewController = NSStoryboard.main?.instantiateController(withIdentifier: .selectFeeds) as? SelectFeedsViewController ?? SelectFeedsViewController()
+            selectView.presentViewControllerAsModalWindow(selectView)
         }
     }
     

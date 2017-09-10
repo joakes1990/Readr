@@ -145,7 +145,7 @@ public class RSSNetworking {
                 return nil
         }
         
-        let linkString: String = pageXML.substring(with: linkRange)
+        let linkString: String = String(pageXML[linkRange])
         return URL(string: linkString)
     }
 }
