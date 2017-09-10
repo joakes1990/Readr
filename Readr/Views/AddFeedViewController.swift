@@ -10,13 +10,18 @@ import Cocoa
 
 class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsViewProtocol {
     
+    
     let defaultmessage: String = NSString.localizedStringWithFormat("Enter a URL of a feed you would like Readr to track") as String
+    static let segue: String = "selectFeeds"
     @IBOutlet weak var urlTextField: NSTextField!
     @IBOutlet weak var label: NSTextField!
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     let feedImporter: ImportFeed = ImportFeed()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        feedImporter.delegate = self
         urlTextField.delegate = self
         urlTextField.wantsLayer = true
         if let clipBoardURL: String = ImportFeed.urlFromClipboard() {
@@ -25,7 +30,7 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsView
     }
     
     override func viewDidDisappear() {
-        NotificationCenter.default.removeObserver(self)
+        feedImporter.delegate = nil
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
@@ -85,17 +90,18 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsView
         }
     }
     
-    func foundFeeds(feeds: [Feed]) {
-        //TODO: init and present multi feed picker VC
+    func foundLinks(links: [Link]?) {
+        performSegue(withIdentifier: .selectFeedsSegue, sender: self)
     }
     
     func returned(error: oklasoftError) {
         let errorMessage: String = NSLocalizedString("Opps, an error occured trying to load this feed", comment: "Opps, an error occured trying to load this feed")
     }
+    
 }
 
 protocol AddFeedsViewProtocol {
     func foundFeed(feed: Feed?)
-    func foundFeeds(feeds: [Feed])
+    func foundLinks(links: [Link]?)
     func returned(error: oklasoftError)
 }

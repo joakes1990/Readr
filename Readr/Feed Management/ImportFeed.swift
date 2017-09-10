@@ -83,7 +83,12 @@ class ImportFeed: RSSNetworkingDelegate {
     }
     
     func found(links: [Link]?) {
-        print(links)
+        if delegate != nil {
+            unowned let unownedSelf: ImportFeed = self
+            DispatchQueue.main.async {
+                unownedSelf.delegate?.foundLinks(links: links)
+            }
+        }
     }
     
     func receavedNetworkError(error: Error) {
