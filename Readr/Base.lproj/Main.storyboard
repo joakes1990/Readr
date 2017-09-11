@@ -780,7 +780,7 @@ DQ
         <!--Select Feeds View Controller-->
         <scene sceneID="sYX-lw-fui">
             <objects>
-                <viewController id="Vfb-gA-tSV" customClass="SelectFeedsViewController" customModule="Readr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="selectFeeds" storyboardIdentifier="selectFeeds" id="Vfb-gA-tSV" customClass="SelectFeedsViewController" customModule="Readr" sceneMemberID="viewController">
                     <view key="view" id="m8I-fQ-hms">
                         <rect key="frame" x="0.0" y="0.0" width="422" height="263"/>
                         <autoresizingMask key="autoresizingMask"/>

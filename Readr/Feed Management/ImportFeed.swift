@@ -89,8 +89,20 @@ class ImportFeed: RSSNetworkingDelegate {
                 unownedSelf.delegate?.foundLinks(links: links)
             }
         } else {
-            let selectView: SelectFeedsViewController = NSStoryboard.main?.instantiateController(withIdentifier: .selectFeeds) as? SelectFeedsViewController ?? SelectFeedsViewController()
-            selectView.presentViewControllerAsModalWindow(selectView)
+            if let returnedLinks: [Link] = links {
+                DispatchQueue.main.async {
+                    if #available(OSX 10.13, *) {
+                        let selectView: SelectFeedsViewController = NSStoryboard.main?.instantiateController(withIdentifier: .selectFeeds) as? SelectFeedsViewController ?? SelectFeedsViewController()
+                        selectView.presentViewControllerAsModalWindow(selectView)
+                        selectView.displayLinks(links: returnedLinks)
+                    } else {
+                        // Fallback on earlier versions
+                        let selectView: SelectFeedsViewController = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: Bundle.main).instantiateController(withIdentifier: .selectFeeds) as? SelectFeedsViewController ?? SelectFeedsViewController()
+                        selectView.presentViewControllerAsModalWindow(selectView)
+                        selectView.displayLinks(links: returnedLinks)
+                    }
+                }
+            }
         }
     }
     
@@ -98,3 +110,4 @@ class ImportFeed: RSSNetworkingDelegate {
         print(error.localizedDescription)
     }
 }
+
