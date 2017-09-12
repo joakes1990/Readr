@@ -20,6 +20,13 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
         TableView.dataSource = self
     }
     
+    override func viewDidAppear() {
+        view.window?.standardWindowButton(.zoomButton)?.isHidden = true
+        view.window?.standardWindowButton(.miniaturizeButton)?.isHidden = true
+        view.window?.minSize = view.window?.frame.size ?? NSSize(width: 440.0, height: 263.0)
+        view.window?.maxSize = view.window?.frame.size ?? NSSize(width: 44.0, height: 263.0)
+    }
+    
     override func viewDidDisappear() {
         links = []
     }
@@ -43,6 +50,7 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
         let cell: AddFeedCellView = AddFeedCellView(frame: NSRect(x: 0.0, y: 0.0, width: 400.0, height: 100.0))
         let link: Link = links[row]
         cell.titleLabel.stringValue = link.title
+        cell.checkBox.toolTip = "Add \(link.title)"
         return cell
     }
 }

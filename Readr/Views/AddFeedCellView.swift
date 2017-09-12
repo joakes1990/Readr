@@ -24,10 +24,19 @@ class AddFeedCellView: NSView {
         super.init(frame: frameRect)
         titleLabel.font = NSFont.systemFont(ofSize: 24.0, weight: .heavy)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        let labelDefaultFrame: NSRect = titleLabel.frame
+        titleLabel.frame = NSRect(x: 20.0,
+                                  y: ((frameRect.height / 2) - (labelDefaultFrame.height / 2)),
+                                  width: labelDefaultFrame.width,
+                                  height: labelDefaultFrame.height)
+        let checkBoxDefaultFrame: NSRect = checkBox.frame
+        checkBox.frame = NSRect(x: ((frameRect.width - checkBoxDefaultFrame.width) - 20),
+                                y: ((frameRect.height / 2) - (checkBoxDefaultFrame.height / 2)),
+                                width: checkBoxDefaultFrame.width,
+                                height: checkBoxDefaultFrame.height)
+        checkBox.state = .on
         addSubview(titleLabel)
         addSubview(checkBox)
-        titleLabel.addConstraints(labelConstraints())
-        checkBox.addConstraints(checkBoxConstraints())
     }
     
     required init?(coder decoder: NSCoder) {
@@ -36,44 +45,6 @@ class AddFeedCellView: NSView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         addSubview(checkBox)
-        titleLabel.addConstraints(labelConstraints())
-        checkBox.addConstraints(checkBoxConstraints())
-    }
-    
-    func labelConstraints() -> [NSLayoutConstraint] {
-        let left: NSLayoutConstraint = NSLayoutConstraint(item: titleLabel,
-                                                          attribute: .leading,
-                                                          relatedBy: .equal,
-                                                          toItem: self,
-                                                          attribute: .left,
-                                                          multiplier: 1.0,
-                                                          constant: 20.0)
-        let centerY: NSLayoutConstraint = NSLayoutConstraint(item: checkBox,
-                                                             attribute: .centerY,
-                                                             relatedBy: .equal,
-                                                             toItem: self,
-                                                             attribute: .centerX,
-                                                             multiplier: 1.0,
-                                                             constant: 0.0)
-        return [left, centerY]
-    }
-    
-    func checkBoxConstraints() -> [NSLayoutConstraint] {
-        let right: NSLayoutConstraint = NSLayoutConstraint(item: checkBox,
-                                                           attribute: .trailing,
-                                                           relatedBy: .equal,
-                                                           toItem: self,
-                                                           attribute: .right,
-                                                           multiplier: 1.0,
-                                                           constant: 20.0)
-        let centerY: NSLayoutConstraint = NSLayoutConstraint(item: checkBox,
-                                                             attribute: .centerY,
-                                                             relatedBy: .equal,
-                                                             toItem: self,
-                                                             attribute: .centerX,
-                                                             multiplier: 1.0,
-                                                             constant: 0.0)
-        return [right, centerY]
     }
     
 }
