@@ -15,3 +15,7 @@ extension NSStoryboardSegue.Identifier {
 extension NSStoryboard.SceneIdentifier {
     static let selectFeeds = NSStoryboard.SceneIdentifier(rawValue: "selectFeeds")
 }
+
+extension NSNib.Name {
+    static let addFeedCell = NSNib.Name(rawValue: "AddFeedCellView")
+}

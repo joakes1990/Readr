@@ -83,24 +83,17 @@ class ImportFeed: RSSNetworkingDelegate {
     }
     
     func found(links: [Link]?) {
-        if delegate != nil {
-            unowned let unownedSelf: ImportFeed = self
+        if let returnedLinks: [Link] = links {
             DispatchQueue.main.async {
-                unownedSelf.delegate?.foundLinks(links: links)
-            }
-        } else {
-            if let returnedLinks: [Link] = links {
-                DispatchQueue.main.async {
-                    if #available(OSX 10.13, *) {
-                        let selectView: SelectFeedsViewController = NSStoryboard.main?.instantiateController(withIdentifier: .selectFeeds) as? SelectFeedsViewController ?? SelectFeedsViewController()
-                        selectView.presentViewControllerAsModalWindow(selectView)
-                        selectView.displayLinks(links: returnedLinks)
-                    } else {
-                        // Fallback on earlier versions
-                        let selectView: SelectFeedsViewController = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: Bundle.main).instantiateController(withIdentifier: .selectFeeds) as? SelectFeedsViewController ?? SelectFeedsViewController()
-                        selectView.presentViewControllerAsModalWindow(selectView)
-                        selectView.displayLinks(links: returnedLinks)
-                    }
+                if #available(OSX 10.13, *) {
+                    let selectView: SelectFeedsViewController = NSStoryboard.main?.instantiateController(withIdentifier: .selectFeeds) as? SelectFeedsViewController ?? SelectFeedsViewController()
+                    selectView.presentViewControllerAsModalWindow(selectView)
+                    selectView.displayLinks(links: returnedLinks)
+                } else {
+                    // Fallback on earlier versions
+                    let selectView: SelectFeedsViewController = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: Bundle.main).instantiateController(withIdentifier: .selectFeeds) as? SelectFeedsViewController ?? SelectFeedsViewController()
+                    selectView.presentViewControllerAsModalWindow(selectView)
+                    selectView.displayLinks(links: returnedLinks)
                 }
             }
         }

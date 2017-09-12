@@ -818,6 +818,10 @@ DQ
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="Vfb-gA-tSV" id="re8-Pr-fH5"/>
+                                                <outlet property="delegate" destination="Vfb-gA-tSV" id="dBc-bP-r4G"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                 </clipView>
@@ -927,7 +931,7 @@ DQ
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88" y="712"/>
+            <point key="canvasLocation" x="66" y="712"/>
         </scene>
     </scenes>
     <resources>
