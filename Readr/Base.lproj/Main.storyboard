@@ -4,6 +4,7 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13189.4"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -782,17 +783,51 @@ DQ
             <objects>
                 <viewController title="Select Feeds" identifier="selectFeeds" storyboardIdentifier="selectFeeds" id="Vfb-gA-tSV" customClass="SelectFeedsViewController" customModule="Readr" sceneMemberID="viewController">
                     <view key="view" id="m8I-fQ-hms">
-                        <rect key="frame" x="0.0" y="0.0" width="440" height="263"/>
+                        <rect key="frame" x="0.0" y="0.0" width="455" height="336"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYU-fM-cmR">
-                                <rect key="frame" x="20" y="48" width="400" height="195"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IUe-vY-ahT">
+                                <rect key="frame" x="277" y="13" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7Vg-GA-sED">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancel:" target="Vfb-gA-tSV" id="iMA-zc-PsC"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BQf-sk-YdN">
+                                <rect key="frame" x="359" y="13" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MoC-A6-9oe">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addLinks:" target="Vfb-gA-tSV" id="Bz6-QS-Fjk"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aS4-AP-F3S">
+                                <rect key="frame" x="18" y="287" width="157" height="29"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select Feeds" id="Sbn-bG-ZeI">
+                                    <font key="font" metaFont="systemHeavy" size="24"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="XYU-fM-cmR">
+                                <rect key="frame" x="20" y="48" width="415" height="231"/>
                                 <clipView key="contentView" id="pO1-J0-C9W">
-                                    <rect key="frame" x="1" y="1" width="398" height="193"/>
+                                    <rect key="frame" x="1" y="1" width="413" height="229"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="Ee2-Iu-QSE">
-                                            <rect key="frame" x="0.0" y="0.0" width="398" height="193"/>
+                                        <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" selectionHighlightStyle="none" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="Ee2-Iu-QSE">
+                                            <rect key="frame" x="0.0" y="0.0" width="413" height="229"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -827,7 +862,7 @@ DQ
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Szu-yV-6TO">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <rect key="frame" x="-100" y="-100" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="MEQ-DO-f5K">
@@ -835,44 +870,20 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IUe-vY-ahT">
-                                <rect key="frame" x="262" y="13" width="82" height="32"/>
-                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7Vg-GA-sED">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="cancelClicked:" target="yfo-vp-hBL" id="HLw-Bg-i0f"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BQf-sk-YdN">
-                                <rect key="frame" x="344" y="13" width="82" height="32"/>
-                                <buttonCell key="cell" type="push" title="Ok" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MoC-A6-9oe">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="addFeed:" target="yfo-vp-hBL" id="L1t-3U-22L"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="BQf-sk-YdN" firstAttribute="width" secondItem="IUe-vY-ahT" secondAttribute="width" id="8g0-Lr-Gb6"/>
                             <constraint firstItem="IUe-vY-ahT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m8I-fQ-hms" secondAttribute="leading" constant="20" symbolic="YES" id="D6x-nJ-WTc"/>
+                            <constraint firstItem="aS4-AP-F3S" firstAttribute="leading" secondItem="m8I-fQ-hms" secondAttribute="leading" constant="20" id="OjM-MM-1sB"/>
                             <constraint firstItem="IUe-vY-ahT" firstAttribute="centerY" secondItem="BQf-sk-YdN" secondAttribute="centerY" id="aha-z5-U6Z"/>
                             <constraint firstItem="XYU-fM-cmR" firstAttribute="leading" secondItem="m8I-fQ-hms" secondAttribute="leading" constant="20" symbolic="YES" id="dqg-E7-Ks5"/>
                             <constraint firstItem="IUe-vY-ahT" firstAttribute="top" secondItem="XYU-fM-cmR" secondAttribute="bottom" constant="7" id="ePd-1f-MRI"/>
                             <constraint firstAttribute="trailing" secondItem="XYU-fM-cmR" secondAttribute="trailing" constant="20" id="fUO-eM-3lU"/>
-                            <constraint firstItem="XYU-fM-cmR" firstAttribute="top" secondItem="m8I-fQ-hms" secondAttribute="top" constant="20" id="lNY-Wp-UIu"/>
                             <constraint firstAttribute="trailing" secondItem="BQf-sk-YdN" secondAttribute="trailing" constant="20" id="pAO-2q-Jge"/>
+                            <constraint firstItem="XYU-fM-cmR" firstAttribute="top" secondItem="aS4-AP-F3S" secondAttribute="bottom" constant="8" id="qTK-mK-CW2"/>
                             <constraint firstItem="XYU-fM-cmR" firstAttribute="trailing" secondItem="BQf-sk-YdN" secondAttribute="trailing" id="qt4-Qb-qua"/>
                             <constraint firstAttribute="bottom" secondItem="BQf-sk-YdN" secondAttribute="bottom" constant="20" id="ueJ-4Q-sN2"/>
+                            <constraint firstItem="aS4-AP-F3S" firstAttribute="top" secondItem="m8I-fQ-hms" secondAttribute="top" constant="20" id="yt9-YJ-oyU"/>
                             <constraint firstItem="BQf-sk-YdN" firstAttribute="leading" secondItem="IUe-vY-ahT" secondAttribute="trailing" constant="12" id="zDB-bX-lAT"/>
                         </constraints>
                     </view>
@@ -882,7 +893,7 @@ DQ
                 </viewController>
                 <customObject id="mtr-CF-eZ9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613" y="709"/>
+            <point key="canvasLocation" x="612.5" y="745"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">

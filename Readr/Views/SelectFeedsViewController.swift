@@ -43,14 +43,26 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 100.0
+        return 75.0
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell: AddFeedCellView = AddFeedCellView(frame: NSRect(x: 0.0, y: 0.0, width: 400.0, height: 100.0))
+        let cell: AddFeedCellView = AddFeedCellView(frame: NSRect(x: 0.0, y: 0.0, width: 400.0, height: 75.0))
         let link: Link = links[row]
         cell.titleLabel.stringValue = link.title
         cell.checkBox.toolTip = "Add \(link.title)"
         return cell
     }
+    
+    @IBAction func addLinks(_ sender: Any) {
+        let feedImporter: ImportFeed = ImportFeed()
+        for index in 0 ..< TableView.numberOfRows {
+            feedImporter.identifyFeed(at: links[index].link.absoluteString)
+        }
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+        view.window?.close()
+    }
+    
 }

@@ -27,7 +27,7 @@ class ImportFeed: RSSNetworkingDelegate {
             let httpsMatch: [NSTextCheckingResult] = httpsRegEx.matches(in: latestClip, range: NSRange(latestClip.startIndex..., in: latestClip))
             let feedMatch: [NSTextCheckingResult] = feedRegEx.matches(in: latestClip, range: NSRange(latestClip.startIndex..., in: latestClip))
             
-            if httpMatch.count > 0 || httpsMatch.count > 0 || feedMatch.count > 0 {
+            if (httpMatch.count > 0 || httpsMatch.count > 0 || feedMatch.count > 0) {
                 return true
             } else {
                 return false
