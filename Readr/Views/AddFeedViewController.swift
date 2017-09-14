@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsViewProtocol {
+class AddFeedViewController: NSViewController, NSTextFieldDelegate, FeedImportProtocol {
     
     
     let defaultmessage: String = NSString.localizedStringWithFormat("Enter a URL of a feed you would like Readr to track") as String
@@ -21,7 +21,7 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        feedImporter.delegate = self
+        feedImporter.delegateView = self
         urlTextField.delegate = self
         urlTextField.wantsLayer = true
         if let clipBoardURL: String = ImportFeed.urlFromClipboard() {
@@ -30,7 +30,7 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsView
     }
     
     override func viewDidDisappear() {
-        feedImporter.delegate = nil
+        feedImporter.delegateView = nil
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
@@ -85,6 +85,7 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsView
         let dismissDate: DispatchTime = DispatchTime(uptimeNanoseconds: DispatchTime.now().rawValue + 3000000000)
         unowned let unownedSelf: AddFeedViewController = self
         toggleModal(enable: false, message: foundMessage)
+        FeedImportDelegate.shared.foundFeed(feed: feed)
         DispatchQueue.main.asyncAfter(deadline: dismissDate) {
             unownedSelf.dismiss(unownedSelf)
         }
@@ -102,8 +103,4 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, AddFeedsView
     
 }
 
-protocol AddFeedsViewProtocol {
-    func foundFeed(feed: Feed?)
-    func foundLinks(links: [Link]?)
-    func returned(error: oklasoftError)
-}
+

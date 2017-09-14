@@ -10,7 +10,7 @@ import Cocoa
 
 class ImportFeed: RSSNetworkingDelegate {
     
-    var delegate: AddFeedViewController?
+    var delegateView: AddFeedViewController?
     
     
     class func validProtocol(_ latestClip: String) -> Bool {
@@ -59,7 +59,7 @@ class ImportFeed: RSSNetworkingDelegate {
     func identifyFeed(at url: String) {
         guard let feedURL: URL = URL(string: url) else {
             let error: oklasoftError = invalidURLError
-            delegate?.returned(error: error)
+            delegateView?.returned(error: error)
             return
         }
         let appDellegate: AppDelegate? = NSApplication.shared.delegate as? AppDelegate
@@ -104,3 +104,8 @@ class ImportFeed: RSSNetworkingDelegate {
     }
 }
 
+protocol ImportFeedDelegate {
+    func foundFeed(feed: Feed?)
+    func foundLinks(links: [Link]?)
+    func returned(error: oklasoftError)
+}

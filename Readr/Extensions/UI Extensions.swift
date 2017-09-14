@@ -19,3 +19,8 @@ extension NSStoryboard.SceneIdentifier {
 extension NSNib.Name {
     static let addFeedCell = NSNib.Name(rawValue: "AddFeedCellView")
 }
+
+extension NSStoryboard.Name {
+    // Needed for macOS 10.12 and older
+    static let main = NSStoryboard.Name(rawValue: "Main")
+}

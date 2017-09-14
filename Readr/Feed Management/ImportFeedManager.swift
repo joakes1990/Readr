@@ -11,12 +11,14 @@ import CoreData
 
 class ImportFeedManager {
     
-    var delegate: ImportProtocol?
+    
+    
+    var delegate: ImportViewProtocol?
+    static let shared: ImportFeedManager = ImportFeedManager()
+    
     static let addedFeedString: String = NSLocalizedString("New feed added", comment: "New feed added")
     var feeds: [Feed] = []
-    init() {
-//        RSSNetworking.shared.delegate = self
-    }
+    
     class func urlIsUnique(_ url: String) -> Bool {
         var unique: Bool = true
         let context: NSManagedObjectContext = (NSApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
@@ -46,7 +48,7 @@ class ImportFeedManager {
     }
 }
 
-protocol ImportProtocol {
+protocol ImportViewProtocol {
     func toggleModal(enable: Bool, message: String?)
     
 }

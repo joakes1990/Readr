@@ -33,6 +33,7 @@
 		D0E780C61F61E26F00C9D356 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64C71F60D43A004880AC /* XMLParser.swift */; };
 		D0E780C81F61E41200C9D356 /* HTMLDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64A71F60D33F004880AC /* HTMLDelegate.swift */; };
 		D0E780C91F61F62800C9D356 /* AtomDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64A51F60D33F004880AC /* AtomDelegate.swift */; };
+		D0E7944C1F6A39B7000E3144 /* FeedImportDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E7944B1F6A39B7000E3144 /* FeedImportDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		D09B64CD1F60D605004880AC /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		D09B64CF1F60DAC2004880AC /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		D0D06A841F4BB585008E0112 /* ImportFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeedManager.swift; sourceTree = "<group>"; };
+		D0E7944B1F6A39B7000E3144 /* FeedImportDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImportDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			children = (
 				D014FCCD1F3E66AA000B906B /* ImportFeed.swift */,
 				D0D06A841F4BB585008E0112 /* ImportFeedManager.swift */,
+				D0E7944B1F6A39B7000E3144 /* FeedImportDelegate.swift */,
 			);
 			path = "Feed Management";
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				D05467F01F64EF2F008088DC /* UI Extensions.swift in Sources */,
 				D09B64CE1F60D605004880AC /* Errors.swift in Sources */,
 				D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */,
+				D0E7944C1F6A39B7000E3144 /* FeedImportDelegate.swift in Sources */,
 				D05467EE1F64CFD0008088DC /* SelectFeedsViewController.swift in Sources */,
 				D084B42A1F3E17E80091EAFF /* AppDelegate.swift in Sources */,
 			);
