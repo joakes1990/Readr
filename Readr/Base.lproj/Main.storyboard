@@ -904,13 +904,13 @@ DQ
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="85D9996C-91AC-49BD-B6CE-31A1D561381F" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="kER-AP-2zX">
+                        <toolbar key="toolbar" implicitIdentifier="85D9996C-91AC-49BD-B6CE-31A1D561381F" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="small" id="kER-AP-2zX">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="K3y-cX-GXf"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Iik-O3-yAl"/>
                                 <toolbarItem implicitItemIdentifier="3B41B897-AB91-43A3-9951-1672C7EA98E6" label="Add Feed" paletteLabel="Add Feed" tag="-1" image="add" id="COj-A5-Qx6">
                                     <connections>
-                                        <segue destination="yfo-vp-hBL" kind="popover" popoverAnchorView="COj-A5-Qx6" popoverBehavior="t" preferredEdge="minY" id="WPF-V1-2yE"/>
+                                        <segue destination="yfo-vp-hBL" kind="popover" popoverAnchorView="COj-A5-Qx6" popoverBehavior="semitransient" preferredEdge="maxY" id="WPF-V1-2yE"/>
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="D7085B76-BDE6-434A-A2FA-16C86240B552" label="Sidebar" paletteLabel="Sidebar" tag="-1" image="sidebar" id="VU7-zO-2SS"/>
