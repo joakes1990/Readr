@@ -11,7 +11,8 @@ import Cocoa
 class ImportFeed: RSSNetworkingDelegate {
     
     var delegateView: AddFeedViewController?
-    
+    var feeds: [Feed] = []
+    static let shared: ImportFeed = ImportFeed()
     
     class func validProtocol(_ latestClip: String) -> Bool {
         do {
@@ -70,6 +71,7 @@ class ImportFeed: RSSNetworkingDelegate {
     
     func found(feeds: [Feed]) {
         print("I found feeds")
+        self.feeds.append(contentsOf: feeds)
     }
     
     func found(html: Data, from url: URL) {
@@ -100,6 +102,7 @@ class ImportFeed: RSSNetworkingDelegate {
     }
     
     func receavedNetworkError(error: Error) {
+        //TODO: write error to logs
         print(error.localizedDescription)
     }
 }

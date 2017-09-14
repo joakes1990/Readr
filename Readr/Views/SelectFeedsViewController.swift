@@ -12,6 +12,7 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
 
     @IBOutlet weak var TableView: NSTableView!
     var links: [Link] = []
+    let feedImporter: ImportFeed = ImportFeed()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +56,10 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
     
     @IBAction func addLinks(_ sender: Any) {
-        let feedImporter: ImportFeed = ImportFeed()
         for index in 0 ..< TableView.numberOfRows {
-            feedImporter.identifyFeed(at: links[index].link.absoluteString)
+            ImportFeed.shared.identifyFeed(at: links[index].link.absoluteString)
         }
+        view.window?.close()
     }
     
     @IBAction func cancel(_ sender: Any) {
