@@ -11,6 +11,7 @@ import Cocoa
 class AddFeedViewController: NSViewController, NSTextFieldDelegate, FeedImportProtocol {
     
     
+    
     let defaultmessage: String = NSString.localizedStringWithFormat("Enter a URL of a feed you would like Readr to track") as String
     static let segue: String = "selectFeeds"
     @IBOutlet weak var urlTextField: NSTextField!
@@ -96,9 +97,8 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, FeedImportPr
         performSegue(withIdentifier: .selectFeedsSegue, sender: self)
     }
     
-    func returned(error: oklasoftError) {
+    func returned(error: Error) {
         let errorMessage: String = NSLocalizedString("Opps, an error occured trying to load this feed", comment: "Opps, an error occured trying to load this feed")
-        //TODO: log error
         toggleModal(enable: false, message: errorMessage)
     }
     

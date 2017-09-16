@@ -70,8 +70,23 @@ class ImportFeed: RSSNetworkingDelegate {
     }
     
     func found(feeds: [Feed]) {
-        print("I found feeds")
         self.feeds.append(contentsOf: feeds)
+        let multipulFeedsString: String = NSLocalizedString("other feeds added", comment: "number of feeds added")
+        let informitiveText: String = feeds.count > 1 ? "\(feeds[0].title) and \(feeds.count - 1) \(multipulFeedsString)" : "\(feeds[0].title) added"
+        let singleTitle: String = NSLocalizedString("Added feed", comment: "Added feed")
+        let multiTitle: String = NSLocalizedString("Added feeds", comment: "Added feeds")
+        let notification: NSUserNotification = NSUserNotification()
+        notification.title = feeds.count > 1 ? multiTitle : singleTitle
+        notification.subtitle = NSLocalizedString("Somthing good happened", comment: "Somthing good happened")
+        notification.informativeText = informitiveText
+        
+        for feed in feeds {
+            createManagedFeedObjects(feed: feed)
+        }
+        
+        DispatchQueue.main.async {
+            NSUserNotificationCenter.default.deliver(notification)
+        }
     }
     
     func found(html: Data, from url: URL) {
@@ -86,6 +101,7 @@ class ImportFeed: RSSNetworkingDelegate {
     
     func found(links: [Link]?) {
         if let returnedLinks: [Link] = links {
+            unowned let unownedSelf: ImportFeed = self
             DispatchQueue.main.async {
                 if #available(OSX 10.13, *) {
                     let selectView: SelectFeedsViewController = NSStoryboard.main?.instantiateController(withIdentifier: .selectFeeds) as? SelectFeedsViewController ?? SelectFeedsViewController()
@@ -97,6 +113,7 @@ class ImportFeed: RSSNetworkingDelegate {
                     selectView.presentViewControllerAsModalWindow(selectView)
                     selectView.displayLinks(links: returnedLinks)
                 }
+                unownedSelf.delegateView?.dismiss(self)
             }
         }
     }
@@ -104,6 +121,30 @@ class ImportFeed: RSSNetworkingDelegate {
     func receavedNetworkError(error: Error) {
         //TODO: write error to logs
         print(error.localizedDescription)
+        if delegateView != nil {
+            unowned let unownedSelf: ImportFeed = self
+            DispatchQueue.main.async {
+                unownedSelf.delegateView?.returned(error: error)
+            }
+        } else {
+            let notification: NSUserNotification = NSUserNotification()
+            notification.title = NSLocalizedString("Could not add feed", comment: "Could not add feed")
+            notification.subtitle = NSLocalizedString("Somthing not good happened", comment: "Somthing not good happened")
+            notification.informativeText = NSLocalizedString("Readr could not find a feed or could not add a feed that was provided", comment: "Readr could not find a feed or could not add a feed that was provided")
+            DispatchQueue.main.async {
+                NSUserNotificationCenter.default.deliver(notification)
+            }
+        }
+    }
+    
+    func createManagedFeedObjects(feed: Feed) {
+        print(feed.url)
+//        let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
+//        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+//        let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: ManagedFeed.feedEntitty, in: context)!
+//        let managedFeed: NSManagedObject = NSManagedObject(entity: entity, insertInto: context)
+//
+//        managedFeed.setValue(feed.canonicalURL?.absoluteString, forKey: "canonicalURL")
     }
 }
 

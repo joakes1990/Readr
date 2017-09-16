@@ -34,7 +34,7 @@ class FeedImportDelegate: NSObject, FeedImportProtocol {
         }
     }
     
-    func returned(error: oklasoftError) {
+    func returned(error: Error) {
         //TODO: Log error
     }
     
@@ -44,5 +44,5 @@ class FeedImportDelegate: NSObject, FeedImportProtocol {
 protocol FeedImportProtocol {
     func foundFeed(feed: Feed?)
     func foundLinks(links: [Link]?)
-    func returned(error: oklasoftError)
+    func returned(error: Error)
 }
