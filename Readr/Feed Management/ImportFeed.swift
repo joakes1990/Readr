@@ -66,13 +66,13 @@ class ImportFeed: RSSNetworkingDelegate {
         let appDellegate: AppDelegate? = NSApplication.shared.delegate as? AppDelegate
         let netManager: RSSNetworking? = appDellegate?.rssNetwork
         netManager?.delegate = self
-        netManager?.identifyFeeds(url: feedURL)
+        netManager?.createManagedFeedFrom(url: feedURL)
     }
     
     func found(feeds: [ManagedFeed]) {
         self.feeds.append(contentsOf: feeds)
         let multipulFeedsString: String = NSLocalizedString("other feeds added", comment: "number of feeds added")
-        let informitiveText: String = feeds.count > 1 ? "\(feeds[0].title) and \(feeds.count - 1) \(multipulFeedsString)" : "\(feeds[0].title) added"
+        let informitiveText: String = feeds.count > 1 ? "\(feeds[0].title ?? "1 feed") and \(feeds.count - 1) \(multipulFeedsString)" : "\(feeds[0].title ?? "Feed") added"
         let singleTitle: String = NSLocalizedString("Added feed", comment: "Added feed")
         let multiTitle: String = NSLocalizedString("Added feeds", comment: "Added feeds")
         let notification: NSUserNotification = NSUserNotification()
@@ -80,12 +80,27 @@ class ImportFeed: RSSNetworkingDelegate {
         notification.subtitle = NSLocalizedString("Somthing good happened", comment: "Somthing good happened")
         notification.informativeText = informitiveText
         
-        for feed in feeds {
-            createManagedFeedObjects(feed: feed)
-        }
+        // if previously added feeds show as disabled remove this code
+//        for feed in feeds {
+//            createManagedFeedObjects(feed: feed)
+//        }
         
         DispatchQueue.main.async {
             NSUserNotificationCenter.default.deliver(notification)
+        }
+    }
+    
+    func wasPreviousltAdded(link: Link) -> Bool {
+        let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
+        let fetchRequest: NSFetchRequest<ManagedFeed> = NSFetchRequest(entityName: ManagedFeed.feedEntitty)
+        let predicate: NSPredicate = NSPredicate(format: "url = %@", argumentArray: [link.link.absoluteString])
+        fetchRequest.predicate = predicate
+        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        
+        do {
+            return try context.fetch(fetchRequest).count > 0 ? true : false
+        } catch {
+            return false
         }
     }
     
@@ -135,16 +150,6 @@ class ImportFeed: RSSNetworkingDelegate {
                 NSUserNotificationCenter.default.deliver(notification)
             }
         }
-    }
-    
-    func createManagedFeedObjects(feed: ManagedFeed) {
-        print(feed.url)
-//        let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
-//        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-//        let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: ManagedFeed.feedEntitty, in: context)!
-//        let managedFeed: NSManagedObject = NSManagedObject(entity: entity, insertInto: context)
-//
-//        managedFeed.setValue(feed.canonicalURL?.absoluteString, forKey: "canonicalURL")
     }
 }
 

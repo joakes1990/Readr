@@ -12,7 +12,7 @@ public class RSSNetworking {
     
     public var delegate: RSSNetworkingDelegate?
     
-    public func identifyFeeds(url: URL) {
+    public func createManagedFeedFrom(url: URL) {
         unowned let unownedSelf: RSSNetworking = self
         
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, responce, error) in
@@ -67,6 +67,12 @@ public class RSSNetworking {
                 break
             case .html:
                 unownedSelf.delegate?.found(html: validData, from: url)
+            }
+            do {
+                try context.save()
+            } catch {
+                //TODO: Log inability to save nsmanged cotext
+                //Note this is called if the html mimetype is returned
             }
         })
         task.resume()

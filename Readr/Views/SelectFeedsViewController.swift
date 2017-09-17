@@ -10,15 +10,15 @@ import Cocoa
 
 class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    @IBOutlet weak var TableView: NSTableView!
+    @IBOutlet weak var tableView: NSTableView!
     var links: [Link] = []
     let feedImporter: ImportFeed = ImportFeed()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        TableView.delegate = self
-        TableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func viewDidAppear() {
@@ -34,12 +34,16 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
     
     func displayLinks(links: [Link]) {
         self.links = links
-        TableView.reloadData()
+        tableView.reloadData()
     }
     
     //MARK: TableView Datasource
     
     func numberOfRows(in tableView: NSTableView) -> Int {
+        var origenalLinks: Int = links.count
+        for link: Link in links {
+            origenalLinks = ImportFeed.shared.wasPreviousltAdded(link: link) ? (origenalLinks - 1) : origenalLinks
+        }
         return links.count
     }
     
@@ -51,13 +55,22 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
         let cell: AddFeedCellView = AddFeedCellView(frame: NSRect(x: 0.0, y: 0.0, width: 400.0, height: 75.0))
         let link: Link = links[row]
         cell.titleLabel.stringValue = link.title
+        if ImportFeed.shared.wasPreviousltAdded(link: link) {
+            cell.checkBox.state = .on
+            cell.checkBox.isEnabled = false
+            cell.checkBox.title = NSLocalizedString("Added", comment: "Added")
+        } else {
         cell.checkBox.toolTip = "Add \(link.title)"
+        }
         return cell
     }
     
     @IBAction func addLinks(_ sender: Any) {
-        for index in 0 ..< TableView.numberOfRows {
-            ImportFeed.shared.identifyFeed(at: links[index].link.absoluteString)
+        for index in 0 ..< tableView.numberOfRows {
+            let row: AddFeedCellView = tableView.view(atColumn: 0, row: index, makeIfNecessary: false) as? AddFeedCellView ?? AddFeedCellView(frame: NSRect(x: 0, y: 0, width: 0, height: 0))
+            if row.checkBox.state == .on && row.checkBox.isEnabled {
+                ImportFeed.shared.identifyFeed(at: links[index].link.absoluteString)
+            }
         }
         view.window?.close()
     }
