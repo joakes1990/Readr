@@ -11,7 +11,7 @@ import Cocoa
 class ImportFeed: RSSNetworkingDelegate {
     
     var delegateView: AddFeedViewController?
-    var feeds: [Feed] = []
+    var feeds: [ManagedFeed] = []
     static let shared: ImportFeed = ImportFeed()
     
     class func validProtocol(_ latestClip: String) -> Bool {
@@ -69,7 +69,7 @@ class ImportFeed: RSSNetworkingDelegate {
         netManager?.identifyFeeds(url: feedURL)
     }
     
-    func found(feeds: [Feed]) {
+    func found(feeds: [ManagedFeed]) {
         self.feeds.append(contentsOf: feeds)
         let multipulFeedsString: String = NSLocalizedString("other feeds added", comment: "number of feeds added")
         let informitiveText: String = feeds.count > 1 ? "\(feeds[0].title) and \(feeds.count - 1) \(multipulFeedsString)" : "\(feeds[0].title) added"
@@ -137,7 +137,7 @@ class ImportFeed: RSSNetworkingDelegate {
         }
     }
     
-    func createManagedFeedObjects(feed: Feed) {
+    func createManagedFeedObjects(feed: ManagedFeed) {
         print(feed.url)
 //        let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
 //        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
@@ -149,7 +149,7 @@ class ImportFeed: RSSNetworkingDelegate {
 }
 
 protocol ImportFeedDelegate {
-    func foundFeed(feed: Feed?)
+    func foundFeed(feed: ManagedFeed?)
     func foundLinks(links: [Link]?)
     func returned(error: oklasoftError)
 }

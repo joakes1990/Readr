@@ -81,7 +81,7 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, FeedImportPr
         }
     }
     
-    func foundFeed(feed: Feed?) {
+    func foundFeed(feed: ManagedFeed?) {
         let foundMessage: String = NSLocalizedString("New feed added!", comment: "New feed added!")
         let dismissDate: DispatchTime = DispatchTime(uptimeNanoseconds: DispatchTime.now().rawValue + 3000000000)
         

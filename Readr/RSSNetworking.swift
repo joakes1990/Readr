@@ -6,7 +6,7 @@
 //  Copyright © 2017 Oklasoft LLC. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 public class RSSNetworking {
     
@@ -33,15 +33,22 @@ public class RSSNetworking {
                     return
             }
             var canonicalURL: URL? = nil
+            
+            let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
+            let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+            let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: ManagedFeed.feedEntitty, in: context)!
+            let newFeed: ManagedFeed = NSManagedObject(entity: entity, insertInto: context) as! ManagedFeed
+
             switch mimeType {
             case .rss, .rssXML, .simpleRSS:
                 canonicalURL = unownedSelf.parentURLForRSS(data: validData)
-                let newFeed: Feed = Feed(title: title,
-                                         url: url,
-                                         canonicalURL: canonicalURL,
-                                         lastUpdated: nil,
-                                         mimeType: mimeType,
-                                         favIcon: nil)
+                
+                newFeed.setValue(title, forKey: "title")
+                newFeed.setValue(url.absoluteString, forKey: "url")
+                newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
+                newFeed.setValue(NSDate(), forKey: "lastUpdated")
+                newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
+                
                 unownedSelf.delegate?.found(feeds: [newFeed])
                 break
             case .atom, .atomXML:
@@ -49,12 +56,13 @@ public class RSSNetworking {
                     let hostURL: URL = URL(string: hostString) {
                     canonicalURL = hostURL
                 }
-                let newFeed: Feed = Feed(title: title,
-                                         url: url,
-                                         canonicalURL: canonicalURL,
-                                         lastUpdated: nil,
-                                         mimeType: mimeType,
-                                         favIcon: nil)
+                
+                newFeed.setValue(title, forKey: "title")
+                newFeed.setValue(url.absoluteString, forKey: "url")
+                newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
+                newFeed.setValue(NSDate(), forKey: "lastUpdated")
+                newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
+                
                 unownedSelf.delegate?.found(feeds: [newFeed])
                 break
             case .html:
@@ -151,7 +159,7 @@ public class RSSNetworking {
 }
 
 public protocol RSSNetworkingDelegate {
-    func found(feeds: [Feed])
+    func found(feeds: [ManagedFeed])
     func found(links: [Link]?)
     func found(html: Data, from url: URL)
     func receavedNetworkError(error: Error)
