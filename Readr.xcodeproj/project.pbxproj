@@ -14,11 +14,12 @@
 		D019B3F21F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3EE1F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift */; };
 		D019B3F31F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3EF1F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift */; };
 		D019B3F41F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3F01F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift */; };
+		D031F9041F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031F9031F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift */; };
 		D04A2C521F674E4000B94F03 /* AddFeedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04A2C511F674E4000B94F03 /* AddFeedCellView.swift */; };
 		D05467EE1F64CFD0008088DC /* SelectFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05467ED1F64CFD0008088DC /* SelectFeedsViewController.swift */; };
 		D05467F01F64EF2F008088DC /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05467EF1F64EF2F008088DC /* UI Extensions.swift */; };
 		D084B42A1F3E17E80091EAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B4291F3E17E80091EAFF /* AppDelegate.swift */; };
-		D084B42C1F3E17E80091EAFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B42B1F3E17E80091EAFF /* ViewController.swift */; };
+		D084B42C1F3E17E80091EAFF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B42B1F3E17E80091EAFF /* MainViewController.swift */; };
 		D084B4311F3E17E80091EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D084B4301F3E17E80091EAFF /* Assets.xcassets */; };
 		D084B4341F3E17E80091EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D084B4321F3E17E80091EAFF /* Main.storyboard */; };
 		D084B4401F3E17E80091EAFF /* ReadrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B43F1F3E17E80091EAFF /* ReadrTests.swift */; };
@@ -66,12 +67,13 @@
 		D019B3EE1F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedStory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D019B3EF1F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedFeed+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D019B3F01F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedFeed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D031F9031F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistOutlineViewDelegate.swift; sourceTree = "<group>"; };
 		D04A2C511F674E4000B94F03 /* AddFeedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedCellView.swift; sourceTree = "<group>"; };
 		D05467ED1F64CFD0008088DC /* SelectFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFeedsViewController.swift; sourceTree = "<group>"; };
 		D05467EF1F64EF2F008088DC /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
 		D084B4261F3E17E80091EAFF /* Readr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Readr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D084B4291F3E17E80091EAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D084B42B1F3E17E80091EAFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D084B42B1F3E17E80091EAFF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D084B42E1F3E17E80091EAFF /* Readr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Readr.xcdatamodel; sourceTree = "<group>"; };
 		D084B4301F3E17E80091EAFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D084B4331F3E17E80091EAFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -127,9 +129,11 @@
 		D05467E81F64C492008088DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D084B42B1F3E17E80091EAFF /* MainViewController.swift */,
 				D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */,
 				D05467ED1F64CFD0008088DC /* SelectFeedsViewController.swift */,
 				D04A2C511F674E4000B94F03 /* AddFeedCellView.swift */,
+				D031F9031F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -164,7 +168,6 @@
 				D09B64A91F60D33F004880AC /* FavIconDelegate.swift */,
 				D09B64CB1F60D5EF004880AC /* RSSNetworking.swift */,
 				D084B4291F3E17E80091EAFF /* AppDelegate.swift */,
-				D084B42B1F3E17E80091EAFF /* ViewController.swift */,
 				D09B64CD1F60D605004880AC /* Errors.swift */,
 				D084B4301F3E17E80091EAFF /* Assets.xcassets */,
 				D084B4321F3E17E80091EAFF /* Main.storyboard */,
@@ -329,7 +332,7 @@
 				D019B3F31F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift in Sources */,
 				D09B64AD1F60D33F004880AC /* FavIconDelegate.swift in Sources */,
 				D019B3F11F588A3000DDE26A /* ManagedStory+CoreDataClass.swift in Sources */,
-				D084B42C1F3E17E80091EAFF /* ViewController.swift in Sources */,
+				D084B42C1F3E17E80091EAFF /* MainViewController.swift in Sources */,
 				D019B3F41F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift in Sources */,
 				D09B64CC1F60D5EF004880AC /* RSSNetworking.swift in Sources */,
 				D08CB7591F61B5AC00DFAD5D /* URLSession.swift in Sources */,
@@ -343,6 +346,7 @@
 				D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */,
 				D0E7944C1F6A39B7000E3144 /* FeedImportDelegate.swift in Sources */,
 				D05467EE1F64CFD0008088DC /* SelectFeedsViewController.swift in Sources */,
+				D031F9041F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift in Sources */,
 				D084B42A1F3E17E80091EAFF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,11 +8,15 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class MainViewController: NSViewController {
 
+    let outlineViewDelegate: PlaylistOutlineViewDelegate = PlaylistOutlineViewDelegate()
+    @IBOutlet weak var outlineView: NSOutlineView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        outlineView.dataSource = outlineViewDelegate
+        outlineView.delegate = outlineViewDelegate
         // Do any additional setup after loading the view.
     }
 
