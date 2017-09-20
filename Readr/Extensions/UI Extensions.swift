@@ -24,3 +24,10 @@ extension NSStoryboard.Name {
     // Needed for macOS 10.12 and older
     static let main = NSStoryboard.Name(rawValue: "Main")
 }
+
+extension NSUserInterfaceItemIdentifier {
+    static let feedCell = NSUserInterfaceItemIdentifier(rawValue: "feedCell")
+    static let folderCell = NSUserInterfaceItemIdentifier(rawValue: "folderCell")
+    static let playlistCell = NSUserInterfaceItemIdentifier(rawValue: "playlistCell")
+    static let smartPlaylistCell = NSUserInterfaceItemIdentifier(rawValue: "smartPlaylistCell")
+}
