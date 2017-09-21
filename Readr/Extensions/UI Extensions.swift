@@ -26,8 +26,5 @@ extension NSStoryboard.Name {
 }
 
 extension NSUserInterfaceItemIdentifier {
-    static let feedCell = NSUserInterfaceItemIdentifier(rawValue: "feedCell")
-    static let folderCell = NSUserInterfaceItemIdentifier(rawValue: "folderCell")
-    static let playlistCell = NSUserInterfaceItemIdentifier(rawValue: "playlistCell")
-    static let smartPlaylistCell = NSUserInterfaceItemIdentifier(rawValue: "smartPlaylistCell")
+    static let cellView = NSUserInterfaceItemIdentifier(rawValue: "cell")
 }
