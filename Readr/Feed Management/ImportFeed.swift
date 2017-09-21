@@ -57,7 +57,7 @@ class ImportFeed: RSSNetworkingDelegate {
         }
     }
     
-    func identifyFeed(at url: String) {
+    func identifyFeed(at url: String, with name: String) {
         guard let feedURL: URL = URL(string: url) else {
             let error: oklasoftError = invalidURLError
             delegateView?.returned(error: error)
@@ -66,7 +66,7 @@ class ImportFeed: RSSNetworkingDelegate {
         let appDellegate: AppDelegate? = NSApplication.shared.delegate as? AppDelegate
         let netManager: RSSNetworking? = appDellegate?.rssNetwork
         netManager?.delegate = self
-        netManager?.createManagedFeedFrom(url: feedURL)
+        netManager?.createManagedFeedFrom(url: feedURL, with: name)
     }
     
     func found(feeds: [ManagedFeed]) {
@@ -79,11 +79,6 @@ class ImportFeed: RSSNetworkingDelegate {
         notification.title = feeds.count > 1 ? multiTitle : singleTitle
         notification.subtitle = NSLocalizedString("Somthing good happened", comment: "Somthing good happened")
         notification.informativeText = informitiveText
-        
-        // if previously added feeds show as disabled remove this code
-//        for feed in feeds {
-//            createManagedFeedObjects(feed: feed)
-//        }
         
         DispatchQueue.main.async {
             NSUserNotificationCenter.default.deliver(notification)

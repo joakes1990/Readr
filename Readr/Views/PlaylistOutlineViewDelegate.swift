@@ -28,6 +28,7 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
             print(error)
         }
     }
+    
     //MARK: DataSource methods
 
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
@@ -39,10 +40,10 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
     }
 
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        guard let outlineItem: [ManagedFeed] = item as? [ManagedFeed] else {
+        guard let outlineItem: DataModel = item as? DataModel else {
             return dataModel
         }
-        return outlineItem[index]
+        return outlineItem.children[index]
     }
 
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {

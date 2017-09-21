@@ -12,7 +12,7 @@ public class RSSNetworking {
     
     public var delegate: RSSNetworkingDelegate?
     
-    public func createManagedFeedFrom(url: URL) {
+    public func createManagedFeedFrom(url: URL, with name: String) {
         unowned let unownedSelf: RSSNetworking = self
         
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, responce, error) in
@@ -25,8 +25,7 @@ public class RSSNetworking {
                 let validData: Data = data,
                 let typeString: String = headers.mimeType,
                 let mimeType: mimeTypes = mimeTypes(rawValue:typeString),
-                let url: URL = headers.url,
-                let title: String = url.host
+                let url: URL = headers.url
                 else {
                     let error: Error = unrecognizableDataError
                     unownedSelf.delegate?.receavedNetworkError(error: error)
@@ -43,7 +42,7 @@ public class RSSNetworking {
             case .rss, .rssXML, .simpleRSS:
                 canonicalURL = unownedSelf.parentURLForRSS(data: validData)
                 
-                newFeed.setValue(title, forKey: "title")
+                newFeed.setValue(name, forKey: "title")
                 newFeed.setValue(url.absoluteString, forKey: "url")
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate(), forKey: "lastUpdated")
@@ -57,7 +56,7 @@ public class RSSNetworking {
                     canonicalURL = hostURL
                 }
                 
-                newFeed.setValue(title, forKey: "title")
+                newFeed.setValue(name, forKey: "title")
                 newFeed.setValue(url.absoluteString, forKey: "url")
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate(), forKey: "lastUpdated")
@@ -66,6 +65,7 @@ public class RSSNetworking {
                 unownedSelf.delegate?.found(feeds: [newFeed])
                 break
             case .html:
+                context.delete(newFeed)
                 unownedSelf.delegate?.found(html: validData, from: url)
             }
             do {

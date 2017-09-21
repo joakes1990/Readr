@@ -68,7 +68,7 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, FeedImportPr
         if ImportFeed.validProtocol(url) {
             let message: String = NSLocalizedString("Looking for feeds 👀", comment: "Looking for feeds 👀")
             toggleModal(enable: true, message: message)
-            feedImporter.identifyFeed(at: url)
+            feedImporter.identifyFeed(at: url, with: URL(string: url)?.host ?? url)
         } else {
             toggleModal(enable: false, message: invalidURLError.localizedDescription)
             shake()
