@@ -10,9 +10,19 @@ import Cocoa
 
 class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
-    var dataModel: DataModel
+    var dataModel: DataModel?
+    var outline: NSOutlineView?
     
     override init() {
+        super.init()
+        populateOutlineView()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(populateOutlineView),
+                                               name: .newFeedSaved,
+                                               object: nil)
+    }
+    
+    @objc fileprivate func populateOutlineView() {
         let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ManagedFeed> = NSFetchRequest(entityName: ManagedFeed.feedEntitty)
@@ -20,11 +30,15 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
             let allFeeds: [ManagedFeed] = try context.fetch(fetchRequest) as [ManagedFeed]
             dataModel = DataModel(name: NSLocalizedString("Feeds", comment: "Feeds"),
                                   children: allFeeds)
-            super.init()
+            unowned let unownedSelf: PlaylistOutlineViewDelegate = self
+            DispatchQueue.main.async {
+               unownedSelf.outline?.reloadItem(nil)
+            }
+        
+            
         } catch {
             //TODO: Log error
             dataModel = DataModel(name: String(), children: [ManagedFeed]())
-            super.init()
             print(error)
         }
     }
@@ -32,6 +46,7 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
     //MARK: DataSource methods
 
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        outline = outlineView
         if let outlineItem: DataModel = item as? DataModel {
             return outlineItem.children.count
         } else {
@@ -41,7 +56,7 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
 
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         guard let outlineItem: DataModel = item as? DataModel else {
-            return dataModel
+            return dataModel as Any
         }
         return outlineItem.children[index]
     }

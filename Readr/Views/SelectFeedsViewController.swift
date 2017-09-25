@@ -69,7 +69,7 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
         for index in 0 ..< tableView.numberOfRows {
             let row: AddFeedCellView = tableView.view(atColumn: 0, row: index, makeIfNecessary: false) as? AddFeedCellView ?? AddFeedCellView(frame: NSRect(x: 0, y: 0, width: 0, height: 0))
             if row.checkBox.state == .on && row.checkBox.isEnabled {
-                ImportFeed.shared.identifyFeed(at: links[index].link.absoluteString, with: links[index].title)
+                ImportFeed.shared.saveFeed(at: links[index].link.absoluteString, with: links[index].title)
             }
         }
         view.window?.close()

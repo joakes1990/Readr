@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ImportFeed: RSSNetworkingDelegate {
+class ImportFeed: RSSNetworkingProtocol {
     
     var delegateView: AddFeedViewController?
     var feeds: [ManagedFeed] = []
@@ -57,7 +57,7 @@ class ImportFeed: RSSNetworkingDelegate {
         }
     }
     
-    func identifyFeed(at url: String, with name: String) {
+    func saveFeed(at url: String, with name: String) {
         guard let feedURL: URL = URL(string: url) else {
             let error: oklasoftError = invalidURLError
             delegateView?.returned(error: error)
@@ -88,7 +88,7 @@ class ImportFeed: RSSNetworkingDelegate {
     func wasPreviousltAdded(link: Link) -> Bool {
         let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
         let fetchRequest: NSFetchRequest<ManagedFeed> = NSFetchRequest(entityName: ManagedFeed.feedEntitty)
-        let predicate: NSPredicate = NSPredicate(format: "url = %@", argumentArray: [link.link.absoluteString])
+        let predicate: NSPredicate = NSPredicate(format: "url = '\(link.link.absoluteString)'")
         fetchRequest.predicate = predicate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         

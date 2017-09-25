@@ -10,7 +10,7 @@ import Cocoa
 
 public class RSSNetworking {
     
-    public var delegate: RSSNetworkingDelegate?
+    public var delegate: RSSNetworkingProtocol?
     
     public func createManagedFeedFrom(url: URL, with name: String) {
         unowned let unownedSelf: RSSNetworking = self
@@ -24,8 +24,7 @@ public class RSSNetworking {
             guard let headers: URLResponse = responce,
                 let validData: Data = data,
                 let typeString: String = headers.mimeType,
-                let mimeType: mimeTypes = mimeTypes(rawValue:typeString),
-                let url: URL = headers.url
+                let mimeType: mimeTypes = mimeTypes(rawValue:typeString)
                 else {
                     let error: Error = unrecognizableDataError
                     unownedSelf.delegate?.receavedNetworkError(error: error)
@@ -70,6 +69,7 @@ public class RSSNetworking {
             }
             do {
                 try context.save()
+                NotificationCenter.default.post(name: .newFeedSaved, object: nil)
             } catch {
                 //TODO: Log inability to save nsmanged cotext
                 //Note this is called if the html mimetype is returned
@@ -164,7 +164,7 @@ public class RSSNetworking {
     }
 }
 
-public protocol RSSNetworkingDelegate {
+public protocol RSSNetworkingProtocol {
     func found(feeds: [ManagedFeed])
     func found(links: [Link]?)
     func found(html: Data, from url: URL)

@@ -29,7 +29,7 @@ public extension XMLParser {
         parse()
     }
     
-    public func parseHTMLforFeeds(fromSite url: URL, for sender: RSSNetworkingDelegate) {
+    public func parseHTMLforFeeds(fromSite url: URL, for sender: RSSNetworkingProtocol) {
         let htmlDelegate: HTMLDelegate = HTMLDelegate(with: url)
         htmlDelegate.caller = sender
         delegate = htmlDelegate

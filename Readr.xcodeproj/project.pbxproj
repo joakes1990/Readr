@@ -30,6 +30,7 @@
 		D09B64CE1F60D605004880AC /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CD1F60D605004880AC /* Errors.swift */; };
 		D09B64D01F60DAC2004880AC /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CF1F60DAC2004880AC /* StringExtensions.swift */; };
 		D0D06A851F4BB585008E0112 /* ImportFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D06A841F4BB585008E0112 /* ImportFeedManager.swift */; };
+		D0D9BFC41F7575370054A1E5 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D9BFC31F7575370054A1E5 /* Notifications.swift */; };
 		D0E780C51F61E25400C9D356 /* RSSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64A81F60D33F004880AC /* RSSDelegate.swift */; };
 		D0E780C61F61E26F00C9D356 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64C71F60D43A004880AC /* XMLParser.swift */; };
 		D0E780C81F61E41200C9D356 /* HTMLDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64A71F60D33F004880AC /* HTMLDelegate.swift */; };
@@ -95,6 +96,7 @@
 		D09B64CD1F60D605004880AC /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		D09B64CF1F60DAC2004880AC /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		D0D06A841F4BB585008E0112 /* ImportFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeedManager.swift; sourceTree = "<group>"; };
+		D0D9BFC31F7575370054A1E5 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D0E7944B1F6A39B7000E3144 /* FeedImportDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImportDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +209,7 @@
 				D09B64CF1F60DAC2004880AC /* StringExtensions.swift */,
 				D09B64C71F60D43A004880AC /* XMLParser.swift */,
 				D08CB7581F61B5AC00DFAD5D /* URLSession.swift */,
+				D0D9BFC31F7575370054A1E5 /* Notifications.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				D09B64CA1F60D5DA004880AC /* RSSmodels.swift in Sources */,
 				D09B64D01F60DAC2004880AC /* StringExtensions.swift in Sources */,
 				D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */,
+				D0D9BFC41F7575370054A1E5 /* Notifications.swift in Sources */,
 				D05467F01F64EF2F008088DC /* UI Extensions.swift in Sources */,
 				D09B64CE1F60D605004880AC /* Errors.swift in Sources */,
 				D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */,
