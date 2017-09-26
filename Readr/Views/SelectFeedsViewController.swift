@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, AddFeedCellDelegate {
 
     @IBOutlet weak var tableView: NSTableView!
     var links: [Link] = []
@@ -53,6 +53,7 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell: AddFeedCellView = AddFeedCellView(frame: NSRect(x: 0.0, y: 0.0, width: 400.0, height: 75.0))
+        cell.delegate = self
         let link: Link = links[row]
         cell.titleLabel.stringValue = link.title
         if ImportFeed.shared.wasPreviousltAdded(link: link) {
@@ -77,6 +78,15 @@ class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTabl
     
     @IBAction func cancel(_ sender: Any) {
         view.window?.close()
+    }
+    
+    func wasCmdClicked(state: NSControl.StateValue) {
+        for index in 0 ..< tableView.numberOfRows {
+            let row: AddFeedCellView = tableView.view(atColumn: 0, row: index, makeIfNecessary: false) as? AddFeedCellView ?? AddFeedCellView(frame: NSRect(x: 0, y: 0, width: 0, height: 0))
+            if row.checkBox.isEnabled {
+                row.checkBox.state = state == .on ? .on : .off
+            }
+        }
     }
     
 }

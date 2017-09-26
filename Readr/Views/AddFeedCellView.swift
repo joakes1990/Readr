@@ -11,8 +11,9 @@ import Cocoa
 class AddFeedCellView: NSView {
     
     let titleLabel: NSTextField = NSTextField(labelWithString: "Feed Title")
-    let checkBox: NSButton = NSButton(checkboxWithTitle: NSLocalizedString("Add Feed", comment: "AddFeed"), target: nil, action: nil)
+    var checkBox: NSButton!
     var feedTitle: String?
+    var delegate: AddFeedCellDelegate?
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
@@ -22,6 +23,9 @@ class AddFeedCellView: NSView {
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
+        checkBox = NSButton(checkboxWithTitle: NSLocalizedString("Add Feed", comment: "AddFeed"),
+                            target: self,
+                            action: #selector(cmdClick))
         translatesAutoresizingMaskIntoConstraints = true
         titleLabel.font = NSFont.systemFont(ofSize: 18, weight: .semibold)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +44,6 @@ class AddFeedCellView: NSView {
         checkBox.state = .on
         addSubview(titleLabel)
         addSubview(checkBox)
-        super.layout()
     }
     
     required init?(coder decoder: NSCoder) {
@@ -50,7 +53,17 @@ class AddFeedCellView: NSView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         addSubview(checkBox)
-        super.layout()
     }
     
+    @objc func cmdClick() {
+        if NSEvent.modifierFlags.contains(.command) && checkBox.isEnabled {
+            delegate?.wasCmdClicked(state: checkBox.state)
+        }
+        
+    }
+    
+}
+
+protocol AddFeedCellDelegate {
+    func wasCmdClicked(state: NSControl.StateValue)
 }
