@@ -68,7 +68,7 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
             tableCell.imageView?.image = #imageLiteral(resourceName: "RSSCellImage")
             return tableCell
         } else if let managedFeedItem: ManagedFeed = item as? ManagedFeed {
-            tableCell.textField?.stringValue = managedFeedItem.title ?? "Piece of shit"
+            tableCell.textField?.stringValue = managedFeedItem.title ?? NSLocalizedString("Untitled Feed", comment: "Untitled Feed")
             return tableCell
         }
         return nil

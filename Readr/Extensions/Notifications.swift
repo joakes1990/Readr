@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
     static let newFeedSaved = Notification.Name("newFeedSaved")
+    static let foundFavIcon = Notification.Name("foundFavIcon")
 }

@@ -18,7 +18,7 @@ extension ManagedFeed {
     }
 
     @NSManaged public var canonicalURL: String?
-    @NSManaged public var favIcon: String?
+    @NSManaged public var favIcon: NSData?
     @NSManaged public var lastUpdated: NSDate?
     @NSManaged public var mimeType: Int16
     @NSManaged public var title: String?
@@ -42,4 +42,17 @@ extension ManagedFeed {
     @objc(removeStories:)
     @NSManaged public func removeFromStories(_ values: NSSet)
 
+}
+
+//MARK: Custom methods
+
+extension ManagedFeed {
+    
+    func requestNewFavIcon() {
+        guard let feedURL: URL = URL(string: url ?? ""),
+            let baseURL: URL = URL(string: feedURL.host ?? "") else {
+            return
+        }
+        
+    }
 }

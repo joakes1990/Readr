@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13233.4" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ManagedFeed" representedClassName="ManagedFeed" syncable="YES">
         <attribute name="canonicalURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="favIcon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="favIcon" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="mimeType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,7 +24,7 @@
         <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedFeed" inverseName="stories" inverseEntity="ManagedFeed" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ManagedFeed" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="ManagedFeed" positionX="-155" positionY="45" width="128" height="148"/>
         <element name="ManagedStory" positionX="108" positionY="9" width="128" height="223"/>
     </elements>
 </model>

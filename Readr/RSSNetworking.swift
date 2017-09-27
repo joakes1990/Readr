@@ -15,6 +15,9 @@ public class RSSNetworking {
     public func createManagedFeedFrom(url: URL, with name: String) {
         unowned let unownedSelf: RSSNetworking = self
         
+        // Attempts to find a news feeds at the provided URL.
+        //If a url to an HTML page is found it will return all the links in the page's head with html or atom mimetypes
+        
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, responce, error) in
             if let foundError:Error = error {
                 unownedSelf.delegate?.receavedNetworkError(error: foundError)
@@ -78,77 +81,6 @@ public class RSSNetworking {
         task.resume()
     }
     
-    static let identifyStoriesCompletion: URLSession.Completion = {(data, responce, error) in
-        if let foundError:Error = error {
-            //TODO: replace with protocol callback
-//            NotificationCenter.default.post(name: .networkingErrorNotification,
-//                                            object: nil,
-//                                            userInfo:errorInfo(error: foundError).toDict())
-            return
-        }
-        guard let headers: URLResponse = responce,
-            let validData: Data = data,
-            let mimeType: mimeTypes = mimeTypes(rawValue:(headers.mimeType ?? "")),
-            let url: URL = headers.url
-            else {
-                return
-        }
-        switch mimeType {
-        case .rss, .rssXML:
-            let parser: XMLParser = XMLParser(data: validData)
-            parser.parseRSSFeed(fromParent: url)
-            break
-        case .atom, .atomXML:
-            let parser: XMLParser = XMLParser(data: validData)
-            parser.parseAtomFeed(fromParent: url)
-            break
-            
-        default:
-            break
-        }
-    }
-    
-    static let findFeedsCompletion: URLSession.Completion = {(data, responce, error) in
-        if let foundError:Error = error {
-            //TODO: replace with protocol callback
-//            NotificationCenter.default.post(name: .networkingErrorNotification,
-//                                            object: nil,
-//                                            userInfo:errorInfo(error: foundError).toDict())
-            return
-        }
-        guard let headers: URLResponse = responce,
-            let validData: Data = data,
-            let mimeType: mimeTypes = mimeTypes(rawValue:(headers.mimeType ?? "")),
-            let url: URL = headers.url
-            else {
-                return
-        }
-        switch mimeType {
-        case .html:
-            guard let htmlString: String = String(data: validData, encoding: .utf8) else {
-                //TODO: replace with protocol callback
-//                NotificationCenter.default.post(name: .errorConvertingHTML,
-//                                                object: nil,
-//                                                userInfo: [errorInfoKey:unrecognizableDataError])
-                return
-            }
-            do {
-                let document: XMLDocument = try XMLDocument(xmlString: htmlString, options: .documentTidyHTML)
-                let parser: XMLParser = XMLParser(data: document.xmlData)
-//                parser.parseHTMLforFeeds(fromSite: url, for: )
-            } catch {
-                //TODO: replace with protocol callback
-//                NotificationCenter.default.post(name: .errorConvertingHTML,
-//                                                object: nil,
-//                                                userInfo: [errorInfoKey:unrecognizableDataError])
-                return
-            }
-            break
-        default:
-            break
-        }
-    }
-    
     func parentURLForRSS(data: Data) -> URL? {
         guard let pageXML: String = String(data: data, encoding: .utf8),
             let linkRange: Range = pageXML.range(of: "(?<=<link>)(.+)(?=</link>)",
@@ -161,6 +93,10 @@ public class RSSNetworking {
         
         let linkString: String = String(pageXML[linkRange])
         return URL(string: linkString)
+    }
+    
+    func requestNewFavIcon(forURL url: URL) {
+        URLSession.shared.getReturnedDataFrom(url: url, completion: <#T##URLSession.Completion##URLSession.Completion##(Data?, URLResponse?, Error?) -> Void#>)
     }
 }
 
