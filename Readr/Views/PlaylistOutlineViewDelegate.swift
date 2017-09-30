@@ -32,9 +32,9 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
                                   children: allFeeds)
             unowned let unownedSelf: PlaylistOutlineViewDelegate = self
             DispatchQueue.main.async {
-               unownedSelf.outline?.reloadItem(nil)
+                unownedSelf.outline?.reloadItem(nil)
             }
-        
+            
             
         } catch {
             //TODO: Log error
@@ -44,7 +44,7 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
     }
     
     //MARK: DataSource methods
-
+    
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         outline = outlineView
         if let outlineItem: DataModel = item as? DataModel {
@@ -53,27 +53,31 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
             return 1
         }
     }
-
+    
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         guard let outlineItem: DataModel = item as? DataModel else {
             return dataModel as Any
         }
         return outlineItem.children[index]
     }
-
+    
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let tableCell = outlineView.makeView(withIdentifier: .cellView, owner: self) as! NSTableCellView
         if let _: DataModel = item as? DataModel {
             tableCell.textField?.stringValue = NSLocalizedString("Feeds", comment: "Feeds")
             tableCell.imageView?.image = #imageLiteral(resourceName: "RSSCellImage")
             return tableCell
-        } else if let managedFeedItem: ManagedFeed = item as? ManagedFeed {
-            tableCell.textField?.stringValue = managedFeedItem.title ?? NSLocalizedString("Untitled Feed", comment: "Untitled Feed")
-            return tableCell
+        } else if let managedFeedItem: ManagedFeed = item as? ManagedFeed,
+            let imageData: Data = managedFeedItem.favIcon as Data?,
+            let urlName: String = URL(string: managedFeedItem.canonicalURL ?? "")?.host {
+                tableCell.textField?.stringValue = "\(urlName) - \(managedFeedItem.title ?? "")"
+            //TODO: Replace with a default icon
+            tableCell.imageView?.image = imageData != nil ? NSImage(data: imageData) : #imageLiteral(resourceName: "reardlogomac")
+                return tableCell
         }
         return nil
     }
-
+    
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         if let _: DataModel = item as? DataModel {
             return true
@@ -81,7 +85,7 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
             return false
         }
     }
-
+    
 }
 
 
