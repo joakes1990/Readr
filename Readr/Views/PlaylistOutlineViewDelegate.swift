@@ -55,10 +55,12 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
     }
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        guard let outlineItem: DataModel = item as? DataModel else {
+        if item == nil {
             return dataModel as Any
+        } else {
+            let outlineItem: DataModel = item as? DataModel ?? DataModel(name: "Feeds", children: [])
+            return outlineItem.children[index] as Any
         }
-        return outlineItem.children[index]
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {

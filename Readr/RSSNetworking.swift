@@ -55,7 +55,8 @@ public class RSSNetworking {
                 break
             case .atom, .atomXML:
                 if let hostString: String = url.host,
-                    let hostURL: URL = URL(string: hostString) {
+                    let protocolString: String = url.absoluteString.contains("https://") ? "https://\(hostString)" : "http://\(hostString)",
+                    let hostURL: URL = URL(string: protocolString) {
                     canonicalURL = hostURL
                 }
                 
@@ -93,7 +94,7 @@ public class RSSNetworking {
                 return nil
         }
         
-        let linkString: String = String(pageXML[linkRange])
+        let linkString: String = String(pageXML[linkRange]).contains("http://") || String(pageXML[linkRange]).contains("https://") ? String(pageXML[linkRange]) : "http://\(String(pageXML[linkRange]))"
         return URL(string: linkString)
     }
     
