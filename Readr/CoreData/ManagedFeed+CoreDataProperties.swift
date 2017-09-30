@@ -7,7 +7,7 @@
 //
 //
 
-import Foundation
+import Cocoa
 import CoreData
 
 
@@ -49,10 +49,10 @@ extension ManagedFeed {
 extension ManagedFeed {
     
     func requestNewFavIcon() {
-        guard let feedURL: URL = URL(string: url ?? ""),
-            let baseURL: URL = URL(string: feedURL.host ?? "") else {
+        guard let feedURL: URL = URL(string: canonicalURL ?? "") else{
             return
         }
-        
+        let rssNetwork: RSSNetworking = (NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()).rssNetwork
+        rssNetwork.requestNewFavIcon(forURL: feedURL)
     }
 }

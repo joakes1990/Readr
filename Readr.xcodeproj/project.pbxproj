@@ -25,7 +25,8 @@
 		D084B4341F3E17E80091EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D084B4321F3E17E80091EAFF /* Main.storyboard */; };
 		D084B4401F3E17E80091EAFF /* ReadrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D084B43F1F3E17E80091EAFF /* ReadrTests.swift */; };
 		D08CB7591F61B5AC00DFAD5D /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08CB7581F61B5AC00DFAD5D /* URLSession.swift */; };
-		D09B64AD1F60D33F004880AC /* FavIconDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64A91F60D33F004880AC /* FavIconDelegate.swift */; };
+		D09412351F7EF47A00C5004A /* FavIconDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09412341F7EF47900C5004A /* FavIconDelegate.swift */; };
+		D09412371F7F2ADA00C5004A /* UpdateFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09412361F7F2ADA00C5004A /* UpdateFeed.swift */; };
 		D09B64CC1F60D5EF004880AC /* RSSNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CB1F60D5EF004880AC /* RSSNetworking.swift */; };
 		D09B64CE1F60D605004880AC /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CD1F60D605004880AC /* Errors.swift */; };
 		D09B64D01F60DAC2004880AC /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CF1F60DAC2004880AC /* StringExtensions.swift */; };
@@ -84,11 +85,11 @@
 		D084B43F1F3E17E80091EAFF /* ReadrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadrTests.swift; sourceTree = "<group>"; };
 		D084B4411F3E17E80091EAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D08CB7581F61B5AC00DFAD5D /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		D09412341F7EF47900C5004A /* FavIconDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavIconDelegate.swift; sourceTree = "<group>"; };
+		D09412361F7F2ADA00C5004A /* UpdateFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFeed.swift; sourceTree = "<group>"; };
 		D09B64A51F60D33F004880AC /* AtomDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomDelegate.swift; sourceTree = "<group>"; };
-		D09B64A61F60D33F004880AC /* FavIconDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavIconDelegate.swift; sourceTree = "<group>"; };
 		D09B64A71F60D33F004880AC /* HTMLDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLDelegate.swift; sourceTree = "<group>"; };
 		D09B64A81F60D33F004880AC /* RSSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSDelegate.swift; sourceTree = "<group>"; };
-		D09B64A91F60D33F004880AC /* FavIconDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavIconDelegate.swift; path = ../../Frameworks/OklasoftRSS/OklasoftRSS/Parsers/FavIconDelegate.swift; sourceTree = "<group>"; };
 		D09B64C71F60D43A004880AC /* XMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
 		D09B64CB1F60D5EF004880AC /* RSSNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSNetworking.swift; sourceTree = "<group>"; };
 		D09B64CD1F60D605004880AC /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 				D05E022A1F7B540A005E6C65 /* RSSmodels.swift */,
 				D014FCCD1F3E66AA000B906B /* ImportFeed.swift */,
 				D0E7944B1F6A39B7000E3144 /* FeedImportDelegate.swift */,
+				D09412361F7F2ADA00C5004A /* UpdateFeed.swift */,
 			);
 			path = "Feed Management";
 			sourceTree = "<group>";
@@ -163,7 +165,6 @@
 				D09B64C21F60D3E9004880AC /* Extensions */,
 				D09B64A41F60D33F004880AC /* Parsers */,
 				D014FCC81F3E63E7000B906B /* Feed Management */,
-				D09B64A91F60D33F004880AC /* FavIconDelegate.swift */,
 				D09B64CB1F60D5EF004880AC /* RSSNetworking.swift */,
 				D084B4291F3E17E80091EAFF /* AppDelegate.swift */,
 				D09B64CD1F60D605004880AC /* Errors.swift */,
@@ -188,8 +189,8 @@
 		D09B64A41F60D33F004880AC /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				D09412341F7EF47900C5004A /* FavIconDelegate.swift */,
 				D09B64A51F60D33F004880AC /* AtomDelegate.swift */,
-				D09B64A61F60D33F004880AC /* FavIconDelegate.swift */,
 				D09B64A71F60D33F004880AC /* HTMLDelegate.swift */,
 				D09B64A81F60D33F004880AC /* RSSDelegate.swift */,
 			);
@@ -321,13 +322,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D09412371F7F2ADA00C5004A /* UpdateFeed.swift in Sources */,
 				D0E780C91F61F62800C9D356 /* AtomDelegate.swift in Sources */,
 				D0E780C81F61E41200C9D356 /* HTMLDelegate.swift in Sources */,
 				D0E780C61F61E26F00C9D356 /* XMLParser.swift in Sources */,
 				D0E780C51F61E25400C9D356 /* RSSDelegate.swift in Sources */,
 				D019B3F21F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift in Sources */,
 				D019B3F31F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift in Sources */,
-				D09B64AD1F60D33F004880AC /* FavIconDelegate.swift in Sources */,
 				D019B3F11F588A3000DDE26A /* ManagedStory+CoreDataClass.swift in Sources */,
 				D084B42C1F3E17E80091EAFF /* MainViewController.swift in Sources */,
 				D019B3F41F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift in Sources */,
@@ -339,6 +340,7 @@
 				D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */,
 				D0D9BFC41F7575370054A1E5 /* Notifications.swift in Sources */,
 				D05467F01F64EF2F008088DC /* UI Extensions.swift in Sources */,
+				D09412351F7EF47A00C5004A /* FavIconDelegate.swift in Sources */,
 				D09B64CE1F60D605004880AC /* Errors.swift in Sources */,
 				D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */,
 				D0E7944C1F6A39B7000E3144 /* FeedImportDelegate.swift in Sources */,

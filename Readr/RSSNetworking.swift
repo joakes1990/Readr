@@ -39,7 +39,7 @@ public class RSSNetworking {
             let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
             let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: ManagedFeed.feedEntitty, in: context)!
             let newFeed: ManagedFeed = NSManagedObject(entity: entity, insertInto: context) as! ManagedFeed
-
+            
             switch mimeType {
             case .rss, .rssXML, .simpleRSS:
                 canonicalURL = unownedSelf.parentURLForRSS(data: validData)
@@ -49,6 +49,7 @@ public class RSSNetworking {
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate(), forKey: "lastUpdated")
                 newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
+                newFeed.requestNewFavIcon()
                 
                 unownedSelf.delegate?.found(feeds: [newFeed])
                 break
@@ -63,6 +64,7 @@ public class RSSNetworking {
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate(), forKey: "lastUpdated")
                 newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
+                newFeed.requestNewFavIcon()
                 
                 unownedSelf.delegate?.found(feeds: [newFeed])
                 break
@@ -96,7 +98,43 @@ public class RSSNetworking {
     }
     
     func requestNewFavIcon(forURL url: URL) {
-        URLSession.shared.getReturnedDataFrom(url: url, completion: <#T##URLSession.Completion##URLSession.Completion##(Data?, URLResponse?, Error?) -> Void#>)
+        if let favIcon: NSImage = clasicFavIconFor(url: url) {
+            let userInfo: [AnyHashable : Any] = [Notification.Name.favIconKey : favIcon,
+                                                 Notification.Name.urlKey : url]
+            NotificationCenter.default.post(name: .foundFavIcon,
+                                            object: nil,
+                                            userInfo: userInfo)
+            return
+        }
+        
+//        URLSession.shared.getReturnedDataFrom(url: url) { (data, responce, error) in
+//            if let foundError: Error = error {
+//                //TODO: Log error
+//                print(foundError)
+//                return
+//            }
+//            guard let validData: Data = data else {
+//                  return
+//            }
+//            do {
+//                let xmlDocument: XMLDocument = try XMLDocument(data: validData, options: .documentTidyHTML)
+//                let parser: XMLParser = XMLParser(data: xmlDocument.xmlData)
+//                parser.parseHTMLforFavIcon(fromSite: url)
+//            } catch {
+//                return
+//            }
+//        }
+        
+    }
+    
+    func clasicFavIconFor(url: URL) -> NSImage? {
+        guard let sanitizedString: String = url.host,
+            let favIconString: String = "http://\(sanitizedString)/favicon.ico",
+            let sanitizedURL: URL = URL(string: favIconString),
+            let favIcon: NSImage = NSImage(contentsOf: sanitizedURL) else {
+            return nil
+        }
+        return favIcon
     }
 }
 
