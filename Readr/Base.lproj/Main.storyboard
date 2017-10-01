@@ -942,7 +942,7 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I6h-Km-hpI">
-                                <rect key="frame" x="159" y="-1" width="20" height="22"/>
+                                <rect key="frame" x="184" y="-1" width="20" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Rtr-Xy-BJ0"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="ZVB-LR-aZv"/>
@@ -953,7 +953,7 @@ DQ
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ux8-86-fVm">
-                                <rect key="frame" x="179" y="-1" width="20" height="22"/>
+                                <rect key="frame" x="204" y="-1" width="20" height="22"/>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SmB-8E-p6f">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -992,7 +992,7 @@ DQ
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jb0-Qg-w1D">
                                                                     <rect key="frame" x="3" y="0.0" width="17" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="k84-Ev-TzI"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="genaricfeed" id="k84-Ev-TzI"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vsn-dA-zR8">
                                                                     <rect key="frame" x="25" y="0.0" width="195" height="17"/>
@@ -1052,10 +1052,10 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="add" width="24" height="24"/>
+        <image name="genaricfeed" width="32" height="32"/>
         <image name="reardlogomac" width="128" height="128"/>
         <image name="sidebar" width="48" height="48"/>
     </resources>

@@ -50,6 +50,7 @@ public class RSSNetworking {
                 newFeed.setValue(NSDate(), forKey: "lastUpdated")
                 newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
                 newFeed.requestNewFavIcon()
+                newFeed.requestNewStories()
                 
                 unownedSelf.delegate?.found(feeds: [newFeed])
                 break
@@ -66,6 +67,7 @@ public class RSSNetworking {
                 newFeed.setValue(NSDate(), forKey: "lastUpdated")
                 newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
                 newFeed.requestNewFavIcon()
+                newFeed.requestNewStories()
                 
                 unownedSelf.delegate?.found(feeds: [newFeed])
                 break
@@ -108,24 +110,54 @@ public class RSSNetworking {
             return
         }
         
-//        URLSession.shared.getReturnedDataFrom(url: url) { (data, responce, error) in
-//            if let foundError: Error = error {
-//                //TODO: Log error
-//                print(foundError)
-//                return
-//            }
-//            guard let validData: Data = data else {
-//                  return
-//            }
-//            do {
-//                let xmlDocument: XMLDocument = try XMLDocument(data: validData, options: .documentTidyHTML)
-//                let parser: XMLParser = XMLParser(data: xmlDocument.xmlData)
-//                parser.parseHTMLforFavIcon(fromSite: url)
-//            } catch {
-//                return
-//            }
-//        }
+        //        URLSession.shared.getReturnedDataFrom(url: url) { (data, responce, error) in
+        //            if let foundError: Error = error {
+        //                //TODO: Log error
+        //                print(foundError)
+        //                return
+        //            }
+        //            guard let validData: Data = data else {
+        //                  return
+        //            }
+        //            do {
+        //                let xmlDocument: XMLDocument = try XMLDocument(data: validData, options: .documentTidyHTML)
+        //                let parser: XMLParser = XMLParser(data: xmlDocument.xmlData)
+        //                parser.parseHTMLforFavIcon(fromSite: url)
+        //            } catch {
+        //                return
+        //            }
+        //        }
         
+    }
+    
+    func requestNewStories(forURL url: URL, ofType type: mimeTypes) {
+        URLSession.shared.getReturnedDataFrom(url: url) { (data, responce, error) in
+            if let foundError: Error = error {
+                //TODO: Log error
+                print(foundError)
+                return
+            }
+            guard let validData: Data = data else {
+                return
+            }
+            do {
+                let xmlDocument: XMLDocument = try XMLDocument(data: validData, options: .documentTidyXML)
+                let parser: XMLParser = XMLParser(data: xmlDocument.xmlData)
+                
+                switch type {
+                case .atomXML, .atom:
+                    parser.parseAtomFeed(fromParent: url)
+                    break
+                case .rss, .rssXML, .simpleRSS:
+                    parser.parseRSSFeed(fromParent: url)
+                    break
+                default:
+                    break
+                }
+            } catch {
+                return
+            }
+        }
     }
     
     func clasicFavIconFor(url: URL) -> NSImage? {
@@ -133,7 +165,7 @@ public class RSSNetworking {
             let favIconString: String = "http://\(sanitizedString)/favicon.ico",
             let sanitizedURL: URL = URL(string: favIconString),
             let favIcon: NSImage = NSImage(contentsOf: sanitizedURL) else {
-            return nil
+                return nil
         }
         return favIcon
     }

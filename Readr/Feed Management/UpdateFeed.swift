@@ -15,6 +15,10 @@ class UpdateFeed {
                                                selector: #selector(didReceaveUpdatedFevIcon(aNotification:)),
                                                name: .foundFavIcon,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceaveUpdatedStories(aNotification:)),
+                                               name: .finishedFindingStories,
+                                               object: nil)
     }
     
     @objc func didReceaveUpdatedFevIcon(aNotification: Notification) {
@@ -41,6 +45,10 @@ class UpdateFeed {
             //TODO: Log error
             print("didn't save fav icon")
         }
+        
+    }
+    
+    @objc func didReceaveUpdatedStories(aNotification: Notification) {
         
     }
 }
