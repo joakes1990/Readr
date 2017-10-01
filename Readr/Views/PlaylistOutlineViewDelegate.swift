@@ -73,8 +73,7 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
             let imageData: Data = managedFeedItem.favIcon as Data?,
             let urlName: String = URL(string: managedFeedItem.canonicalURL ?? "")?.host {
                 tableCell.textField?.stringValue = "\(urlName) - \(managedFeedItem.title ?? "")"
-            //TODO: Replace with a default icon
-            tableCell.imageView?.image = imageData != nil ? NSImage(data: imageData) : #imageLiteral(resourceName: "reardlogomac")
+            tableCell.imageView?.image = imageData != nil ? NSImage(data: imageData) : #imageLiteral(resourceName: "genaricfeed")
                 return tableCell
         }
         return nil

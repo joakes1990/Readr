@@ -12,5 +12,5 @@ import CoreData
 
 @objc(ManagedStory)
 public class ManagedStory: NSManagedObject {
-
+    static let storyEntity = "ManagedStory"
 }
