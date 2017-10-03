@@ -10,7 +10,7 @@ import Cocoa
 
 class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
-    var dataModel: DataModel?
+    var rootDataModel: DataModel?
     var outline: NSOutlineView?
     
     override init() {
@@ -28,8 +28,8 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
         let fetchRequest: NSFetchRequest<ManagedFeed> = NSFetchRequest(entityName: ManagedFeed.feedEntitty)
         do {
             let allFeeds: [ManagedFeed] = try context.fetch(fetchRequest) as [ManagedFeed]
-            dataModel = DataModel(name: NSLocalizedString("Feeds", comment: "Feeds"),
-                                  children: allFeeds)
+            rootDataModel = DataModel(name: NSLocalizedString("Feeds", comment: "Feeds"),
+                                      children: allFeeds)
             unowned let unownedSelf: PlaylistOutlineViewDelegate = self
             DispatchQueue.main.async {
                 unownedSelf.outline?.reloadItem(nil)
@@ -38,7 +38,7 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
             
         } catch {
             //TODO: Log error
-            dataModel = DataModel(name: String(), children: [ManagedFeed]())
+            rootDataModel = DataModel(name: String(), children: [ManagedFeed]())
             print(error)
         }
     }
@@ -56,7 +56,7 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if item == nil {
-            return dataModel as Any
+            return rootDataModel as Any
         } else {
             let outlineItem: DataModel = item as? DataModel ?? DataModel(name: "Feeds", children: [])
             return outlineItem.children[index] as Any
@@ -72,9 +72,9 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
         } else if let managedFeedItem: ManagedFeed = item as? ManagedFeed,
             let imageData: Data = managedFeedItem.favIcon as Data?,
             let urlName: String = URL(string: managedFeedItem.canonicalURL ?? "")?.host {
-                tableCell.textField?.stringValue = "\(urlName) - \(managedFeedItem.title ?? "")"
-            tableCell.imageView?.image = imageData != nil ? NSImage(data: imageData) : #imageLiteral(resourceName: "genaricfeed")
-                return tableCell
+            tableCell.textField?.stringValue = "\(urlName) - \(managedFeedItem.title ?? "")"
+            tableCell.imageView?.image = NSImage(data: imageData)
+            return tableCell
         }
         return nil
     }
@@ -87,6 +87,24 @@ class PlaylistOutlineViewDelegate: NSObject, NSOutlineViewDataSource, NSOutlineV
         }
     }
     
+    //MARK DelegateMethods
+    
+    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        if let dataModel: DataModel = item as? DataModel {
+            let children: [ManagedFeed] = dataModel.children
+            var allStories: [ManagedStory] = []
+            children.forEach({ (feed) in
+                let stories: [ManagedStory] = feed.stories?.allObjects as? [ManagedStory] ?? []
+                allStories.append(contentsOf: stories)
+            })
+            allStories.sort(by: { (story1, story2) -> Bool in
+                return story1.pubdate as Date? == story1.pubdate?.laterDate(story2.pubdate as Date? ?? Date.distantPast)
+            })
+            print(allStories)
+        }
+        print(item)
+        return true
+    }
 }
 
 
