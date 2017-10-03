@@ -12,10 +12,6 @@ class FeedImportDelegate: NSObject, FeedImportProtocol {
     
     static let shared: FeedImportDelegate = FeedImportDelegate()
     
-    func foundFeed(feed: ManagedFeed?) {
-        //TODO: create Managed object and save to core data
-    }
-    
     func foundLinks(links: [Link]?) {
         var storyboard: NSStoryboard
         // Remove this check after min suported version >= 10.13
@@ -42,7 +38,6 @@ class FeedImportDelegate: NSObject, FeedImportProtocol {
 }
 
 protocol FeedImportProtocol {
-    func foundFeed(feed: ManagedFeed?)
     func foundLinks(links: [Link]?)
     func returned(error: Error)
 }

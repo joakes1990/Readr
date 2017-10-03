@@ -28,6 +28,11 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, FeedImportPr
         if let clipBoardURL: String = ImportFeed.urlFromClipboard() {
             urlTextField.stringValue = clipBoardURL
         }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(foundFeed),
+                                               name: .finishedFindingStories,
+                                               object: nil)
+        
     }
     
     override func viewDidDisappear() {
@@ -81,13 +86,14 @@ class AddFeedViewController: NSViewController, NSTextFieldDelegate, FeedImportPr
         }
     }
     
-    func foundFeed(feed: ManagedFeed?) {
+    @objc func foundFeed() {
         let foundMessage: String = NSLocalizedString("New feed added!", comment: "New feed added!")
-        let dismissDate: DispatchTime = DispatchTime(uptimeNanoseconds: DispatchTime.now().rawValue + 3000000000)
+        let dismissDate: DispatchTime = DispatchTime(uptimeNanoseconds: DispatchTime.now().rawValue + 1500000000)
         
         unowned let unownedSelf: AddFeedViewController = self
-        toggleModal(enable: false, message: foundMessage)
-        FeedImportDelegate.shared.foundFeed(feed: feed)
+        DispatchQueue.main.async {
+            unownedSelf.toggleModal(enable: false, message: foundMessage)
+        }
         DispatchQueue.main.asyncAfter(deadline: dismissDate) {
             unownedSelf.dismiss(unownedSelf)
         }
