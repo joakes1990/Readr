@@ -53,7 +53,7 @@ extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
         }
         if let cell: MainCellView = tableView.makeView(withIdentifier: MainCellView.identifier, owner: nil) as? MainCellView {
             cell.textField?.stringValue = text ?? ""
-            cell.imageView = NSImageView(image: image ?? #imageLiteral(resourceName: "genaricfeed"))
+            cell.imageView?.image = image != nil ? image : #imageLiteral(resourceName: "genaricfeed")
             return cell
         }
         return nil

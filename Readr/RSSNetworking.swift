@@ -162,8 +162,7 @@ public class RSSNetworking {
     
     func clasicFavIconFor(url: URL) -> NSImage? {
         guard let sanitizedString: String = url.host,
-            let favIconString: String = "http://\(sanitizedString)/favicon.ico",
-            let sanitizedURL: URL = URL(string: favIconString),
+            let sanitizedURL: URL = URL(string: "http://\(sanitizedString)/favicon.ico"),
             let favIcon: NSImage = NSImage(contentsOf: sanitizedURL) else {
                 return nil
         }
