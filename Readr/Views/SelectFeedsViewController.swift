@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, AddFeedCellDelegate {
+class SelectFeedsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate,AddFeedCellDelegate {
 
     @IBOutlet weak var tableView: NSTableView!
     var links: [Link] = []

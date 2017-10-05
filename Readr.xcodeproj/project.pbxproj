@@ -14,8 +14,6 @@
 		D019B3F21F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3EE1F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift */; };
 		D019B3F31F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3EF1F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift */; };
 		D019B3F41F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019B3F01F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift */; };
-		D031F9041F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031F9031F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift */; };
-		D04A2C521F674E4000B94F03 /* AddFeedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04A2C511F674E4000B94F03 /* AddFeedCellView.swift */; };
 		D05467EE1F64CFD0008088DC /* SelectFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05467ED1F64CFD0008088DC /* SelectFeedsViewController.swift */; };
 		D05467F01F64EF2F008088DC /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05467EF1F64EF2F008088DC /* UI Extensions.swift */; };
 		D05E022B1F7B540A005E6C65 /* RSSmodels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E022A1F7B540A005E6C65 /* RSSmodels.swift */; };
@@ -30,6 +28,10 @@
 		D09B64CC1F60D5EF004880AC /* RSSNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CB1F60D5EF004880AC /* RSSNetworking.swift */; };
 		D09B64CE1F60D605004880AC /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CD1F60D605004880AC /* Errors.swift */; };
 		D09B64D01F60DAC2004880AC /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64CF1F60DAC2004880AC /* StringExtensions.swift */; };
+		D0AC54B31F85A6CC00143E5D /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AC54B21F85A6CC00143E5D /* NSColor.swift */; };
+		D0AC54B71F85DD0900143E5D /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AC54B61F85DD0900143E5D /* ToolbarView.swift */; };
+		D0AC54BA1F85EBD300143E5D /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AC54B91F85EBD300143E5D /* FeedController.swift */; };
+		D0AC54BC1F85F41000143E5D /* AddFeedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AC54BB1F85F41000143E5D /* AddFeedCellView.swift */; };
 		D0D9BFC41F7575370054A1E5 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D9BFC31F7575370054A1E5 /* Notifications.swift */; };
 		D0E780C51F61E25400C9D356 /* RSSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64A81F60D33F004880AC /* RSSDelegate.swift */; };
 		D0E780C61F61E26F00C9D356 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64C71F60D43A004880AC /* XMLParser.swift */; };
@@ -68,8 +70,6 @@
 		D019B3EE1F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedStory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D019B3EF1F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedFeed+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D019B3F01F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedFeed+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D031F9031F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistOutlineViewDelegate.swift; sourceTree = "<group>"; };
-		D04A2C511F674E4000B94F03 /* AddFeedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedCellView.swift; sourceTree = "<group>"; };
 		D05467ED1F64CFD0008088DC /* SelectFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFeedsViewController.swift; sourceTree = "<group>"; };
 		D05467EF1F64EF2F008088DC /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
 		D05E022A1F7B540A005E6C65 /* RSSmodels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RSSmodels.swift; path = ../../../Frameworks/OklasoftRSS/OklasoftRSS/Parsers/RSSmodels.swift; sourceTree = "<group>"; };
@@ -94,6 +94,10 @@
 		D09B64CB1F60D5EF004880AC /* RSSNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSNetworking.swift; sourceTree = "<group>"; };
 		D09B64CD1F60D605004880AC /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		D09B64CF1F60DAC2004880AC /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		D0AC54B21F85A6CC00143E5D /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
+		D0AC54B61F85DD0900143E5D /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		D0AC54B91F85EBD300143E5D /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		D0AC54BB1F85F41000143E5D /* AddFeedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedCellView.swift; sourceTree = "<group>"; };
 		D0D9BFC31F7575370054A1E5 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D0E7944B1F6A39B7000E3144 /* FeedImportDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImportDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,8 +137,8 @@
 				D084B42B1F3E17E80091EAFF /* MainViewController.swift */,
 				D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */,
 				D05467ED1F64CFD0008088DC /* SelectFeedsViewController.swift */,
-				D04A2C511F674E4000B94F03 /* AddFeedCellView.swift */,
-				D031F9031F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift */,
+				D0AC54BB1F85F41000143E5D /* AddFeedCellView.swift */,
+				D0AC54B61F85DD0900143E5D /* ToolbarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,7 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				D05467E81F64C492008088DC /* Views */,
-				D0C37C6A1F4D2E9A00FC0C77 /* CoreData */,
+				D0C37C6A1F4D2E9A00FC0C77 /* CoreData Model Classes */,
+				D0AC54B81F85E77300143E5D /* Data Controller Classes */,
 				D09B64C21F60D3E9004880AC /* Extensions */,
 				D09B64A41F60D33F004880AC /* Parsers */,
 				D014FCC81F3E63E7000B906B /* Feed Management */,
@@ -206,11 +211,20 @@
 				D09B64C71F60D43A004880AC /* XMLParser.swift */,
 				D08CB7581F61B5AC00DFAD5D /* URLSession.swift */,
 				D0D9BFC31F7575370054A1E5 /* Notifications.swift */,
+				D0AC54B21F85A6CC00143E5D /* NSColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		D0C37C6A1F4D2E9A00FC0C77 /* CoreData */ = {
+		D0AC54B81F85E77300143E5D /* Data Controller Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D0AC54B91F85EBD300143E5D /* FeedController.swift */,
+			);
+			path = "Data Controller Classes";
+			sourceTree = "<group>";
+		};
+		D0C37C6A1F4D2E9A00FC0C77 /* CoreData Model Classes */ = {
 			isa = PBXGroup;
 			children = (
 				D019B3ED1F588A3000DDE26A /* ManagedStory+CoreDataClass.swift */,
@@ -218,7 +232,7 @@
 				D019B3EF1F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift */,
 				D019B3F01F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift */,
 			);
-			path = CoreData;
+			path = "CoreData Model Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,25 +342,27 @@
 				D0E780C61F61E26F00C9D356 /* XMLParser.swift in Sources */,
 				D0E780C51F61E25400C9D356 /* RSSDelegate.swift in Sources */,
 				D019B3F21F588A3000DDE26A /* ManagedStory+CoreDataProperties.swift in Sources */,
+				D0AC54B71F85DD0900143E5D /* ToolbarView.swift in Sources */,
 				D019B3F31F588A3000DDE26A /* ManagedFeed+CoreDataClass.swift in Sources */,
 				D019B3F11F588A3000DDE26A /* ManagedStory+CoreDataClass.swift in Sources */,
 				D084B42C1F3E17E80091EAFF /* MainViewController.swift in Sources */,
 				D019B3F41F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift in Sources */,
 				D09B64CC1F60D5EF004880AC /* RSSNetworking.swift in Sources */,
 				D08CB7591F61B5AC00DFAD5D /* URLSession.swift in Sources */,
-				D04A2C521F674E4000B94F03 /* AddFeedCellView.swift in Sources */,
+				D0AC54B31F85A6CC00143E5D /* NSColor.swift in Sources */,
 				D019B3EC1F58897F00DDE26A /* Readr.xcdatamodeld in Sources */,
 				D09B64D01F60DAC2004880AC /* StringExtensions.swift in Sources */,
+				D0AC54BA1F85EBD300143E5D /* FeedController.swift in Sources */,
 				D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */,
 				D0D9BFC41F7575370054A1E5 /* Notifications.swift in Sources */,
 				D05467F01F64EF2F008088DC /* UI Extensions.swift in Sources */,
+				D0AC54BC1F85F41000143E5D /* AddFeedCellView.swift in Sources */,
 				D09412351F7EF47A00C5004A /* FavIconDelegate.swift in Sources */,
 				D09B64CE1F60D605004880AC /* Errors.swift in Sources */,
 				D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */,
 				D0E7944C1F6A39B7000E3144 /* FeedImportDelegate.swift in Sources */,
 				D05E022B1F7B540A005E6C65 /* RSSmodels.swift in Sources */,
 				D05467EE1F64CFD0008088DC /* SelectFeedsViewController.swift in Sources */,
-				D031F9041F6F345E003A6613 /* PlaylistOutlineViewDelegate.swift in Sources */,
 				D084B42A1F3E17E80091EAFF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

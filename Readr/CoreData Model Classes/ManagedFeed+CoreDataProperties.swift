@@ -24,7 +24,7 @@ extension ManagedFeed {
     @NSManaged public var title: String?
     @NSManaged public var url: String?
     @NSManaged public var stories: NSSet?
-    
+    @NSManaged public var order: Int16
 }
 
 // MARK: Generated accessors for stories

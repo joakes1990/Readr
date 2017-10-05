@@ -51,7 +51,7 @@ class UpdateFeed {
     @objc func didReceaveUpdatedStories(aNotification: Notification) {
         guard let userInfo: [AnyHashable : Any] = aNotification.userInfo,
             let feedURL: URL = userInfo.keys.first as? URL ?? URL(string: ""),
-            let stories: [Story] = userInfo[feedURL] as? [Story] ?? [Story]()
+            let stories: [Story] = (userInfo[feedURL] as? [Story]?) ?? []
             else {
                 return
         }
