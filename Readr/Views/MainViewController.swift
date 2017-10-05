@@ -30,19 +30,36 @@ extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         // Get number of feeds and add two
-        return 2
+        return (FeedController.shared.allFeeds?.count ?? 0) + 2
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        var text: String?
+        var image: NSImage?
+        
         switch row {
         case 0:
-            // create folder row
+            text = NSLocalizedString("Folders", comment: "Folders")
+            image = #imageLiteral(resourceName: "Folder")
             break
         case 1:
-            // create playlist row
+            text = NSLocalizedString("Playlists", comment: "Playlists")
+            image = #imageLiteral(resourceName: "Playlist")
             break
         default:
-            // get feed object and create row
+            let index: Int = row - 2
+            text = FeedController.shared.tableString(forIndex: index)
+            image = FeedController.shared.tableImage(forIndex: index)
         }
+        if let cell: MainCellView = tableView.makeView(withIdentifier: MainCellView.identifier, owner: nil) as? MainCellView {
+            cell.textField?.stringValue = text ?? ""
+            cell.imageView = NSImageView(image: image ?? #imageLiteral(resourceName: "genaricfeed"))
+            return cell
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        return 65.0
     }
 }

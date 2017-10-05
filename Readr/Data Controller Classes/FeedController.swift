@@ -28,4 +28,26 @@ class FeedController {
             return []
         }
     }
+    
+    // MARK: Tableview support methods
+    
+    func tableString(forIndex index: Int) -> String? {
+        guard let feed: ManagedFeed = allFeeds?[index],
+            let url: String = feed.canonicalURL,
+            let hosturl: String = URL(string: url)?.host,
+            let name: String = feed.title
+            else {
+            return nil
+        }
+        return "\(hosturl) - \(name)"
+    }
+    
+    func tableImage(forIndex index: Int) -> NSImage? {
+        guard let feed: ManagedFeed = allFeeds?[index],
+            let imageData: Data = feed.favIcon as Data?
+            else {
+                return nil
+        }
+        return NSImage(data: imageData)
+    }
 }
