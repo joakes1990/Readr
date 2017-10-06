@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
@@ -931,26 +932,18 @@ DQ
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66" y="266"/>
+            <point key="canvasLocation" x="50" y="273"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="Readr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="510" height="313"/>
+                        <rect key="frame" x="0.0" y="0.0" width="514" height="313"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u34-k0-oVN">
-                                <rect key="frame" x="255" y="58" width="255" height="255"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="255" id="0VH-Dz-0dt"/>
-                                    <constraint firstAttribute="width" constant="255" id="3PQ-ZO-b1r"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="6D6-OJ-ZZd"/>
-                            </imageView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Z8d-7I-mdo" customClass="ToolbarView" customModule="Readr" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="255" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="257" height="30"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="WHc-mP-HnL">
                                         <rect key="frame" x="10" y="0.0" width="30" height="30"/>
@@ -985,19 +978,19 @@ DQ
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="36" horizontalPageScroll="10" verticalLineScroll="36" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="fvm-hp-uCP">
-                                <rect key="frame" x="0.0" y="29" width="255" height="284"/>
+                                <rect key="frame" x="0.0" y="29" width="257" height="284"/>
                                 <clipView key="contentView" id="8y4-Gs-edp">
-                                    <rect key="frame" x="1" y="1" width="253" height="282"/>
+                                    <rect key="frame" x="1" y="1" width="255" height="282"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="34" rowSizeStyle="automatic" viewBased="YES" id="xiA-lo-Dh2">
-                                            <rect key="frame" x="0.0" y="0.0" width="253" height="282"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="34" rowSizeStyle="automatic" viewBased="YES" id="xiA-lo-Dh2">
+                                            <rect key="frame" x="0.0" y="0.0" width="255" height="282"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.066666666666666666" green="0.082352941176470587" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" width="250" minWidth="40" maxWidth="1000" id="xaf-R6-wNg">
+                                                <tableColumn identifier="" width="252" minWidth="40" maxWidth="1000" id="xaf-R6-wNg">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1011,7 +1004,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="mainCell" id="IAe-Xc-yY5" customClass="MainCellView" customModule="Readr" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="250" height="34"/>
+                                                            <rect key="frame" x="1" y="1" width="252" height="34"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gCb-gb-k1H">
@@ -1066,17 +1059,25 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="b0V-ht-2wH">
+                                <rect key="frame" x="257" y="0.0" width="257" height="313"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="255" id="Emx-pu-4e1"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="fvm-hp-uCP" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" multiplier="0.5" id="2UY-KX-Kf9"/>
+                            <constraint firstAttribute="bottom" secondItem="b0V-ht-2wH" secondAttribute="bottom" id="Ac8-8K-aQX"/>
                             <constraint firstItem="fvm-hp-uCP" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="C1L-gb-VnM"/>
                             <constraint firstItem="fvm-hp-uCP" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="FeU-ZI-o8f"/>
                             <constraint firstAttribute="bottom" secondItem="Z8d-7I-mdo" secondAttribute="bottom" id="N4z-VA-jDW"/>
+                            <constraint firstAttribute="trailing" secondItem="b0V-ht-2wH" secondAttribute="trailing" id="NXB-Xx-4ca"/>
                             <constraint firstItem="Z8d-7I-mdo" firstAttribute="top" secondItem="fvm-hp-uCP" secondAttribute="bottom" constant="-1" id="RC7-wQ-PJN"/>
-                            <constraint firstItem="u34-k0-oVN" firstAttribute="leading" secondItem="fvm-hp-uCP" secondAttribute="trailing" id="RoK-5c-4zF"/>
-                            <constraint firstItem="u34-k0-oVN" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="UWq-Bt-9Nq"/>
                             <constraint firstItem="Z8d-7I-mdo" firstAttribute="width" secondItem="fvm-hp-uCP" secondAttribute="width" id="VZU-v5-T4x"/>
-                            <constraint firstAttribute="trailing" secondItem="u34-k0-oVN" secondAttribute="trailing" id="lgO-Y7-QMc"/>
+                            <constraint firstItem="b0V-ht-2wH" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="gxb-3s-9s8"/>
                             <constraint firstItem="Z8d-7I-mdo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="sv1-QR-3wN"/>
+                            <constraint firstItem="b0V-ht-2wH" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" multiplier="0.5" id="y2j-HX-8aK"/>
                         </constraints>
                     </view>
                     <connections>
