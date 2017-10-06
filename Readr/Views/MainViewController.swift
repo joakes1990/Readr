@@ -17,11 +17,22 @@ class MainViewController: NSViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.intercellSpacing = NSSize(width: 0.0, height: 0.0)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceaveNewFeeds(aNotification:)),
+                                               name: .newFeedSaved,
+                                               object: nil)
     }
 
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
+        }
+    }
+    
+    @objc func didReceaveNewFeeds(aNotification: Notification) {
+        unowned let unownedSelf: MainViewController = self
+        DispatchQueue.main.async {
+            unownedSelf.tableView.reloadData()
         }
     }
 
@@ -63,5 +74,9 @@ extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 65.0
+    }
+    
+    func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
+        return true
     }
 }

@@ -14,19 +14,32 @@ class FeedController {
     var allFeeds: [ManagedFeed]?
     
     init() {
-        allFeeds = populateAllFeeds()
+        updateFeedsArray()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateFeedsArray),
+                                               name: .newFeedSaved,
+                                               object: nil)
     }
     
     func populateAllFeeds() -> [ManagedFeed] {
         let appDelegate: AppDelegate = NSApplication.shared.delegate  as? AppDelegate ?? AppDelegate()
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ManagedFeed> = NSFetchRequest(entityName: ManagedFeed.feedEntitty)
+        let sortDescripter: NSSortDescriptor = NSSortDescriptor(key: "order", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescripter]
         do {
-            let feeds: [ManagedFeed] = try context.fetch(fetchRequest)
-            return feeds.sorted(by: ({$0.order > $1.order}))
+            return try context.fetch(fetchRequest)
         } catch {
             return []
         }
+    }
+    
+    @objc func updateFeedsArray() {
+        allFeeds = populateAllFeeds()
+    }
+    
+    func allFeedsCount() -> Int16 {
+        return Int16(populateAllFeeds().count)
     }
     
     // MARK: Tableview support methods

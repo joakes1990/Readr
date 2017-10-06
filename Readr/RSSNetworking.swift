@@ -49,10 +49,18 @@ public class RSSNetworking {
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate.distantPast as NSDate, forKey: "lastUpdated")
                 newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
+                newFeed.setValue(FeedController.shared.allFeedsCount(), forKey: "order")
                 newFeed.requestNewFavIcon()
                 newFeed.requestNewStories()
                 
                 unownedSelf.delegate?.found(feeds: [newFeed])
+                do {
+                    try context.save()
+                    NotificationCenter.default.post(name: .newFeedSaved, object: nil)
+                } catch {
+                    //TODO: Log inability to save nsmanged cotext
+                    //Note this is called if the html mimetype is returned
+                }
                 break
             case .atom, .atomXML:
                 if let hostString: String = url.host,
@@ -66,21 +74,22 @@ public class RSSNetworking {
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate.distantPast as NSDate, forKey: "lastUpdated")
                 newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
+                newFeed.setValue(FeedController.shared.allFeedsCount(), forKey: "order")
                 newFeed.requestNewFavIcon()
                 newFeed.requestNewStories()
                 
                 unownedSelf.delegate?.found(feeds: [newFeed])
+                do {
+                    try context.save()
+                    NotificationCenter.default.post(name: .newFeedSaved, object: nil)
+                } catch {
+                    //TODO: Log inability to save nsmanged cotext
+                    //Note this is called if the html mimetype is returned
+                }
                 break
             case .html:
                 context.delete(newFeed)
                 unownedSelf.delegate?.found(html: validData, from: url)
-            }
-            do {
-                try context.save()
-                NotificationCenter.default.post(name: .newFeedSaved, object: nil)
-            } catch {
-                //TODO: Log inability to save nsmanged cotext
-                //Note this is called if the html mimetype is returned
             }
         })
         task.resume()
