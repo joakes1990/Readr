@@ -1079,6 +1079,9 @@ DQ
                             <constraint firstItem="Z8d-7I-mdo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="sv1-QR-3wN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="xiA-lo-Dh2" id="u4g-Lp-KkD"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

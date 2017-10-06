@@ -10,11 +10,13 @@ import Cocoa
 
 class MainViewController: NSViewController {
 
-    @IBOutlet weak var outlineView: NSOutlineView!
+    @IBOutlet weak var tableView: NSTableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        tableView.intercellSpacing = NSSize(width: 0.0, height: 0.0)
     }
 
     override var representedObject: Any? {
