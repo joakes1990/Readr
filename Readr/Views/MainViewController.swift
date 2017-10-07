@@ -9,7 +9,7 @@
 import Cocoa
 
 class MainViewController: NSViewController {
-
+    
     @IBOutlet weak var tableView: NSTableView!
     
     
@@ -17,15 +17,16 @@ class MainViewController: NSViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.intercellSpacing = NSSize(width: 0.0, height: 0.0)
+        tableView.registerForDraggedTypes([.mainCellType])
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didReceaveNewFeeds(aNotification:)),
                                                name: .newFeedSaved,
                                                object: nil)
     }
-
+    
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
     
@@ -35,8 +36,8 @@ class MainViewController: NSViewController {
             unownedSelf.tableView.reloadData()
         }
     }
-
-
+    
+    
 }
 
 extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
@@ -77,6 +78,39 @@ extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
     }
     
     func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
-        return true
+        guard let index: Int = rowIndexes.first else {
+            return false
+        }
+        if index <= 1 {
+            return false
+        } else {
+            pboard.clearContents()
+            let data: Data = NSKeyedArchiver.archivedData(withRootObject: rowIndexes)
+            pboard.setData(data, forType: .mainCellType)
+            return true
+        }
+    }
+    
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+        if row >= 3 {
+            return .move
+        } else {
+            return .generic
+        }
+    }
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+        if dropOperation == .above {
+            let indexData: Data = info.draggingPasteboard().data(forType: .mainCellType) ?? Data()
+            let indexSet: IndexSet? = NSKeyedUnarchiver.unarchiveObject(with: indexData) as? IndexSet
+            guard let startIndex: Int = indexSet?.first else {
+                return false
+            }
+            tableView.beginUpdates()
+            tableView.moveRow(at: startIndex, to: row)
+            tableView.endUpdates()
+            return true
+        } else {
+            return false
+        }
     }
 }
