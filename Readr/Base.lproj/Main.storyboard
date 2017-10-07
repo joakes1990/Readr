@@ -900,7 +900,7 @@ DQ
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="MainWindowController" customModule="Readr" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Readr" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -915,7 +915,11 @@ DQ
                                         <segue destination="yfo-vp-hBL" kind="popover" popoverAnchorView="COj-A5-Qx6" popoverBehavior="semitransient" preferredEdge="maxY" id="WPF-V1-2yE"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="D7085B76-BDE6-434A-A2FA-16C86240B552" label="Sidebar" paletteLabel="Sidebar" tag="-1" image="sidebar" id="VU7-zO-2SS"/>
+                                <toolbarItem implicitItemIdentifier="D7085B76-BDE6-434A-A2FA-16C86240B552" label="Sidebar" paletteLabel="Sidebar" tag="-1" image="sidebar" id="VU7-zO-2SS">
+                                    <connections>
+                                        <action selector="toggleSidebar:" target="B8D-0N-5wS" id="yzw-Iu-uaf"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="COj-A5-Qx6"/>
@@ -927,6 +931,7 @@ DQ
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="sidebarToolbarItem" destination="VU7-zO-2SS" id="BK2-t8-pzE"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>
                 </windowController>
@@ -943,7 +948,7 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Z8d-7I-mdo" customClass="ToolbarView" customModule="Readr" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="257" height="30"/>
+                                <rect key="frame" x="-350" y="0.0" width="350" height="30"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="WHc-mP-HnL">
                                         <rect key="frame" x="10" y="0.0" width="30" height="30"/>
@@ -978,19 +983,19 @@ DQ
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="36" horizontalPageScroll="10" verticalLineScroll="36" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="fvm-hp-uCP">
-                                <rect key="frame" x="0.0" y="29" width="257" height="284"/>
+                                <rect key="frame" x="-350" y="29" width="350" height="284"/>
                                 <clipView key="contentView" id="8y4-Gs-edp">
-                                    <rect key="frame" x="1" y="1" width="255" height="282"/>
+                                    <rect key="frame" x="1" y="1" width="348" height="282"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="34" rowSizeStyle="automatic" viewBased="YES" id="xiA-lo-Dh2">
-                                            <rect key="frame" x="0.0" y="0.0" width="255" height="282"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="282"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" red="0.066666666666666666" green="0.082352941176470587" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" width="252" minWidth="40" maxWidth="1000" id="xaf-R6-wNg">
+                                                <tableColumn identifier="" width="345" minWidth="40" maxWidth="1000" id="xaf-R6-wNg">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1004,7 +1009,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="mainCell" id="IAe-Xc-yY5" customClass="MainCellView" customModule="Readr" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="252" height="34"/>
+                                                            <rect key="frame" x="1" y="1" width="345" height="34"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gCb-gb-k1H">
@@ -1048,7 +1053,7 @@ DQ
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
                                 </clipView>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="255" id="StZ-RZ-SuB"/>
+                                    <constraint firstAttribute="width" constant="350" id="StZ-RZ-SuB"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="7qa-fp-fMF">
                                     <rect key="frame" x="-100" y="-100" width="223" height="15"/>
@@ -1067,20 +1072,20 @@ DQ
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="fvm-hp-uCP" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" multiplier="0.5" id="2UY-KX-Kf9"/>
+                            <constraint firstItem="Z8d-7I-mdo" firstAttribute="leading" secondItem="xiA-lo-Dh2" secondAttribute="leading" constant="-1" id="2kb-6e-eHY"/>
                             <constraint firstAttribute="bottom" secondItem="b0V-ht-2wH" secondAttribute="bottom" id="Ac8-8K-aQX"/>
                             <constraint firstItem="fvm-hp-uCP" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="C1L-gb-VnM"/>
-                            <constraint firstItem="fvm-hp-uCP" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="FeU-ZI-o8f"/>
+                            <constraint firstItem="fvm-hp-uCP" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="-350" id="FeU-ZI-o8f"/>
                             <constraint firstAttribute="bottom" secondItem="Z8d-7I-mdo" secondAttribute="bottom" id="N4z-VA-jDW"/>
                             <constraint firstAttribute="trailing" secondItem="b0V-ht-2wH" secondAttribute="trailing" id="NXB-Xx-4ca"/>
                             <constraint firstItem="Z8d-7I-mdo" firstAttribute="top" secondItem="fvm-hp-uCP" secondAttribute="bottom" constant="-1" id="RC7-wQ-PJN"/>
                             <constraint firstItem="Z8d-7I-mdo" firstAttribute="width" secondItem="fvm-hp-uCP" secondAttribute="width" id="VZU-v5-T4x"/>
                             <constraint firstItem="b0V-ht-2wH" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="gxb-3s-9s8"/>
-                            <constraint firstItem="Z8d-7I-mdo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="sv1-QR-3wN"/>
                             <constraint firstItem="b0V-ht-2wH" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" multiplier="0.5" id="y2j-HX-8aK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="sidebarOffsetConstraint" destination="FeU-ZI-o8f" id="SlN-yV-QEJ"/>
                         <outlet property="tableView" destination="xiA-lo-Dh2" id="u4g-Lp-KkD"/>
                     </connections>
                 </viewController>
