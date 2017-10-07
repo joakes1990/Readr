@@ -99,14 +99,14 @@ extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
         }
     }
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-        if dropOperation == .above {
+        if dropOperation == .above && row >= 2 {
             let indexData: Data = info.draggingPasteboard().data(forType: .mainCellType) ?? Data()
             let indexSet: IndexSet? = NSKeyedUnarchiver.unarchiveObject(with: indexData) as? IndexSet
             guard let startIndex: Int = indexSet?.first else {
                 return false
             }
             tableView.beginUpdates()
-            tableView.moveRow(at: startIndex, to: row == tableView.numberOfRows ? row - 1 : row)
+            tableView.moveRow(at: startIndex, to: row == tableView.numberOfRows ? row - 1 : row > startIndex ? row - 1 : row)
             tableView.endUpdates()
             FeedController.shared.tableviewCellDidMove(from: startIndex, to: row)
             return true
