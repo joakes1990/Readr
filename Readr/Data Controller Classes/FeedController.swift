@@ -63,4 +63,27 @@ class FeedController {
         }
         return NSImage(data: imageData)
     }
+    
+    func tableviewCellDidMove(from oldIndex: Int, to newIndex: Int) {
+        //offset for folders and playlists row
+        let old: Int = oldIndex - 2
+        let new: Int = newIndex - 2
+        
+        var managedFeeds: [ManagedFeed] = allFeeds ?? populateAllFeeds()
+        let affectedFeed: ManagedFeed = managedFeeds.remove(at: old)
+        managedFeeds.insert(affectedFeed, at: new == 0 ? new : new - 1)
+        for number: Int in 0..<managedFeeds.count {
+            let feed: ManagedFeed = managedFeeds[number]
+            feed.order = Int16(number)
+        }
+        let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
+        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        do {
+            try context.save()
+        } catch {
+            //TODO: log error
+            print(error)
+        }
+        
+    }
 }

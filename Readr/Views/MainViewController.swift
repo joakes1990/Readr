@@ -106,8 +106,9 @@ extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
                 return false
             }
             tableView.beginUpdates()
-            tableView.moveRow(at: startIndex, to: row)
+            tableView.moveRow(at: startIndex, to: row == tableView.numberOfRows ? row - 1 : row)
             tableView.endUpdates()
+            FeedController.shared.tableviewCellDidMove(from: startIndex, to: row)
             return true
         } else {
             return false
