@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D006BD431F89DBB500C3EB55 /* StoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D006BD421F89DBB500C3EB55 /* StoryController.swift */; };
 		D014FCCC1F3E650C000B906B /* AddFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */; };
 		D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014FCCD1F3E66AA000B906B /* ImportFeed.swift */; };
 		D019B3EC1F58897F00DDE26A /* Readr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D084B42D1F3E17E80091EAFF /* Readr.xcdatamodeld */; };
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D006BD421F89DBB500C3EB55 /* StoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryController.swift; sourceTree = "<group>"; };
 		D014FCCB1F3E650C000B906B /* AddFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedViewController.swift; sourceTree = "<group>"; };
 		D014FCCD1F3E66AA000B906B /* ImportFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFeed.swift; sourceTree = "<group>"; };
 		D019B3ED1F588A3000DDE26A /* ManagedStory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedStory+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				D0AC54B91F85EBD300143E5D /* FeedController.swift */,
+				D006BD421F89DBB500C3EB55 /* StoryController.swift */,
 			);
 			path = "Data Controller Classes";
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				D019B3F11F588A3000DDE26A /* ManagedStory+CoreDataClass.swift in Sources */,
 				D084B42C1F3E17E80091EAFF /* MainViewController.swift in Sources */,
 				D019B3F41F588A3000DDE26A /* ManagedFeed+CoreDataProperties.swift in Sources */,
+				D006BD431F89DBB500C3EB55 /* StoryController.swift in Sources */,
 				D0B322581F896FAE005F8351 /* MainWindowController.swift in Sources */,
 				D09B64CC1F60D5EF004880AC /* RSSNetworking.swift in Sources */,
 				D08CB7591F61B5AC00DFAD5D /* URLSession.swift in Sources */,
