@@ -7,7 +7,7 @@
 //
 //
 
-import Foundation
+import Cocoa
 import CoreData
 
 
@@ -17,11 +17,12 @@ extension ManagedStory {
         return NSFetchRequest<ManagedStory>(entityName: "ManagedStory")
     }
 
-    @NSManaged public var audioContent: String?
+    @NSManaged public var audioContentURL: String?
     @NSManaged public var author: String?
     @NSManaged public var feedURL: String?
     @NSManaged public var htmlContent: String?
-    @NSManaged public var image: String?
+    @NSManaged public var imageURL: String?
+    @NSManaged public var image: NSData?
     @NSManaged public var podcast: Bool
     @NSManaged public var pubdate: NSDate?
     @NSManaged public var read: Bool
@@ -30,4 +31,15 @@ extension ManagedStory {
     @NSManaged public var url: String?
     @NSManaged public var feed: ManagedFeed?
 
+}
+
+extension ManagedStory {
+    
+    func requestPodcastImage() {
+        guard let url: URL = URL(string: imageURL ?? "") else {
+            return
+        }
+        let rssNetwork: RSSNetworking = (NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()).rssNetwork
+        rssNetwork.requestImageData(forStory: self, at: url)
+    }
 }

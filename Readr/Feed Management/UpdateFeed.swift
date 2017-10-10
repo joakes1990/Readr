@@ -90,9 +90,9 @@ class UpdateFeed {
                         
                         if let podcast: PodCast = story as? PodCast {
                             managedStory.podcast = true
-                            managedStory.audioContent = podcast.audioContent[0].absoluteString
-                            //TODO: turn into NSImage
-                            managedStory.image = podcast.image.absoluteString
+                            managedStory.audioContentURL = podcast.audioContent[0].absoluteString
+                            managedStory.requestPodcastImage()
+
                         } else {
                             managedStory.podcast = false
                         }

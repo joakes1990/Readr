@@ -169,6 +169,26 @@ public class RSSNetworking {
         }
     }
     
+    func requestImageData(forStory story: ManagedStory, at url: URL) {
+        URLSession.shared.getReturnedDataFrom(url: url) { (data, headers, error) in
+            if let foundError: Error = error {
+                //TODO: Log error
+                print(foundError)
+                return
+            }
+            guard let validData: Data = data else {
+                return
+            }
+            story.image = validData as NSData
+            do {
+                try (NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()).persistentContainer.viewContext.save()
+            } catch {
+                //TODO: Log error
+                print(error)
+            }
+        }
+    }
+    
     func clasicFavIconFor(url: URL) -> NSImage? {
         guard let sanitizedString: String = url.host,
             let sanitizedURL: URL = URL(string: "http://\(sanitizedString)/favicon.ico"),

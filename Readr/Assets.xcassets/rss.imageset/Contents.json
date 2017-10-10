@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "mac",
-      "filename" : "RSSCellImage1x.png",
+      "filename" : "rss64.png",
       "scale" : "1x"
     },
     {
       "idiom" : "mac",
-      "filename" : "RSSCellImage.png",
+      "filename" : "rss.png",
       "scale" : "2x"
     }
   ],

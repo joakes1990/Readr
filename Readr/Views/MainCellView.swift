@@ -9,8 +9,6 @@
 import Cocoa
 
 class MainCellView: NSTableCellView {
-
-    static let identifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(rawValue: "mainCell")
     
     override func draw(_ dirtyRect: NSRect) {
         NSColor.feedListBackground.setFill()

@@ -33,7 +33,7 @@ extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
             text = FeedController.shared.tableString(forIndex: index)
             image = FeedController.shared.tableImage(forIndex: index)
         }
-        if let cell: MainCellView = tableView.makeView(withIdentifier: MainCellView.identifier, owner: nil) as? MainCellView {
+        if let cell: MainCellView = tableView.makeView(withIdentifier: .mainCell, owner: nil) as? MainCellView {
             cell.textField?.stringValue = text ?? ""
             cell.imageView?.image = image != nil ? image : #imageLiteral(resourceName: "genaricfeed")
             return cell
@@ -45,6 +45,7 @@ extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
         return 65.0
     }
     
+    //MARK: Drag and drop methods
     func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
         guard let index: Int = rowIndexes.first else {
             return false

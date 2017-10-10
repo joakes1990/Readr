@@ -26,5 +26,6 @@ extension NSStoryboard.Name {
 }
 
 extension NSUserInterfaceItemIdentifier {
-    static let cellView = NSUserInterfaceItemIdentifier(rawValue: "cell")
+    static let mainCell = NSUserInterfaceItemIdentifier(rawValue: "mainCell")
+    static let storyCell = NSUserInterfaceItemIdentifier("storyCell")
 }
