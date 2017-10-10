@@ -11,12 +11,16 @@ import Cocoa
 class MainViewController: NSViewController {
     
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var storyTableView: NSTableView!
     @IBOutlet weak var sidebarOffsetConstraint: NSLayoutConstraint!
+    let storiesTabledelegate: StoryTableViewDelegate = StoryTableViewDelegate()
     fileprivate var sidebarOpen: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        storyTableView.dataSource = storiesTabledelegate
+        storyTableView.delegate = storiesTabledelegate
         tableView.intercellSpacing = NSSize(width: 0.0, height: 0.0)
         tableView.registerForDraggedTypes([.mainCellType])
         NotificationCenter.default.addObserver(self,
