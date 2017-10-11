@@ -77,8 +77,8 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
                 return ()
             }
         }
-        if let feeds: [ManagedFeed] = item as? [ManagedFeed] {
-            return feeds[index]
+        if let _: [ManagedFeed] = item as? [ManagedFeed] {
+            return sidebarDataSource?.allFeeds[index] as Any
         }
         return NSObject()
     }

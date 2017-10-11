@@ -45,11 +45,12 @@ class MainViewController: NSViewController {
         }
         DispatchQueue.main.async {
             let index: Int = unownedSelf.sidebarDataSource?.allFeeds.count ?? 0
-            unownedSelf.sidebarDataSource?.allFeeds.append(newFeed)
+            unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
+            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allFeeds[0])
             unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
-                                                inParent: unownedSelf.sidebarDataSource?.allFeeds,
+                                                inParent: parentItem,
                                                 withAnimation: NSTableView.AnimationOptions.slideRight)
-            unownedSelf.outlineview.reloadItem(unownedSelf.sidebarDataSource?.allFeeds, reloadChildren: false)
+//            unownedSelf.outlineview.reloadItem(unownedSelf.sidebarDataSource?.allFeeds, reloadChildren: false)
         }
     }
     
