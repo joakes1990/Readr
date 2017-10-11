@@ -39,10 +39,6 @@ class MainViewController: NSViewController {
     
     @objc func didReceaveNewFeeds(aNotification: Notification) {
         unowned let unownedSelf: MainViewController = self
-        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
-            let newFeed: ManagedFeed = userinfo[Notification.Name.newFeedKey] as? ManagedFeed else {
-            return
-        }
         DispatchQueue.main.async {
             let index: Int = unownedSelf.sidebarDataSource?.allFeeds.count ?? 0
             unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
@@ -50,7 +46,6 @@ class MainViewController: NSViewController {
             unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
                                                 inParent: parentItem,
                                                 withAnimation: NSTableView.AnimationOptions.slideRight)
-//            unownedSelf.outlineview.reloadItem(unownedSelf.sidebarDataSource?.allFeeds, reloadChildren: false)
         }
     }
     
