@@ -8,79 +8,84 @@
 
 import Cocoa
 
-extension MainViewController: NSTableViewDataSource, NSTableViewDelegate {
+extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
     
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        // Get number of feeds and add two
-        return (FeedController.shared.allFeeds?.count ?? 0) + 2
+    
+    func populateDataSource() -> sourceData {
+        let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
+        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        let allFeedFetchRequest: NSFetchRequest<ManagedFeed> = NSFetchRequest(entityName: ManagedFeed.feedEntitty)
+        let allFeedsSort: NSSortDescriptor = NSSortDescriptor(key: "order", ascending: true)
+        allFeedFetchRequest.sortDescriptors = [allFeedsSort]
+        var allFeeds: [ManagedFeed] = [ManagedFeed]()
+        do {
+            allFeeds = try context.fetch(allFeedFetchRequest)
+        } catch {
+            return sourceData(allFeeds: [], allGroups: [], allPlaylists: [])
+        }
+        //TODO: populate groups and playlists
+        
+        return sourceData(allFeeds: allFeeds, allGroups: [], allPlaylists: [])
     }
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var text: String?
-        var image: NSImage?
-        
-        switch row {
-        case 0:
-            text = NSLocalizedString("Folders", comment: "Folders")
-            image = #imageLiteral(resourceName: "Folder")
-            break
-        case 1:
-            text = NSLocalizedString("Playlists", comment: "Playlists")
-            image = #imageLiteral(resourceName: "Playlist")
-            break
-        default:
-            let index: Int = row - 2
-            text = FeedController.shared.tableString(forIndex: index)
-            image = FeedController.shared.tableImage(forIndex: index)
+    //MARK: Datasource/Delegate Methods
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        if let _: [Any] = item as? [Any] {
+            return true
+        } else {
+            return false
         }
-        if let cell: MainCellView = tableView.makeView(withIdentifier: .mainCell, owner: nil) as? MainCellView {
-            cell.textField?.stringValue = text ?? ""
-            cell.imageView?.image = image != nil ? image : #imageLiteral(resourceName: "genaricfeed")
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        if item == nil {
+            return 3
+        }
+        if let feeds: [ManagedFeed] = item as? [ManagedFeed] {
+            return feeds.count
+        }
+        return 0
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        if let _: [ManagedFeed] = item as? [ManagedFeed] {
+            let cell: NSTableCellView = outlineview.makeView(withIdentifier: .headerCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
+            cell.textField?.stringValue = NSLocalizedString("Feeds", comment: "Feeds")
+            return cell
+        } else if let feed: ManagedFeed = item as? ManagedFeed {
+            let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
+            let host: String = URL(string: feed.canonicalURL ?? "")?.host ?? ""
+            let imageData: Data = feed.favIcon as Data? ?? Data()
+            let favicon: NSImage = NSImage(data: (imageData)) ?? #imageLiteral(resourceName: "genaricfeed")
+            cell.textField?.stringValue = "\(host) - \(feed.title ?? "RSS")"
+            cell.imageView?.image = favicon
             return cell
         }
-        return nil
+        return NSView()
     }
     
-    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 65.0
-    }
-    
-    //MARK: Drag and drop methods
-    func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
-        guard let index: Int = rowIndexes.first else {
-            return false
-        }
-        if index <= 1 {
-            return false
-        } else {
-            pboard.clearContents()
-            let data: Data = NSKeyedArchiver.archivedData(withRootObject: rowIndexes)
-            pboard.setData(data, forType: .mainCellType)
-            return true
-        }
-    }
-    
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-        if row >= 3 {
-            return .move
-        } else {
-            return .generic
-        }
-    }
-    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-        if dropOperation == .above && row >= 2 {
-            let indexData: Data = info.draggingPasteboard().data(forType: .mainCellType) ?? Data()
-            let indexSet: IndexSet? = NSKeyedUnarchiver.unarchiveObject(with: indexData) as? IndexSet
-            guard let startIndex: Int = indexSet?.first else {
-                return false
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        if item == nil {
+            switch index {
+            case 0:
+                return sidebarDataSource?.allFeeds as Any
+            case 1:
+                return sidebarDataSource?.allGroups as Any
+            case 2:
+                return sidebarDataSource?.allPlaylists as Any
+            default:
+                return ()
             }
-            tableView.beginUpdates()
-            tableView.moveRow(at: startIndex, to: row == tableView.numberOfRows ? row - 1 : row > startIndex ? row - 1 : row)
-            tableView.endUpdates()
-            FeedController.shared.tableviewCellDidMove(from: startIndex, to: row)
-            return true
-        } else {
-            return false
         }
+        if let feeds: [ManagedFeed] = item as? [ManagedFeed] {
+            return feeds[index]
+        }
+        return NSObject()
     }
+}
+
+struct sourceData {
+    var allFeeds: [ManagedFeed]
+    var allGroups: [Any]
+    var allPlaylists: [Any]
 }

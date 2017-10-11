@@ -56,7 +56,10 @@ public class RSSNetworking {
                 unownedSelf.delegate?.found(feeds: [newFeed])
                 do {
                     try context.save()
-                    NotificationCenter.default.post(name: .newFeedSaved, object: nil)
+                    let userInfo: [AnyHashable : Any] = [Notification.Name.newFeedKey : newFeed]
+                    NotificationCenter.default.post(name: .newFeedSaved,
+                                                    object: nil,
+                                                    userInfo: userInfo)
                 } catch {
                     //TODO: Log inability to save nsmanged cotext
                     //Note this is called if the html mimetype is returned

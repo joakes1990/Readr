@@ -10,19 +10,21 @@ import Cocoa
 
 class MainViewController: NSViewController {
     
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var outlineview: NSOutlineView!
     @IBOutlet weak var storyTableView: NSTableView!
-    @IBOutlet weak var sidebarOffsetConstraint: NSLayoutConstraint!
     let storiesTabledelegate: StoryTableViewDelegate = StoryTableViewDelegate()
+    var sidebarDataSource: sourceData?
     fileprivate var sidebarOpen: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        sidebarDataSource = populateDataSource()
+        outlineview.dataSource = self
+        outlineview.delegate = self
         storyTableView.dataSource = storiesTabledelegate
         storyTableView.delegate = storiesTabledelegate
-        tableView.intercellSpacing = NSSize(width: 0.0, height: 0.0)
-        tableView.registerForDraggedTypes([.mainCellType])
+//        tableView.registerForDraggedTypes([.mainCellType])
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didReceaveNewFeeds(aNotification:)),
                                                name: .newFeedSaved,
@@ -37,22 +39,31 @@ class MainViewController: NSViewController {
     
     @objc func didReceaveNewFeeds(aNotification: Notification) {
         unowned let unownedSelf: MainViewController = self
+        guard let userinfo: [AnyHashable : Any] = aNotification.userInfo,
+            let newFeed: ManagedFeed = userinfo[Notification.Name.newFeedKey] as? ManagedFeed else {
+            return
+        }
         DispatchQueue.main.async {
-            unownedSelf.tableView.reloadData()
+            let index: Int = unownedSelf.sidebarDataSource?.allFeeds.count ?? 0
+            unownedSelf.sidebarDataSource?.allFeeds.append(newFeed)
+            unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
+                                                inParent: unownedSelf.sidebarDataSource?.allFeeds,
+                                                withAnimation: NSTableView.AnimationOptions.slideRight)
+            unownedSelf.outlineview.reloadItem(unownedSelf.sidebarDataSource?.allFeeds, reloadChildren: false)
         }
     }
     
     //MARK: Animation
     
     func toggleSidebar() {
-        NSAnimationContext.runAnimationGroup({ (context) in
-            context.duration = 0.250
-            sidebarOffsetConstraint.animator().constant = self.sidebarOpen ? -350 : 0
-        }) {
-            let windowController: MainWindowController = self.view.window?.windowController as? MainWindowController ?? MainWindowController()
-            windowController.sidebarToolbarItem.image = self.sidebarOpen ? #imageLiteral(resourceName: "sidebar") : #imageLiteral(resourceName: "closesidebar")
-            self.sidebarOpen = self.sidebarOpen ? false : true
-        }
+//        NSAnimationContext.runAnimationGroup({ (context) in
+//            context.duration = 0.250
+//            sidebarOffsetConstraint.animator().constant = self.sidebarOpen ? -350 : 0
+//        }) {
+//            let windowController: MainWindowController = self.view.window?.windowController as? MainWindowController ?? MainWindowController()
+//            windowController.sidebarToolbarItem.image = self.sidebarOpen ? #imageLiteral(resourceName: "sidebar") : #imageLiteral(resourceName: "closesidebar")
+//            self.sidebarOpen = self.sidebarOpen ? false : true
+//        }
     }
 }
 
