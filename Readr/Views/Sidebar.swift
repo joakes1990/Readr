@@ -83,6 +83,11 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
             cell.textField?.stringValue = "\(host) - \(feed.title ?? "RSS")"
             cell.imageView?.image = favicon
             return cell
+        } else if let group: ManagedGroup = item as? ManagedGroup {
+            let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
+            cell.textField?.stringValue = group.name ?? NSLocalizedString("Unnamed", comment: "Unnamed")
+            cell.imageView?.image = #imageLiteral(resourceName: "Folder")
+            return cell
         }
         
         return NSView()

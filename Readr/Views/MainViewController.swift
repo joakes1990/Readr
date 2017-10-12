@@ -29,7 +29,9 @@ class MainViewController: NSViewController {
         storyTableView.delegate = storiesTabledelegate
 
         let addMenu: NSMenu = NSMenu()
-        let addGroupMenuItem: NSMenuItem = NSMenuItem(title: "Add Group", action: nil, keyEquivalent: "hello")
+        let addGroupMenuItem: NSMenuItem = NSMenuItem(title: NSLocalizedString("Add Group", comment: "Add Group"),
+                                                      action: #selector(addGroup),
+                                                      keyEquivalent: "G")
         let addPlaylistItem: NSMenuItem = NSMenuItem(title: "Add Playlist", action: nil, keyEquivalent: "good bye")
         addMenu.addItem(addGroupMenuItem)
         addMenu.addItem(addPlaylistItem)
@@ -45,6 +47,10 @@ class MainViewController: NSViewController {
                                                selector: #selector(didReceaveNewFeeds(aNotification:)),
                                                name: .newFeedSaved,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceaveNewGroup(aNotification:)),
+                                               name: .newGroupCreated,
+                                               object: nil)
     }
     
     override var representedObject: Any? {
@@ -59,6 +65,18 @@ class MainViewController: NSViewController {
             let index: Int = unownedSelf.sidebarDataSource?.allFeeds.count ?? 0
             unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
             let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allFeeds[0])
+            unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
+                                                inParent: parentItem,
+                                                withAnimation: NSTableView.AnimationOptions.slideDown)
+        }
+    }
+    
+    @objc func didReceaveNewGroup(aNotification: Notification) {
+        unowned let unownedSelf: MainViewController = self
+        DispatchQueue.main.async {
+            let index: Int = unownedSelf.sidebarDataSource?.allGroups.count ?? 0
+            unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
+            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allGroups[0])
             unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
                                                 inParent: parentItem,
                                                 withAnimation: NSTableView.AnimationOptions.slideRight)
@@ -79,7 +97,11 @@ class MainViewController: NSViewController {
     }
     
     //MARK: Add / Remove Groups/Feeds
-
+    
+    @objc func addGroup() {
+        print("Hello groups")
+        GroupController.shared.createGroup(with: NSLocalizedString("Untitled", comment: "Untitled"))
+    }
 
 
 }
