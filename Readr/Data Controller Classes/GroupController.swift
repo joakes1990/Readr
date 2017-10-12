@@ -48,6 +48,7 @@ class GroupController {
         
         if let goodName: String = name {
             newGroup.name = goodName
+            NotificationCenter.default.post(name: .newGroupCreated, object: nil)
         }
         newGroup.order = allGroupsCount() - 1
         do {
@@ -57,6 +58,5 @@ class GroupController {
             print(error.localizedDescription)
         }
         
-        NotificationCenter.default.post(name: .newGroupCreated, object: nil)
     }
 }

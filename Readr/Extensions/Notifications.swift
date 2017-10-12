@@ -17,4 +17,5 @@ extension Notification.Name {
     static let foundFavIcon = Notification.Name("foundFavIcon")
     static let finishedFindingStories = Notification.Name("finishedFindingStories")
     static let newGroupCreated = Notification.Name(rawValue: "newGroupCreated")
+    static let newPlaylistCreated = Notification.Name("newPlaylistCreated")
 }

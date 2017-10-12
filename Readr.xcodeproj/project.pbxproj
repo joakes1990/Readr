@@ -22,6 +22,7 @@
 		D047CB741F8F3A7B0066E623 /* ManagedStory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D047CB6C1F8F3A7B0066E623 /* ManagedStory+CoreDataProperties.swift */; };
 		D047CB751F8F3A7B0066E623 /* ManagedPlaylist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D047CB6D1F8F3A7B0066E623 /* ManagedPlaylist+CoreDataClass.swift */; };
 		D047CB761F8F3A7B0066E623 /* ManagedPlaylist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D047CB6E1F8F3A7B0066E623 /* ManagedPlaylist+CoreDataProperties.swift */; };
+		D047CB781F8F3BAD0066E623 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D047CB771F8F3BAD0066E623 /* PlaylistController.swift */; };
 		D05467EE1F64CFD0008088DC /* SelectFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05467ED1F64CFD0008088DC /* SelectFeedsViewController.swift */; };
 		D05467F01F64EF2F008088DC /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05467EF1F64EF2F008088DC /* UI Extensions.swift */; };
 		D05E022B1F7B540A005E6C65 /* Stories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E022A1F7B540A005E6C65 /* Stories.swift */; };
@@ -90,6 +91,7 @@
 		D047CB6C1F8F3A7B0066E623 /* ManagedStory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedStory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D047CB6D1F8F3A7B0066E623 /* ManagedPlaylist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedPlaylist+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D047CB6E1F8F3A7B0066E623 /* ManagedPlaylist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedPlaylist+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D047CB771F8F3BAD0066E623 /* PlaylistController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
 		D05467ED1F64CFD0008088DC /* SelectFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFeedsViewController.swift; sourceTree = "<group>"; };
 		D05467EF1F64EF2F008088DC /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
 		D05E022A1F7B540A005E6C65 /* Stories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Stories.swift; path = ../../../Frameworks/OklasoftRSS/OklasoftRSS/Parsers/Stories.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				D0AC54B91F85EBD300143E5D /* FeedController.swift */,
 				D006BD421F89DBB500C3EB55 /* StoryController.swift */,
 				D047CB651F8EEE610066E623 /* GroupController.swift */,
+				D047CB771F8F3BAD0066E623 /* PlaylistController.swift */,
 			);
 			path = "Data Controller Classes";
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				D014FCCE1F3E66AA000B906B /* ImportFeed.swift in Sources */,
 				D047CB721F8F3A7B0066E623 /* ManagedGroup+CoreDataProperties.swift in Sources */,
 				D0E7944C1F6A39B7000E3144 /* FeedImportDelegate.swift in Sources */,
+				D047CB781F8F3BAD0066E623 /* PlaylistController.swift in Sources */,
 				D047CB731F8F3A7B0066E623 /* ManagedStory+CoreDataClass.swift in Sources */,
 				D05E022B1F7B540A005E6C65 /* Stories.swift in Sources */,
 				D05467EE1F64CFD0008088DC /* SelectFeedsViewController.swift in Sources */,
