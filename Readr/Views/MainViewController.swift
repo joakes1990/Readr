@@ -10,11 +10,14 @@ import Cocoa
 
 class MainViewController: NSViewController {
     
+    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     @IBOutlet weak var outlineview: NSOutlineView!
     @IBOutlet weak var storyTableView: NSTableView!
+    @IBOutlet weak var addButton: NSButton!
+    @IBOutlet weak var removeButton: NSButton!
     let storiesTabledelegate: StoryTableViewDelegate = StoryTableViewDelegate()
     var sidebarDataSource: sourceData?
-    fileprivate var sidebarOpen: Bool = false
+    fileprivate var sidebarOpen: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +27,20 @@ class MainViewController: NSViewController {
         outlineview.delegate = self
         storyTableView.dataSource = storiesTabledelegate
         storyTableView.delegate = storiesTabledelegate
-//        tableView.registerForDraggedTypes([.mainCellType])
+
+        let addMenu: NSMenu = NSMenu()
+        let addGroupMenuItem: NSMenuItem = NSMenuItem(title: "Add Group", action: nil, keyEquivalent: "hello")
+        let addPlaylistItem: NSMenuItem = NSMenuItem(title: "Add Playlist", action: nil, keyEquivalent: "good bye")
+        addMenu.addItem(addGroupMenuItem)
+        addMenu.addItem(addPlaylistItem)
+        let removeMenu: NSMenu = NSMenu()
+        let removeGroupMenuItem: NSMenuItem = NSMenuItem(title: "Remove Group", action: nil, keyEquivalent: "hello")
+        let removePlaylistMenuItem: NSMenuItem = NSMenuItem(title: "Remove Playlist", action: nil, keyEquivalent: "good bye")
+        removeMenu.addItem(removeGroupMenuItem)
+        removeMenu.addItem(removePlaylistMenuItem)
+        removeButton.menu = removeMenu
+        addButton.menu = addMenu
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didReceaveNewFeeds(aNotification:)),
                                                name: .newFeedSaved,
@@ -52,15 +68,18 @@ class MainViewController: NSViewController {
     //MARK: Animation
     
     func toggleSidebar() {
-//        NSAnimationContext.runAnimationGroup({ (context) in
-//            context.duration = 0.250
-//            sidebarOffsetConstraint.animator().constant = self.sidebarOpen ? -350 : 0
-//        }) {
-//            let windowController: MainWindowController = self.view.window?.windowController as? MainWindowController ?? MainWindowController()
-//            windowController.sidebarToolbarItem.image = self.sidebarOpen ? #imageLiteral(resourceName: "sidebar") : #imageLiteral(resourceName: "closesidebar")
-//            self.sidebarOpen = self.sidebarOpen ? false : true
-//        }
+        NSAnimationContext.runAnimationGroup({ (context) in
+            context.duration = 0.200
+            widthConstraint.animator().constant = self.sidebarOpen ? 0 : 225
+        }) {
+            let windowController: MainWindowController = self.view.window?.windowController as? MainWindowController ?? MainWindowController()
+            windowController.sidebarToolbarItem.image = self.sidebarOpen ? #imageLiteral(resourceName: "sidebar") : #imageLiteral(resourceName: "closesidebar") 
+            self.sidebarOpen = self.sidebarOpen ? false : true
+        }
     }
+    
+    //MARK: Add / Remove Groups/Feeds
+
+
+
 }
-
-
