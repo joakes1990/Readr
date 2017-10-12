@@ -2,7 +2,7 @@
 //  ManagedStory+CoreDataProperties.swift
 //  Readr
 //
-//  Created by Justin Oakes on 8/31/17.
+//  Created by justin on 10/12/17.
 //  Copyright © 2017 Oklasoft LLC. All rights reserved.
 //
 //
@@ -21,8 +21,8 @@ extension ManagedStory {
     @NSManaged public var author: String?
     @NSManaged public var feedURL: String?
     @NSManaged public var htmlContent: String?
-    @NSManaged public var imageURL: String?
     @NSManaged public var image: NSData?
+    @NSManaged public var imageURL: String?
     @NSManaged public var podcast: Bool
     @NSManaged public var pubdate: NSDate?
     @NSManaged public var read: Bool

@@ -2,7 +2,7 @@
 //  ManagedGroup+CoreDataProperties.swift
 //  Readr
 //
-//  Created by Justin Oakes on 11/10/17.
+//  Created by justin on 10/12/17.
 //  Copyright © 2017 Oklasoft LLC. All rights reserved.
 //
 //

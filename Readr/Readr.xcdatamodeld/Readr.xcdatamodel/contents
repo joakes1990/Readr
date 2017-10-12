@@ -16,6 +16,11 @@
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedFeed" inverseName="groups" inverseEntity="ManagedFeed" syncable="YES"/>
     </entity>
+    <entity name="ManagedPlaylist" representedClassName="ManagedPlaylist" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedStory" syncable="YES"/>
+    </entity>
     <entity name="ManagedStory" representedClassName="ManagedStory" syncable="YES">
         <attribute name="audioContentURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,7 +38,8 @@
     </entity>
     <elements>
         <element name="ManagedFeed" positionX="-173" positionY="69" width="128" height="178"/>
-        <element name="ManagedStory" positionX="108" positionY="9" width="128" height="238"/>
         <element name="ManagedGroup" positionX="108" positionY="-85" width="126" height="88"/>
+        <element name="ManagedStory" positionX="108" positionY="9" width="128" height="240"/>
+        <element name="ManagedPlaylist" positionX="351" positionY="45" width="128" height="88"/>
     </elements>
 </model>
