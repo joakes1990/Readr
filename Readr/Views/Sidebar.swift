@@ -151,6 +151,10 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
         }
         return NSObject()
     }
+    
+    func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
+        return true
+    }
 }
 
 struct sourceData {
@@ -171,4 +175,6 @@ struct sourceData {
         usedFeeds = false
         usedGroups = false
     }
+    
+    //MARK: Drag and drop
 }

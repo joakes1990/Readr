@@ -42,8 +42,7 @@ class UpdateFeed {
 
             try context.save()
         } catch {
-            //TODO: Log error
-            print("didn't save fav icon")
+            print(error.localizedDescription)
         }
         
     }

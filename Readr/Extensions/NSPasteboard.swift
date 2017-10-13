@@ -9,5 +9,5 @@
 import Cocoa
 
 extension NSPasteboard.PasteboardType {
-    static let mainCellType = NSPasteboard.PasteboardType(rawValue: "MainCellView")
+    static let feedType = NSPasteboard.PasteboardType(rawValue: "FeedType")
 }

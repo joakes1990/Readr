@@ -23,10 +23,9 @@ extension ManagedFeed {
     @NSManaged public var mimeType: Int16
     @NSManaged public var order: Int16
     @NSManaged public var title: String?
-    @NSManaged public var url: String?
+    @NSManaged public var url: String
     @NSManaged public var groups: NSSet?
     @NSManaged public var stories: NSSet?
-
 }
 
 // MARK: Generated accessors for groups
@@ -76,7 +75,7 @@ extension ManagedFeed {
     }
     
     func requestNewStories() {
-        guard let feedURL: URL = URL(string: url ?? "") else {
+        guard let feedURL: URL = URL(string: url) else {
             return
         }
         let rssNetwork: RSSNetworking = (NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()).rssNetwork

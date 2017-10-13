@@ -45,6 +45,7 @@ class MainViewController: NSViewController {
         removeButton.menu = removeMenu
         addButton.menu = addMenu
         
+        outlineview.registerForDraggedTypes([.feedType])
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didReceaveNewFeeds(aNotification:)),
                                                name: .newFeedSaved,
