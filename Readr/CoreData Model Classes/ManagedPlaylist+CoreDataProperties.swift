@@ -20,6 +20,7 @@ extension ManagedPlaylist {
     @NSManaged public var name: String?
     @NSManaged public var order: Int16
     @NSManaged public var stories: NSSet?
+    @NSManaged public var sort: Int16
 
 }
 
@@ -38,4 +39,29 @@ extension ManagedPlaylist {
     @objc(removeStories:)
     @NSManaged public func removeFromStories(_ values: NSSet)
 
+}
+
+extension ManagedPlaylist {
+    
+    func sortDescripters(forType type: sortType) -> [NSSortDescriptor] {
+        switch type {
+        case .read:
+            let read: NSSortDescriptor = NSSortDescriptor(key: "read", ascending: true)
+            let pubdate: NSSortDescriptor = NSSortDescriptor(key: "pubdate", ascending: false)
+            return [read, pubdate]
+        case.pubdate:
+            return [NSSortDescriptor(key: "pubdate", ascending: false)]
+        case .host:
+            return [NSSortDescriptor(key: "feedURL", ascending: true)]
+        case .title:
+            return [NSSortDescriptor(key: "title", ascending: true)]
+        }
+    }
+    
+    enum sortType: Int {
+        case read
+        case pubdate
+        case host
+        case title
+    }
 }

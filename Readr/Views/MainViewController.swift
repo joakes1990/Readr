@@ -31,8 +31,10 @@ class MainViewController: NSViewController {
         let addMenu: NSMenu = NSMenu()
         let addGroupMenuItem: NSMenuItem = NSMenuItem(title: NSLocalizedString("Add Group", comment: "Add Group"),
                                                       action: #selector(addGroup),
-                                                      keyEquivalent: "G")
-        let addPlaylistItem: NSMenuItem = NSMenuItem(title: "Add Playlist", action: nil, keyEquivalent: "good bye")
+                                                      keyEquivalent: "g")
+        let addPlaylistItem: NSMenuItem = NSMenuItem(title: NSLocalizedString("Add Playlist", comment: "Add Playlist"),
+                                                     action: #selector(addPlaylist),
+                                                     keyEquivalent: "P")
         addMenu.addItem(addGroupMenuItem)
         addMenu.addItem(addPlaylistItem)
         let removeMenu: NSMenu = NSMenu()
@@ -51,7 +53,12 @@ class MainViewController: NSViewController {
                                                selector: #selector(didReceaveNewGroup(aNotification:)),
                                                name: .newGroupCreated,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceaveNewPlaylist(aNotification:)),
+                                               name: .newPlaylistCreated,
+                                               object: nil)
     }
+
     
     override var representedObject: Any? {
         didSet {
@@ -59,6 +66,7 @@ class MainViewController: NSViewController {
         }
     }
     
+    //MARK: outline view
     @objc func didReceaveNewFeeds(aNotification: Notification) {
         unowned let unownedSelf: MainViewController = self
         DispatchQueue.main.async {
@@ -83,6 +91,18 @@ class MainViewController: NSViewController {
         }
     }
     
+    @objc func didReceaveNewPlaylist(aNotification: Notification) {
+        unowned let unownedSelf: MainViewController = self
+        DispatchQueue.main.async {
+            let index: Int = unownedSelf.sidebarDataSource?.allPlaylists.count ?? 0
+            unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
+            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allPlaylists[0])
+            unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
+                                                inParent: parentItem,
+                                                withAnimation: NSTableView.AnimationOptions.slideRight)
+        }
+    }
+    
     //MARK: Animation
     
     func toggleSidebar() {
@@ -99,8 +119,11 @@ class MainViewController: NSViewController {
     //MARK: Add / Remove Groups/Feeds
     
     @objc func addGroup() {
-        print("Hello groups")
         GroupController.shared.createGroup(with: NSLocalizedString("Untitled", comment: "Untitled"))
+    }
+    
+    @objc func addPlaylist() {
+        PlaylistController.shared.createPlaylist(with: NSLocalizedString("Untitled", comment: "Untitled"))
     }
 
 

@@ -42,4 +42,5 @@ extension ManagedStory {
         let rssNetwork: RSSNetworking = (NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()).rssNetwork
         rssNetwork.requestImageData(forStory: self, at: url)
     }
+    
 }

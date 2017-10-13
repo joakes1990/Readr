@@ -15,8 +15,8 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
         let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         let allFeedFetchRequest: NSFetchRequest<ManagedFeed> = NSFetchRequest(entityName: ManagedFeed.feedEntitty)
-        let allFeedsSort: NSSortDescriptor = NSSortDescriptor(key: "order", ascending: true)
-        allFeedFetchRequest.sortDescriptors = [allFeedsSort]
+        let orderSort: NSSortDescriptor = NSSortDescriptor(key: "order", ascending: true)
+        allFeedFetchRequest.sortDescriptors = [orderSort]
         var allFeeds: [ManagedFeed] = [ManagedFeed]()
         do {
             allFeeds = try context.fetch(allFeedFetchRequest)
@@ -25,36 +25,49 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
         }
         
         let allGroupsFetchRequest: NSFetchRequest<ManagedGroup> = NSFetchRequest(entityName: ManagedGroup.groupEntitty)
-        let allGroupSort: NSSortDescriptor = NSSortDescriptor(key: "order", ascending: true)
-        allGroupsFetchRequest.sortDescriptors = [allGroupSort]
+        allGroupsFetchRequest.sortDescriptors = [orderSort]
         var allGroups: [ManagedGroup] = [ManagedGroup]()
         do {
             allGroups = try context.fetch(allGroupsFetchRequest)
         } catch {
             return sourceData(allFeeds: allFeeds, allGroups: [], allPlaylists: [])
         }
-        //TODO: populate playlists
         
-        return sourceData(allFeeds: allFeeds, allGroups:allGroups, allPlaylists: [])
+        let allPlaylistsFetchRequest: NSFetchRequest<ManagedPlaylist> = NSFetchRequest(entityName: ManagedPlaylist.playlistEntity)
+        allPlaylistsFetchRequest.sortDescriptors = [orderSort]
+        var allPlaylists: [ManagedPlaylist] = [ManagedPlaylist]()
+        do {
+            allPlaylists = try context.fetch(allPlaylistsFetchRequest)
+        } catch {
+            return sourceData(allFeeds: allFeeds, allGroups:allGroups, allPlaylists: [])
+        }
+        return sourceData(allFeeds: allFeeds, allGroups: allGroups, allPlaylists: allPlaylists)
     }
     
     //MARK: Datasource/Delegate Methods
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         if let _: [Any] = item as? [Any] {
             return true
-        } else {
-            return false
+        } else if let _: ManagedGroup = item as? ManagedGroup{
+            return true
+        } else if let _: ManagedPlaylist = item as? ManagedPlaylist {
+            return true
         }
+        return false
     }
     
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if item == nil {
             return 3
         }
-        if let feeds: [ManagedFeed] = item as? [ManagedFeed] {
+        if let set: [Any] = item as? [Any] {
+            return set.count
+        } else if let group: ManagedGroup = item as? ManagedGroup {
+            let feeds: NSSet = group.feeds ?? []
             return feeds.count
-        } else if let groups: [ManagedGroup] = item as? [ManagedGroup] {
-            return groups.count
+        } else if let playlist: ManagedPlaylist = item as? ManagedPlaylist {
+            let stories: NSSet = playlist.stories ?? []
+            return stories.count
         }
         return 0
     }
@@ -75,7 +88,8 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
             }
             cell.textField?.stringValue = title
             return cell
-        } else if let feed: ManagedFeed = item as? ManagedFeed {
+        }
+        if let feed: ManagedFeed = item as? ManagedFeed {
             let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
             let host: String = URL(string: feed.canonicalURL ?? "")?.host ?? ""
             let imageData: Data = feed.favIcon as Data? ?? Data()
@@ -83,13 +97,19 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
             cell.textField?.stringValue = "\(host) - \(feed.title ?? "RSS")"
             cell.imageView?.image = favicon
             return cell
-        } else if let group: ManagedGroup = item as? ManagedGroup {
+        }
+        if let group: ManagedGroup = item as? ManagedGroup {
             let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
             cell.textField?.stringValue = group.name ?? NSLocalizedString("Unnamed", comment: "Unnamed")
             cell.imageView?.image = #imageLiteral(resourceName: "Folder")
             return cell
         }
-        
+        if let playlist: ManagedPlaylist = item as? ManagedPlaylist {
+            let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
+            cell.textField?.stringValue = playlist.name ?? NSLocalizedString("Unnamed", comment: "Unnamed")
+            cell.imageView?.image = #imageLiteral(resourceName: "Playlist")
+            return cell
+        }
         return NSView()
     }
     
@@ -112,6 +132,23 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
         if let _: [ManagedGroup] = item as? [ManagedGroup] {
             return sidebarDataSource?.allGroups[index] as Any
         }
+        if let _: [ManagedPlaylist] = item as? [ManagedPlaylist] {
+            return sidebarDataSource?.allPlaylists[index] as Any
+        }
+        if let group: ManagedGroup = item as? ManagedGroup {
+            let feeds: NSSet = group.feeds ?? []
+            let sortType: ManagedGroup.sortType = ManagedGroup.sortType(rawValue: Int(group.sort)) ?? .host
+            let sortDescripter: [NSSortDescriptor] = group.sortDescripters(forType: sortType)
+            let sortedArray = feeds.sortedArray(using: sortDescripter)
+            return sortedArray[index] as Any
+        }
+        if let playlist: ManagedPlaylist = item as? ManagedPlaylist {
+            let stories: NSSet = playlist.stories ?? []
+            let sortType: ManagedPlaylist.sortType = ManagedPlaylist.sortType(rawValue: Int(playlist.sort)) ?? .read
+            let sortDescripter: [NSSortDescriptor] = playlist.sortDescripters(forType: sortType)
+            let sortedArray = stories.sortedArray(using: sortDescripter)
+            return sortedArray[index] as Any
+        }
         return NSObject()
     }
 }
@@ -121,9 +158,9 @@ struct sourceData {
     var usedFeeds: Bool
     var allGroups: [ManagedGroup]
     var usedGroups: Bool
-    var allPlaylists: [Any]
+    var allPlaylists: [ManagedPlaylist]
     
-    init(allFeeds: [ManagedFeed], allGroups: [ManagedGroup], allPlaylists: [Any]) {
+    init(allFeeds: [ManagedFeed], allGroups: [ManagedGroup], allPlaylists: [ManagedPlaylist]) {
         self.allFeeds = allFeeds
         self.allGroups = allGroups
         self.allPlaylists = allPlaylists
