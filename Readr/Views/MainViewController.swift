@@ -27,7 +27,7 @@ class MainViewController: NSViewController {
         outlineview.delegate = self
         storyTableView.dataSource = storiesTabledelegate
         storyTableView.delegate = storiesTabledelegate
-
+        
         let addMenu: NSMenu = NSMenu()
         let addGroupMenuItem: NSMenuItem = NSMenuItem(title: NSLocalizedString("Add Group", comment: "Add Group"),
                                                       action: #selector(addGroup),
@@ -58,7 +58,7 @@ class MainViewController: NSViewController {
                                                name: .newPlaylistCreated,
                                                object: nil)
     }
-
+    
     
     override var representedObject: Any? {
         didSet {
@@ -72,10 +72,19 @@ class MainViewController: NSViewController {
         DispatchQueue.main.async {
             let index: Int = unownedSelf.sidebarDataSource?.allFeeds.count ?? 0
             unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
-            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allFeeds[0])
-            unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
-                                                inParent: parentItem,
-                                                withAnimation: NSTableView.AnimationOptions.slideDown)
+            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allFeeds.first)
+            if parentItem != nil && unownedSelf.outlineview.isItemExpanded(parentItem) {
+                
+                
+                unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
+                                                    inParent: parentItem,
+                                                    withAnimation: NSTableView.AnimationOptions.slideDown)
+                unownedSelf.outlineview.reloadItem(parentItem)
+//                unownedSelf.outlineview.reloadData()
+            } else {
+//                unownedSelf.outlineview.reloadData()
+                unownedSelf.outlineview.reloadItem(parentItem)
+            }
         }
     }
     
@@ -84,10 +93,19 @@ class MainViewController: NSViewController {
         DispatchQueue.main.async {
             let index: Int = unownedSelf.sidebarDataSource?.allGroups.count ?? 0
             unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
-            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allGroups[0])
-            unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
-                                                inParent: parentItem,
-                                                withAnimation: NSTableView.AnimationOptions.slideRight)
+            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allGroups.first)
+            if parentItem != nil && unownedSelf.outlineview.isItemExpanded(parentItem) {
+                unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
+                                                    inParent: parentItem,
+                                                    withAnimation: NSTableView.AnimationOptions.slideRight)
+                unownedSelf.sidebarDataSource?.usedFeeds = true
+                unownedSelf.outlineview.reloadItem(parentItem)
+            }
+            else {
+                unownedSelf.sidebarDataSource?.usedFeeds = true
+                unownedSelf.outlineview.reloadItem(parentItem)
+                unownedSelf.sidebarDataSource?.resetUsedFlags()
+            }
         }
     }
     
@@ -96,10 +114,22 @@ class MainViewController: NSViewController {
         DispatchQueue.main.async {
             let index: Int = unownedSelf.sidebarDataSource?.allPlaylists.count ?? 0
             unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
-            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allPlaylists[0])
-            unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
-                                                inParent: parentItem,
-                                                withAnimation: NSTableView.AnimationOptions.slideRight)
+            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allPlaylists.first)
+            if parentItem != nil && unownedSelf.outlineview.isItemExpanded(parentItem) {
+                unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
+                                                    inParent: parentItem,
+                                                    withAnimation: NSTableView.AnimationOptions.slideRight)
+                unownedSelf.sidebarDataSource?.usedFeeds = true
+                unownedSelf.sidebarDataSource?.usedGroups = true
+                unownedSelf.outlineview.reloadItem(parentItem)
+            }
+            else {
+                unownedSelf.sidebarDataSource?.usedFeeds = true
+                unownedSelf.sidebarDataSource?.usedGroups = true
+//                unownedSelf.outlineview.reloadData()
+                unownedSelf.outlineview.reloadItem(parentItem)
+                unownedSelf.sidebarDataSource?.resetUsedFlags()
+            }
         }
     }
     
@@ -125,6 +155,6 @@ class MainViewController: NSViewController {
     @objc func addPlaylist() {
         PlaylistController.shared.createPlaylist(with: NSLocalizedString("Untitled", comment: "Untitled"))
     }
-
-
+    
+    
 }
