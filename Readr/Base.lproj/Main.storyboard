@@ -1066,9 +1066,9 @@ DQ
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Obe-8g-P9h">
-                                                                    <rect key="frame" x="0.0" y="2" width="220" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="220" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Feeds" id="rUb-Ch-V2Y">
-                                                                        <font key="font" metaFont="smallSystemBold"/>
+                                                                        <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>

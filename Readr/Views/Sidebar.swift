@@ -152,7 +152,32 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
         return NSObject()
     }
     
+    //MARK: Drag and drop
+    
     func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
+        if let item: ManagedFeed = items[0] as? ManagedFeed {
+            pasteboard.clearContents()
+            let data: Data = NSKeyedArchiver.archivedData(withRootObject: item)
+            pasteboard.setData(data, forType: .feedType)
+            return true
+        }
+        if let _: ManagedGroup = items[0] as? ManagedGroup {
+            return true
+        }
+        if let _: ManagedPlaylist = items[0] as? ManagedPlaylist {
+            return true
+        }
+        return false
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+        
+        print(index)
+        print(item)
+        return .move
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
         return true
     }
 }
@@ -176,5 +201,4 @@ struct sourceData {
         usedGroups = false
     }
     
-    //MARK: Drag and drop
 }
