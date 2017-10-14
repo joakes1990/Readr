@@ -162,24 +162,59 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
             return true
         }
         if let _: ManagedGroup = items[0] as? ManagedGroup {
-            return true
+            return false
         }
         if let _: ManagedPlaylist = items[0] as? ManagedPlaylist {
-            return true
+            return false
         }
         return false
     }
     
     func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
-        
-        print(index)
-        print(item)
-        return .move
+        let dragedItems: [NSPasteboardItem]? = info.draggingPasteboard().pasteboardItems
+        if dragedItems?.count == 1 {
+            if let _: Data = dragedItems?[0].data(forType: .feedType) {
+                return dragOperation(forItem: item)
+            }
+        }
+        return .generic
     }
     
     func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
-        return true
+        if let feeds: [ManagedFeed] = item as? [ManagedFeed] {
+            guard let feedData: Data = info.draggingPasteboard().pasteboardItems?.first?.data(forType: .feedType),
+                let feed: ManagedFeed = NSKeyedUnarchiver.unarchiveObject(with: feedData) as? ManagedFeed,
+                let parentItem = outlineView.parent(forItem: feed)
+                else {
+                return false
+            }
+            var dropIndex: Int = index == feeds.count ? index - 1 : index
+            let feedIndex: Int = outlineView.childIndex(forItem: feed)
+            dropIndex = dropIndex == -1 ? 0 : dropIndex
+            outlineView.beginUpdates()
+            outlineView.moveItem(at: feedIndex, inParent: parentItem, to: dropIndex, inParent: parentItem)
+            outlineView.endUpdates()
+            return true
+        }
+        if let group: ManagedGroup = item as? ManagedGroup {
+            print("Dropping on a group at index \(index)")
+            return true
+        }
+        return false
     }
+    
+    // Drag and drop support
+    
+    func dragOperation(forItem item: Any?) -> NSDragOperation {
+        if let _: [ManagedFeed] = item as? [ManagedFeed] {
+            return .move
+        }
+        if let _: ManagedGroup = item as? ManagedGroup {
+            return .copy
+        }
+        return []
+    }
+    
 }
 
 struct sourceData {

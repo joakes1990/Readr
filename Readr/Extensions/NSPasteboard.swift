@@ -9,5 +9,5 @@
 import Cocoa
 
 extension NSPasteboard.PasteboardType {
-    static let feedType = NSPasteboard.PasteboardType(rawValue: "FeedType")
+    static let feedType = NSPasteboard.PasteboardType(rawValue: "com.oklasoft.Readr.FeedType")
 }

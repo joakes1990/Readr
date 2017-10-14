@@ -18,7 +18,7 @@ public class ManagedFeed: NSManagedObject, NSCoding {
         let context: NSManagedObjectContext = (NSApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: ManagedFeed.feedEntitty, in: context)!
         
-        self.init(entity: entity, insertInto: nil)
+        self.init(entity: entity, insertInto: context)
         canonicalURL = aDecoder.decodeObject(forKey: "canonicalURL") as? String
         favIcon = aDecoder.decodeObject(forKey: "favIcon") as? NSData
         lastUpdated = aDecoder.decodeObject(forKey: "lastUpdated") as? NSDate
@@ -26,8 +26,6 @@ public class ManagedFeed: NSManagedObject, NSCoding {
         order = aDecoder.decodeObject(forKey: "order") as! Int16
         title = aDecoder.decodeObject(forKey: "title") as? String
         url = aDecoder.decodeObject(forKey: "url") as! String
-        groups = aDecoder.decodeObject(forKey: "groups") as? NSSet
-        stories = aDecoder.decodeObject(forKey: "stories") as? NSSet
     }
     
     public override func awakeAfter(using aDecoder: NSCoder) -> Any? {
@@ -66,8 +64,6 @@ extension ManagedFeed: NSPasteboardWriting {
         aCoder.encode(order, forKey: "order")
         aCoder.encode(title, forKey: "title")
         aCoder.encode(url, forKey: "url")
-        aCoder.encode(groups, forKey: "groups")
-        aCoder.encode(stories, forKey: "stories")
     }
     
 }
