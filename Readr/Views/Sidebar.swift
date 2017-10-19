@@ -12,35 +12,10 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
     
     
     func populateDataSource() -> sourceData {
-        let appDelegate: AppDelegate = NSApplication.shared.delegate as? AppDelegate ?? AppDelegate()
-        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-        let allFeedFetchRequest: NSFetchRequest<ManagedFeed> = NSFetchRequest(entityName: ManagedFeed.feedEntitty)
-        let orderSort: NSSortDescriptor = NSSortDescriptor(key: "order", ascending: true)
-        allFeedFetchRequest.sortDescriptors = [orderSort]
-        var allFeeds: [ManagedFeed] = [ManagedFeed]()
-        do {
-            allFeeds = try context.fetch(allFeedFetchRequest)
-        } catch {
-            return sourceData(allFeeds: [], allGroups: [], allPlaylists: [])
-        }
+        let allFeeds: [ManagedFeed] = FeedController.shared.allFeeds ?? [ManagedFeed]()
+        let allGroups: [ManagedGroup] = GroupController.shared.allGroups ?? [ManagedGroup]()
+        let allPlaylists: [ManagedPlaylist] = PlaylistController.shared.allPlatlists ?? [ManagedPlaylist]()
         
-        let allGroupsFetchRequest: NSFetchRequest<ManagedGroup> = NSFetchRequest(entityName: ManagedGroup.groupEntitty)
-        allGroupsFetchRequest.sortDescriptors = [orderSort]
-        var allGroups: [ManagedGroup] = [ManagedGroup]()
-        do {
-            allGroups = try context.fetch(allGroupsFetchRequest)
-        } catch {
-            return sourceData(allFeeds: allFeeds, allGroups: [], allPlaylists: [])
-        }
-        
-        let allPlaylistsFetchRequest: NSFetchRequest<ManagedPlaylist> = NSFetchRequest(entityName: ManagedPlaylist.playlistEntity)
-        allPlaylistsFetchRequest.sortDescriptors = [orderSort]
-        var allPlaylists: [ManagedPlaylist] = [ManagedPlaylist]()
-        do {
-            allPlaylists = try context.fetch(allPlaylistsFetchRequest)
-        } catch {
-            return sourceData(allFeeds: allFeeds, allGroups:allGroups, allPlaylists: [])
-        }
         return sourceData(allFeeds: allFeeds, allGroups: allGroups, allPlaylists: allPlaylists)
     }
     
@@ -48,9 +23,11 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         if let _: [Any] = item as? [Any] {
             return true
-        } else if let _: ManagedGroup = item as? ManagedGroup{
+        }
+        if let _: ManagedGroup = item as? ManagedGroup{
             return true
-        } else if let _: ManagedPlaylist = item as? ManagedPlaylist {
+        }
+        if let _: ManagedPlaylist = item as? ManagedPlaylist {
             return true
         }
         return false
@@ -62,10 +39,12 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
         }
         if let set: [Any] = item as? [Any] {
             return set.count
-        } else if let group: ManagedGroup = item as? ManagedGroup {
+        }
+        if let group: ManagedGroup = item as? ManagedGroup {
             let feeds: NSSet = group.feeds ?? []
             return feeds.count
-        } else if let playlist: ManagedPlaylist = item as? ManagedPlaylist {
+        }
+        if let playlist: ManagedPlaylist = item as? ManagedPlaylist {
             let stories: NSSet = playlist.stories ?? []
             return stories.count
         }
@@ -75,40 +54,46 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         if let _: [Any] = item as? [Any] {
             let cell: NSTableCellView = outlineview.makeView(withIdentifier: .headerCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
-            var title: String
-            if sidebarDataSource?.usedFeeds == true && sidebarDataSource?.usedGroups == true {
-                title = NSLocalizedString("Playlists", comment: "Playlists")
-                sidebarDataSource?.resetUsedFlags()
-            } else if sidebarDataSource?.usedFeeds == true {
-                title = NSLocalizedString("Groups", comment: "Groups")
-                sidebarDataSource?.usedGroups = true
-            } else {
-                title = NSLocalizedString("Feeds", comment: "Feeds")
-                sidebarDataSource?.usedFeeds = true
+            var title: String = String()
+            if outlineView.parent(forItem: item) == nil {
+                let index: Int = outlineView.childIndex(forItem: item)
+                switch index {
+                case 0:
+                    title = NSLocalizedString("Feeds", comment: "Feeds")
+                    break
+                case 1:
+                    title = NSLocalizedString("Groups", comment: "Groups")
+                    break
+                case 2:
+                    title = NSLocalizedString("Playlists", comment: "Playlists")
+                    break
+                default:
+                    break
+                }
+                cell.textField?.stringValue = title
+                return cell
             }
-            cell.textField?.stringValue = title
-            return cell
         }
-        if let feed: ManagedFeed = item as? ManagedFeed {
-            let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
-            let host: String = URL(string: feed.canonicalURL ?? "")?.host ?? ""
-            let imageData: Data = feed.favIcon as Data? ?? Data()
-            let favicon: NSImage = NSImage(data: (imageData)) ?? #imageLiteral(resourceName: "genaricfeed")
-            cell.textField?.stringValue = "\(host) - \(feed.title ?? "RSS")"
-            cell.imageView?.image = favicon
-            return cell
-        }
-        if let group: ManagedGroup = item as? ManagedGroup {
-            let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
-            cell.textField?.stringValue = group.name ?? NSLocalizedString("Unnamed", comment: "Unnamed")
-            cell.imageView?.image = #imageLiteral(resourceName: "Folder")
-            return cell
-        }
-        if let playlist: ManagedPlaylist = item as? ManagedPlaylist {
-            let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
-            cell.textField?.stringValue = playlist.name ?? NSLocalizedString("Unnamed", comment: "Unnamed")
-            cell.imageView?.image = #imageLiteral(resourceName: "Playlist")
-            return cell
+            if let feed: ManagedFeed = item as? ManagedFeed {
+                let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
+                let host: String = URL(string: feed.canonicalURL ?? "")?.host ?? ""
+                let imageData: Data = feed.favIcon as Data? ?? Data()
+                let favicon: NSImage = NSImage(data: (imageData)) ?? #imageLiteral(resourceName: "genaricfeed")
+                cell.textField?.stringValue = "\(host) - \(feed.title ?? "RSS")"
+                cell.imageView?.image = favicon
+                return cell
+            }
+            if let group: ManagedGroup = item as? ManagedGroup {
+                let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
+                cell.textField?.stringValue = group.name ?? NSLocalizedString("Unnamed", comment: "Unnamed")
+                cell.imageView?.image = #imageLiteral(resourceName: "Folder")
+                return cell
+            }
+            if let playlist: ManagedPlaylist = item as? ManagedPlaylist {
+                let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
+                cell.textField?.stringValue = playlist.name ?? NSLocalizedString("Unnamed", comment: "Unnamed")
+                cell.imageView?.image = #imageLiteral(resourceName: "Playlist")
+                return cell
         }
         return NSView()
     }
@@ -181,29 +166,28 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
     }
     
     func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
-        if let feeds: [ManagedFeed] = item as? [ManagedFeed] {
-            guard let feedData: Data = info.draggingPasteboard().pasteboardItems?.first?.data(forType: .feedType),
-                let feed: ManagedFeed = NSKeyedUnarchiver.unarchiveObject(with: feedData) as? ManagedFeed,
-                let parentItem = outlineView.parent(forItem: feed)
-                else {
+        if let group: ManagedGroup = item as? ManagedGroup {
+            guard let pasteboardItems: [NSPasteboardItem] = info.draggingPasteboard().pasteboardItems,
+                let pbItem: NSPasteboardItem = pasteboardItems.first,
+                let data: Data = pbItem.data(forType: .feedType),
+                let feed: ManagedFeed = NSKeyedUnarchiver.unarchiveObject(with: data) as? ManagedFeed else {
                 return false
             }
-            var dropIndex: Int = index == feeds.count ? index - 1 : index
-            let feedIndex: Int = outlineView.childIndex(forItem: feed)
-            dropIndex = dropIndex == -1 ? 0 : dropIndex
-            outlineView.beginUpdates()
-            outlineView.moveItem(at: feedIndex, inParent: parentItem, to: dropIndex, inParent: parentItem)
-            outlineView.endUpdates()
-            return true
-        }
-        if let group: ManagedGroup = item as? ManagedGroup {
-            print("Dropping on a group at index \(index)")
+            group.addToFeeds(FeedController.shared.originalFeed(tempFeed: feed))
+            GroupController.shared.saveContext()
+            GroupController.shared.updateGroupsArray()
+            sidebarDataSource = populateDataSource()
+            if outlineView.isItemExpanded(item) {
+//                outlineView.reloadItem(item)
+                outlineview.reloadItem(item, reloadChildren: true)
+            }
             return true
         }
         return false
     }
     
     // Drag and drop support
+    
     
     func dragOperation(forItem item: Any?) -> NSDragOperation {
         if let _: [ManagedFeed] = item as? [ManagedFeed] {

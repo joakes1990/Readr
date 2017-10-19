@@ -59,4 +59,14 @@ class GroupController {
         }
         
     }
+    
+    func saveContext() {
+        let delegate: AppDelegate = NSApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = delegate.persistentContainer.viewContext
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }

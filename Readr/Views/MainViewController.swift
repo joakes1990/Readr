@@ -69,23 +69,19 @@ class MainViewController: NSViewController {
     
     //MARK: outline view
     @objc func didReceaveNewFeeds(aNotification: Notification) {
+        guard let info: [AnyHashable : Any] = aNotification.userInfo,
+            let feed: ManagedFeed = info[Notification.Name.newFeedKey] as? ManagedFeed
+            else {
+                return
+        }
         unowned let unownedSelf: MainViewController = self
         DispatchQueue.main.async {
+            unownedSelf.sidebarDataSource?.allFeeds.append(feed)
             let index: Int = unownedSelf.sidebarDataSource?.allFeeds.count ?? 0
-            unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
-            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allFeeds.first)
-            if parentItem != nil && unownedSelf.outlineview.isItemExpanded(parentItem) {
-                
-                
-                unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
-                                                    inParent: parentItem,
-                                                    withAnimation: NSTableView.AnimationOptions.slideDown)
-                unownedSelf.outlineview.reloadItem(parentItem)
-//                unownedSelf.outlineview.reloadData()
-            } else {
-//                unownedSelf.outlineview.reloadData()
-                unownedSelf.outlineview.reloadItem(parentItem)
-            }
+            let parentItem = unownedSelf.outlineview.item(atRow: 0)
+            unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index - 1 >= 0 ? index - 1 : 0) as IndexSet,
+                                                inParent: parentItem,
+                                                withAnimation: .slideDown)
         }
     }
     
@@ -127,7 +123,7 @@ class MainViewController: NSViewController {
             else {
                 unownedSelf.sidebarDataSource?.usedFeeds = true
                 unownedSelf.sidebarDataSource?.usedGroups = true
-//                unownedSelf.outlineview.reloadData()
+                //                unownedSelf.outlineview.reloadData()
                 unownedSelf.outlineview.reloadItem(parentItem)
                 unownedSelf.sidebarDataSource?.resetUsedFlags()
             }

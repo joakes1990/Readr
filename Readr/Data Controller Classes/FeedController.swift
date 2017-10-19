@@ -86,4 +86,12 @@ class FeedController {
         }
         
     }
+    
+    func originalFeed(tempFeed: ManagedFeed) -> ManagedFeed {
+        let url: String = tempFeed.url
+        let originalFeed: ManagedFeed? = allFeeds?.first(where: { (feed) -> Bool in
+            feed.url == url
+        })
+        return originalFeed ?? tempFeed
+    }
 }

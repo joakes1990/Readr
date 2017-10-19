@@ -18,7 +18,7 @@ public class ManagedFeed: NSManagedObject, NSCoding {
         let context: NSManagedObjectContext = (NSApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: ManagedFeed.feedEntitty, in: context)!
         
-        self.init(entity: entity, insertInto: context)
+        self.init(entity: entity, insertInto: nil)
         canonicalURL = aDecoder.decodeObject(forKey: "canonicalURL") as? String
         favIcon = aDecoder.decodeObject(forKey: "favIcon") as? NSData
         lastUpdated = aDecoder.decodeObject(forKey: "lastUpdated") as? NSDate
