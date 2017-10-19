@@ -72,6 +72,12 @@ class MainViewController: NSViewController {
         guard let info: [AnyHashable : Any] = aNotification.userInfo,
             let feed: ManagedFeed = info[Notification.Name.newFeedKey] as? ManagedFeed
             else {
+                unowned let unownedSelf: MainViewController = self
+                DispatchQueue.main.async {
+                    FeedController.shared.updateFeedsArray()
+                    unownedSelf.sidebarDataSource?.allFeeds = FeedController.shared.allFeeds ?? []
+                    unownedSelf.outlineview.reloadData()
+                }
                 return
         }
         unowned let unownedSelf: MainViewController = self
@@ -79,9 +85,15 @@ class MainViewController: NSViewController {
             unownedSelf.sidebarDataSource?.allFeeds.append(feed)
             let index: Int = unownedSelf.sidebarDataSource?.allFeeds.count ?? 0
             let parentItem = unownedSelf.outlineview.item(atRow: 0)
-            unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index - 1 >= 0 ? index - 1 : 0) as IndexSet,
-                                                inParent: parentItem,
-                                                withAnimation: .slideDown)
+            
+            if unownedSelf.outlineview.isItemExpanded(parentItem) {
+                unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index - 1 >= 0 ? index - 1 : 0) as IndexSet,
+                                                    inParent: parentItem,
+                                                    withAnimation: .slideDown)
+            } else {
+                unownedSelf.outlineview.reloadItem(parentItem, reloadChildren: true)
+            }
+            
         }
     }
     

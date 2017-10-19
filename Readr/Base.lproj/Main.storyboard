@@ -91,28 +91,7 @@
                                                 <action selector="performClose:" target="Ady-hI-5gd" id="HmO-Ls-i7Q"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
-                                            <connections>
-                                                <action selector="saveDocument:" target="Ady-hI-5gd" id="teZ-XB-qJY"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Save As…" keyEquivalent="S" id="Bw7-FT-i3A">
-                                            <connections>
-                                                <action selector="saveDocumentAs:" target="Ady-hI-5gd" id="mDf-zr-I0C"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Revert to Saved" keyEquivalent="r" id="KaW-ft-85H">
-                                            <connections>
-                                                <action selector="revertDocumentToSaved:" target="Ady-hI-5gd" id="iJ3-Pv-kwq"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
-                                        <menuItem title="Page Setup…" keyEquivalent="P" id="qIS-W8-SiK">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="runPageLayout:" target="Ady-hI-5gd" id="Din-rz-gC5"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
                                             <connections>
                                                 <action selector="print:" target="Ady-hI-5gd" id="qaZ-4w-aoO"/>
@@ -1035,17 +1014,17 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kS8-St-kTr">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kS8-St-kTr">
                                 <rect key="frame" x="0.0" y="22" width="225" height="367"/>
                                 <clipView key="contentView" drawsBackground="NO" id="hzM-QZ-rK5">
                                     <rect key="frame" x="1" y="1" width="223" height="365"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="3" outlineTableColumn="OgB-cP-CdV" id="EsJ-vq-PbW">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="3" outlineTableColumn="OgB-cP-CdV" id="EsJ-vq-PbW">
                                             <rect key="frame" x="0.0" y="0.0" width="223" height="365"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="" width="220" minWidth="16" maxWidth="1000" id="OgB-cP-CdV">
@@ -1066,7 +1045,7 @@ DQ
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Obe-8g-P9h">
-                                                                    <rect key="frame" x="0.0" y="1" width="220" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="220" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Feeds" id="rUb-Ch-V2Y">
                                                                         <font key="font" metaFont="systemBold"/>
                                                                         <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1107,6 +1086,7 @@ DQ
                                                                 <constraint firstItem="WPs-qW-Uae" firstAttribute="centerY" secondItem="u2G-mZ-zaU" secondAttribute="centerY" id="6We-sp-BL3"/>
                                                                 <constraint firstAttribute="trailing" secondItem="apI-ps-Txw" secondAttribute="trailing" constant="2" id="8Mn-MP-3SP"/>
                                                                 <constraint firstItem="WPs-qW-Uae" firstAttribute="top" secondItem="apI-ps-Txw" secondAttribute="top" id="PMQ-Qx-HbN"/>
+                                                                <constraint firstItem="WPs-qW-Uae" firstAttribute="centerY" secondItem="apI-ps-Txw" secondAttribute="centerY" id="WAi-49-TEo"/>
                                                                 <constraint firstItem="apI-ps-Txw" firstAttribute="leading" secondItem="WPs-qW-Uae" secondAttribute="trailing" constant="7" id="WIG-en-Zht"/>
                                                                 <constraint firstItem="WPs-qW-Uae" firstAttribute="bottom" secondItem="apI-ps-Txw" secondAttribute="bottom" id="ZaN-rj-qNP"/>
                                                                 <constraint firstItem="WPs-qW-Uae" firstAttribute="leading" secondItem="u2G-mZ-zaU" secondAttribute="leading" constant="3" id="qpd-tz-Yr7"/>
@@ -1127,7 +1107,7 @@ DQ
                                     <constraint firstAttribute="width" constant="225" id="Uis-JR-gBY"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="crU-6e-ton">
-                                    <rect key="frame" x="1" y="119" width="238" height="15"/>
+                                    <rect key="frame" x="-100" y="-100" width="238" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="TBw-bn-fHJ">

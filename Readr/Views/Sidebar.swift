@@ -178,7 +178,6 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
             GroupController.shared.updateGroupsArray()
             sidebarDataSource = populateDataSource()
             if outlineView.isItemExpanded(item) {
-//                outlineView.reloadItem(item)
                 outlineview.reloadItem(item, reloadChildren: true)
             }
             return true
