@@ -10,7 +10,8 @@ import Cocoa
 
 class MainViewController: NSViewController {
     
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var sidebarOffsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var outlineview: NSOutlineView!
     @IBOutlet weak var storyTableView: NSTableView!
     @IBOutlet weak var addButton: NSButton!
@@ -147,7 +148,7 @@ class MainViewController: NSViewController {
     func toggleSidebar() {
         NSAnimationContext.runAnimationGroup({ (context) in
             context.duration = 0.200
-            widthConstraint.animator().constant = self.sidebarOpen ? 0 : 225
+            sidebarOffsetConstraint.animator().constant = self.sidebarOpen ? -225 : 0
         }) {
             let windowController: MainWindowController = self.view.window?.windowController as? MainWindowController ?? MainWindowController()
             windowController.sidebarToolbarItem.image = self.sidebarOpen ? #imageLiteral(resourceName: "sidebar") : #imageLiteral(resourceName: "closesidebar") 
