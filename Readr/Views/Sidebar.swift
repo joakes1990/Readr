@@ -152,8 +152,6 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate, NS
         return true
     }
     
-    //MARK: Drag and drop
-    
     func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
         if let item: ManagedFeed = items[0] as? ManagedFeed {
             pasteboard.clearContents()
@@ -255,4 +253,5 @@ struct sourceData {
         usedGroups = false
     }
     
+    //MARK: Drag and drop
 }
