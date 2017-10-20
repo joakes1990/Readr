@@ -8,7 +8,7 @@
 
 import Cocoa
 
-extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
+extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate {
     
     
     func populateDataSource() -> sourceData {
@@ -76,10 +76,11 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
         }
             if let feed: ManagedFeed = item as? ManagedFeed {
                 let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
-                let host: String = URL(string: feed.canonicalURL ?? "")?.host ?? ""
                 let imageData: Data = feed.favIcon as Data? ?? Data()
                 let favicon: NSImage = NSImage(data: (imageData)) ?? #imageLiteral(resourceName: "genaricfeed")
-                cell.textField?.stringValue = "\(host) - \(feed.title ?? "RSS")"
+                cell.textField?.stringValue = feed.title ?? NSLocalizedString("Untitled", comment: "Untitled")
+                cell.toolTip = feed.title ?? NSLocalizedString("Untitled", comment: "Untitled")
+                cell.textField?.delegate = self
                 cell.imageView?.image = favicon
                 return cell
             }
@@ -87,6 +88,7 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
                 let cell: NSTableCellView = outlineView.makeView(withIdentifier: .dataCell, owner: nil) as? NSTableCellView ?? NSTableCellView()
                 cell.textField?.stringValue = group.name ?? NSLocalizedString("Unnamed", comment: "Unnamed")
                 cell.imageView?.image = #imageLiteral(resourceName: "Folder")
+                cell.textField?.delegate = self
                 return cell
             }
             if let playlist: ManagedPlaylist = item as? ManagedPlaylist {
@@ -135,6 +137,19 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
             return sortedArray[index] as Any
         }
         return NSObject()
+    }
+    
+    //MARK: Misc outlineview support
+    
+    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        if let collection: [Any] = item as? [Any] {
+            if let feeds: [ManagedFeed] = collection as? [ManagedFeed] {
+                return feeds.count > 0 ? true : false
+            } else {
+                return false
+            }
+        }
+        return true
     }
     
     //MARK: Drag and drop
@@ -196,6 +211,27 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
             return .copy
         }
         return []
+    }
+    
+    //MARK: Textfield Delegate
+    
+    override func controlTextDidEndEditing(_ obj: Notification) {
+        guard let textField: NSTextField = obj.object as? NSTextField else {
+            return
+        }
+        let newString: String = textField.stringValue
+        let row: Int = outlineview.selectedRow
+        let item = outlineview.item(atRow: row)
+        
+        if let feed: ManagedFeed = item as? ManagedFeed {
+            feed.setValue(newString, forKey: "title")
+            FeedController.shared.saveContext()
+        }
+        
+        if let group: ManagedGroup = item as? ManagedGroup {
+            group.setValue(newString, forKey: "name")
+            GroupController.shared.saveContext()
+        }
     }
     
 }

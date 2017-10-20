@@ -65,6 +65,7 @@ class GroupController {
         let context: NSManagedObjectContext = delegate.persistentContainer.viewContext
         do {
             try context.save()
+            updateGroupsArray()
         } catch {
             print(error.localizedDescription)
         }

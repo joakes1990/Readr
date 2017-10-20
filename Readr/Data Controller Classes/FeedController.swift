@@ -64,6 +64,17 @@ class FeedController {
         return NSImage(data: imageData)
     }
     
+    func saveContext() {
+        let delegate: AppDelegate = NSApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = delegate.persistentContainer.viewContext
+        do {
+            try context.save()
+            updateFeedsArray()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     func tableviewCellDidMove(from oldIndex: Int, to newIndex: Int) {
         //offset for folders and playlists row
         let old: Int = oldIndex - 2
@@ -81,8 +92,7 @@ class FeedController {
         do {
             try context.save()
         } catch {
-            //TODO: log error
-            print(error)
+            print(error.localizedDescription)
         }
         
     }

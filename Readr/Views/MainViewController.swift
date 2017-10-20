@@ -165,5 +165,4 @@ class MainViewController: NSViewController {
         PlaylistController.shared.createPlaylist(with: NSLocalizedString("Untitled", comment: "Untitled"))
     }
     
-    
 }

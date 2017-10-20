@@ -44,7 +44,7 @@ public class RSSNetworking {
             case .rss, .rssXML, .simpleRSS:
                 canonicalURL = unownedSelf.parentURLForRSS(data: validData)
                 
-                newFeed.setValue(name, forKey: "title")
+                newFeed.setValue("\(canonicalURL?.host ?? "") \(name)", forKey: "title")
                 newFeed.setValue(url.absoluteString, forKey: "url")
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate.distantPast as NSDate, forKey: "lastUpdated")
@@ -72,7 +72,7 @@ public class RSSNetworking {
                     canonicalURL = hostURL
                 }
                 
-                newFeed.setValue(name, forKey: "title")
+                newFeed.setValue("\(canonicalURL?.host ?? "") \(name)", forKey: "title")
                 newFeed.setValue(url.absoluteString, forKey: "url")
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate.distantPast as NSDate, forKey: "lastUpdated")
