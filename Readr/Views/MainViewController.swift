@@ -88,7 +88,7 @@ class MainViewController: NSViewController {
             let parentItem = unownedSelf.outlineview.item(atRow: 0)
             
             if unownedSelf.outlineview.isItemExpanded(parentItem) {
-                unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index - 1 >= 0 ? index - 1 : 0) as IndexSet,
+                unownedSelf.outlineview.insertItems(at: [index - 1 >= 0 ? index - 1 : 0],
                                                     inParent: parentItem,
                                                     withAnimation: .slideDown)
             } else {

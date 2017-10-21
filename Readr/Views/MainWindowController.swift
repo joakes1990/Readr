@@ -11,7 +11,6 @@ import Cocoa
 class MainWindowController: NSWindowController {
 
     @IBOutlet weak var sidebarToolbarItem: NSToolbarItem!
-    
     override func windowDidLoad() {
         super.windowDidLoad()
     
@@ -21,6 +20,25 @@ class MainWindowController: NSWindowController {
     @IBAction func toggleSidebar(_ sender: Any) {
         let childView: MainViewController = window?.contentViewController as? MainViewController ?? MainViewController()
         childView.toggleSidebar()
+    }
+    
+    func removeSelectedItemFromOutline() {
+        let childView: MainViewController = window?.contentViewController as? MainViewController ?? MainViewController()
+        childView.removeSelectedItem()
+    }
+    
+    //MARK: Accept keyboard shortcuts
+    override func keyDown(with event: NSEvent) {
+        if event.modifierFlags.intersection(.deviceIndependentFlagsMask).contains(.command) {
+            switch event.keyCode {
+                // Command + Delete
+            case 51:
+                removeSelectedItemFromOutline()
+                break
+            default:
+                break
+            }
+        }
     }
     
 }

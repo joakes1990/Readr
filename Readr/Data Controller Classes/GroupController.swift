@@ -70,4 +70,18 @@ class GroupController {
             print(error.localizedDescription)
         }
     }
+    
+    func remove(group: ManagedGroup) {
+        let delegate: AppDelegate = NSApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = delegate.persistentContainer.viewContext
+        allGroups?.remove(at: Int(group.order))
+        context.delete(group)
+        do {
+            try context.save()
+            
+        } catch{
+            print(error.localizedDescription)
+        }
+        allGroups = populateAllGroups()
+    }
 }

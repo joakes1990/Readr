@@ -232,6 +232,21 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate, NS
         }
     }
     
+    //MARK: Removing Items
+    
+    func removeSelectedItem() {
+        let selectedRow: Int = outlineview.selectedRow
+        let selectedItem: Any? = outlineview.item(atRow: selectedRow)
+        if let group: ManagedGroup = selectedItem as? ManagedGroup {
+            let childIndex: Int = outlineview.childIndex(forItem: group)
+            outlineview.removeItems(at: [childIndex],
+                                    inParent: outlineview.parent(forItem: group),
+                                    withAnimation: .slideLeft)
+            GroupController.shared.remove(group: group)
+            sidebarDataSource = populateDataSource()
+        }
+    }
+    
 }
 
 struct sourceData {

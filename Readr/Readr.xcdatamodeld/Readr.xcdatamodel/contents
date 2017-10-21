@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ManagedFeed" representedClassName="ManagedFeed" syncable="YES">
         <attribute name="canonicalURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="favIcon" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -21,7 +21,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sort" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedStory" syncable="YES"/>
+        <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedStory" inverseName="playlists" inverseEntity="ManagedStory" syncable="YES"/>
     </entity>
     <entity name="ManagedStory" representedClassName="ManagedStory" syncable="YES">
         <attribute name="audioContentURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,11 +37,12 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedFeed" inverseName="stories" inverseEntity="ManagedFeed" syncable="YES"/>
+        <relationship name="playlists" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedPlaylist" inverseName="stories" inverseEntity="ManagedPlaylist" syncable="YES"/>
     </entity>
     <elements>
         <element name="ManagedFeed" positionX="-173" positionY="69" width="128" height="178"/>
         <element name="ManagedGroup" positionX="108" positionY="-121" width="126" height="103"/>
-        <element name="ManagedPlaylist" positionX="351" positionY="45" width="128" height="103"/>
-        <element name="ManagedStory" positionX="108" positionY="9" width="128" height="238"/>
+        <element name="ManagedPlaylist" positionX="351" positionY="45" width="128" height="105"/>
+        <element name="ManagedStory" positionX="108" positionY="9" width="128" height="255"/>
     </elements>
 </model>
