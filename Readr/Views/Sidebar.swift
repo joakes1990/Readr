@@ -152,6 +152,8 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate, NS
         return true
     }
     
+    //MARK: Drag and drop
+    
     func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
         if let item: ManagedFeed = items[0] as? ManagedFeed {
             pasteboard.clearContents()
@@ -245,28 +247,52 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate, NS
             GroupController.shared.remove(group: group)
             sidebarDataSource = populateDataSource()
         }
+        
+        if let feed: ManagedFeed = selectedItem as? ManagedFeed {
+            let childIndex: Int = outlineview.childIndex(forItem: feed)
+            let parentItem = outlineview.parent(forItem: feed)
+            if let feeds: [ManagedFeed] = parentItem as? [ManagedFeed] {
+                removeFeedFromGroups(feed: feed)
+                FeedController.shared.remove(feed: feed)
+                FeedController.shared.saveContext()
+            }
+            if let group: ManagedGroup = parentItem as? ManagedGroup {
+                group.removeFromFeeds(feed)
+                GroupController.shared.saveContext()
+                sidebarDataSource = populateDataSource()
+            }
+            if let group: ManagedGroup = parentItem as? ManagedGroup {
+                group.removeFromFeeds(feed)
+            }
+            outlineview.removeItems(at: [childIndex],
+                                    inParent: parentItem,
+                                    withAnimation: .slideLeft)
+            sidebarDataSource = populateDataSource()
+            
+        }
     }
     
+    func removeFeedFromGroups(feed: ManagedFeed) {
+        feed.groups?.forEach({ (item) in
+            guard let group: ManagedGroup = item as? ManagedGroup else {
+                return
+            }
+            group.removeFromFeeds(feed)
+            outlineview.reloadItem(group, reloadChildren: true)
+        })
+        FeedController.shared.saveContext()
+        
+    }
 }
 
 struct sourceData {
     var allFeeds: [ManagedFeed]
-    var usedFeeds: Bool
     var allGroups: [ManagedGroup]
-    var usedGroups: Bool
     var allPlaylists: [ManagedPlaylist]
     
     init(allFeeds: [ManagedFeed], allGroups: [ManagedGroup], allPlaylists: [ManagedPlaylist]) {
         self.allFeeds = allFeeds
         self.allGroups = allGroups
         self.allPlaylists = allPlaylists
-        usedFeeds = false
-        usedGroups = false
     }
-    mutating func resetUsedFlags()  {
-        usedFeeds = false
-        usedGroups = false
-    }
-    
-    //MARK: Drag and drop
 }

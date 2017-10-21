@@ -49,7 +49,7 @@ public class RSSNetworking {
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate.distantPast as NSDate, forKey: "lastUpdated")
                 newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
-                newFeed.setValue(FeedController.shared.allFeedsCount(), forKey: "order")
+                newFeed.setValue(FeedController.shared.allFeedsCount() - 1, forKey: "order")
                 newFeed.requestNewFavIcon()
                 newFeed.requestNewStories()
                 

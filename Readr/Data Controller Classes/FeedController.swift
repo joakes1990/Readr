@@ -58,7 +58,7 @@ class FeedController {
             let hosturl: String = URL(string: url)?.host,
             let name: String = feed.title
             else {
-            return nil
+                return nil
         }
         return "\(hosturl) - \(name)"
     }
@@ -83,6 +83,32 @@ class FeedController {
         }
     }
     
+    func remove(feed: ManagedFeed) {
+        let delegate: AppDelegate = NSApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = delegate.persistentContainer.viewContext
+        allFeeds?.remove(at: Int(feed.order))
+        context.delete(feed)
+        do {
+            try context.save()
+            
+        } catch{
+            print(error.localizedDescription)
+        }
+        allFeeds = populateAllFeeds()
+        reorderFeeds()
+    }
+    
+    func reorderFeeds() {
+        if let feeds: [ManagedFeed] = allFeeds {
+            if feeds.count > 0 {
+                for index in 0 ..< feeds.count {
+                    let feed: ManagedFeed = feeds[index]
+                    feed.setValue(index, forKey: "order")
+                }
+                saveContext()
+            }
+        }
+    }
     func tableviewCellDidMove(from oldIndex: Int, to newIndex: Int) {
         //offset for folders and playlists row
         let old: Int = oldIndex - 2
@@ -113,7 +139,7 @@ class FeedController {
         return originalFeed ?? tempFeed
     }
     
-    //MARK: Adding Fav Icon
+    //MARK: Adding FavIcon
     
     @objc func didReceaveUpdatedFevIcon(aNotification: Notification) {
         guard let userInfo: [AnyHashable : Any] = aNotification.userInfo,
