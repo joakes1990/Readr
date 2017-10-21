@@ -86,6 +86,10 @@ class FeedController {
     func remove(feed: ManagedFeed) {
         let delegate: AppDelegate = NSApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = delegate.persistentContainer.viewContext
+        let stories: [ManagedStory] = feed.stories?.sortedArray(using: []) as? [ManagedStory] ?? []
+        stories.forEach({ (story) in
+            context.delete(story)
+        })
         allFeeds?.remove(at: Int(feed.order))
         context.delete(feed)
         do {
