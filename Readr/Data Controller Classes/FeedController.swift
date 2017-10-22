@@ -72,6 +72,10 @@ class FeedController {
         return NSImage(data: imageData)
     }
     
+    @objc func insertNewFeed(feed: ManagedFeed) {
+        allFeeds?.append(feed)
+    }
+    
     func saveContext() {
         let delegate: AppDelegate = NSApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = delegate.persistentContainer.viewContext
@@ -204,25 +208,24 @@ class FeedController {
                         let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: ManagedStory.storyEntity, in: context)!
                         let managedStory: ManagedStory = NSManagedObject(entity: entity, insertInto: context) as! ManagedStory
                         
-                        managedStory.title = story.title
-                        managedStory.url = story.url.absoluteString
-                        managedStory.textContent = story.textContent
-                        managedStory.htmlContent = story.htmlContent
-                        managedStory.pubdate = story.pubdate as NSDate
-                        managedStory.read = false
-                        managedStory.feedURL = feedURL.absoluteString
-                        managedStory.author = story.author
+                        managedStory.setValue(story.title, forKey: "title")
+                        managedStory.setValue(story.url.absoluteString, forKey: "url")
+                        managedStory.setValue(story.textContent, forKey: "textContent")
+                        managedStory.setValue(story.htmlContent, forKey: "htmlContent")
+                        managedStory.setValue(story.pubdate as NSDate, forKey: "pubdate")
+                        managedStory.setValue(false, forKey: "read")
+                        managedStory.setValue(feedURL.absoluteString, forKey: "feedURL")
+                        managedStory.setValue(story.author, forKey: "author")
                         
                         if let podcast: PodCast = story as? PodCast {
-                            managedStory.podcast = true
-                            managedStory.audioContentURL = podcast.audioContent[0].absoluteString
+                            managedStory.setValue(true, forKey: "podcast")
+                            managedStory.setValue(podcast.audioContent[0].absoluteString, forKey: "audioContentURL")
                             managedStory.requestPodcastImage()
-                            
                         } else {
-                            managedStory.podcast = false
+                            managedStory.setValue(false, forKey: "podcast")
                         }
                         feed.addToStories(managedStory)
-                        feed.lastUpdated = Date() as NSDate
+                        feed.setValue(Date() as NSDate, forKey: "lastUpdated")
                     }
                 }
             })

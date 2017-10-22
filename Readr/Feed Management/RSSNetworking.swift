@@ -43,27 +43,28 @@ public class RSSNetworking {
             switch mimeType {
             case .rss, .rssXML, .simpleRSS:
                 canonicalURL = unownedSelf.parentURLForRSS(data: validData)
-                
+                let allFeedscount: Int = (FeedController.shared.allFeeds ?? []).count
                 newFeed.setValue("\(canonicalURL?.host ?? "") \(name)", forKey: "title")
                 newFeed.setValue(url.absoluteString, forKey: "url")
                 newFeed.setValue(canonicalURL?.absoluteString, forKey: "canonicalURL")
                 newFeed.setValue(NSDate.distantPast as NSDate, forKey: "lastUpdated")
                 newFeed.setValue(mimeType.hashValue, forKey: "mimeType")
-                newFeed.setValue(FeedController.shared.allFeedsCount() - 1, forKey: "order")
+                newFeed.setValue(allFeedscount == 0 ? 0 : allFeedscount - 1, forKey: "order")
                 newFeed.requestNewFavIcon()
                 newFeed.requestNewStories()
                 
-                unownedSelf.delegate?.found(feeds: [newFeed])
                 do {
                     try context.save()
                     let userInfo: [AnyHashable : Any] = [Notification.Name.newFeedKey : newFeed]
                     NotificationCenter.default.post(name: .newFeedSaved,
                                                     object: nil,
                                                     userInfo: userInfo)
+                    unownedSelf.delegate?.found(feed: newFeed)
                 } catch {
                     //TODO: Log inability to save nsmanged cotext
                     //Note this is called if the html mimetype is returned
                 }
+                
                 break
             case .atom, .atomXML:
                 if let hostString: String = url.host,
@@ -81,7 +82,7 @@ public class RSSNetworking {
                 newFeed.requestNewFavIcon()
                 newFeed.requestNewStories()
                 
-                unownedSelf.delegate?.found(feeds: [newFeed])
+                unownedSelf.delegate?.found(feed: newFeed)
                 do {
                     try context.save()
                     NotificationCenter.default.post(name: .newFeedSaved, object: nil)
@@ -203,7 +204,7 @@ public class RSSNetworking {
 }
 
 public protocol RSSNetworkingProtocol {
-    func found(feeds: [ManagedFeed])
+    func found(feed: ManagedFeed)
     func found(links: [Link]?)
     func found(html: Data, from url: URL)
     func receavedNetworkError(error: Error)

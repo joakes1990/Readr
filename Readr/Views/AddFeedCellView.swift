@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class AddFeedCellView: NSView {
+class AddFeedCellView: NSTableRowView {
     
     let titleLabel: NSTextField = NSTextField(labelWithString: "Feed Title")
     var checkBox: NSButton!

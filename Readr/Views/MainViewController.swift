@@ -107,13 +107,9 @@ class MainViewController: NSViewController {
             let index: Int = unownedSelf.sidebarDataSource.allFeeds.count
             let parentItem = unownedSelf.outlineview.item(atRow: 0)
             
-            if unownedSelf.outlineview.isItemExpanded(parentItem) {
                 unownedSelf.outlineview.insertItems(at: [index - 1 >= 0 ? index - 1 : 0],
                                                     inParent: parentItem,
                                                     withAnimation: .slideDown)
-            } else {
-                unownedSelf.outlineview.reloadItem(parentItem, reloadChildren: true)
-            }
             
         }
     }
@@ -130,11 +126,9 @@ class MainViewController: NSViewController {
                                                     withAnimation: NSTableView.AnimationOptions.slideRight)
                 unownedSelf.outlineview.reloadItem(parentItem)
             }
-//            else {
-//                unownedSelf.sidebarDataSource?.usedFeeds = true
-//                unownedSelf.outlineview.reloadItem(parentItem)
-//                unownedSelf.sidebarDataSource?.resetUsedFlags()
-//            }
+            else {
+                unownedSelf.outlineview.reloadItem(parentItem)
+            }
         }
     }
     

@@ -11,7 +11,6 @@ import Cocoa
 class ImportFeed: RSSNetworkingProtocol {
     
     var delegateView: AddFeedViewController?
-    var feeds: [ManagedFeed] = []
     static let shared: ImportFeed = ImportFeed()
     
     class func validProtocol(_ latestClip: String) -> Bool {
@@ -69,17 +68,13 @@ class ImportFeed: RSSNetworkingProtocol {
         netManager?.createManagedFeedFrom(url: feedURL, with: name)
     }
     
-    func found(feeds: [ManagedFeed]) {
-        self.feeds.append(contentsOf: feeds)
-        let multipulFeedsString: String = NSLocalizedString("other feeds added", comment: "number of feeds added")
-        let informitiveText: String = feeds.count > 1 ? "\(feeds[0].title ?? "1 feed") and \(feeds.count - 1) \(multipulFeedsString)" : "\(feeds[0].title ?? "Feed") added"
-        let singleTitle: String = NSLocalizedString("Added feed", comment: "Added feed")
-        let multiTitle: String = NSLocalizedString("Added feeds", comment: "Added feeds")
+    func found(feed: ManagedFeed) {
+        let informitiveText: String = "\(feed.title ?? "Feed") added"
+        let notificationTitle: String = NSLocalizedString("Added feed", comment: "Added feed")
         let notification: NSUserNotification = NSUserNotification()
-        notification.title = feeds.count > 1 ? multiTitle : singleTitle
+        notification.title = notificationTitle
         notification.subtitle = NSLocalizedString("Somthing good happened", comment: "Somthing good happened")
         notification.informativeText = informitiveText
-        
         DispatchQueue.main.async {
             NSUserNotificationCenter.default.deliver(notification)
         }
@@ -129,7 +124,6 @@ class ImportFeed: RSSNetworkingProtocol {
     }
     
     func receavedNetworkError(error: Error) {
-        //TODO: write error to logs
         print(error.localizedDescription)
         if delegateView != nil {
             unowned let unownedSelf: ImportFeed = self

@@ -29,4 +29,5 @@ extension NSUserInterfaceItemIdentifier {
     static let dataCell = NSUserInterfaceItemIdentifier("DataCell")
     static let headerCell = NSUserInterfaceItemIdentifier("HeaderCell")
     static let storyCell = NSUserInterfaceItemIdentifier("storyCell")
+    static let addFeedCell = NSUserInterfaceItemIdentifier("addFeed")
 }
