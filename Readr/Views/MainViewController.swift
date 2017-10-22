@@ -17,28 +17,8 @@ class MainViewController: NSViewController {
     @IBOutlet weak var addButton: NSButton!
     @IBOutlet weak var removeButton: NSButton!
     let storiesTabledelegate: StoryTableViewDelegate = StoryTableViewDelegate()
-    var sidebarDataSource: sourceData
+    var sidebarDataSource: sourceData?
     fileprivate var sidebarOpen: Bool = true
-    
-    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
-        let allFeeds: [ManagedFeed] = FeedController.shared.allFeeds ?? []
-        let allGroups: [ManagedGroup] = GroupController.shared.allGroups ?? []
-        let allPlaylists: [ManagedPlaylist] = PlaylistController.shared.allPlatlists ?? []
-        sidebarDataSource = sourceData(allFeeds: allFeeds,
-                                       allGroups: allGroups,
-                                       allPlaylists: allPlaylists)
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder: NSCoder) {
-        let allFeeds: [ManagedFeed] = FeedController.shared.allFeeds ?? []
-        let allGroups: [ManagedGroup] = GroupController.shared.allGroups ?? []
-        let allPlaylists: [ManagedPlaylist] = PlaylistController.shared.allPlatlists ?? []
-        sidebarDataSource = sourceData(allFeeds: allFeeds,
-                                       allGroups: allGroups,
-                                       allPlaylists: allPlaylists)
-        super.init(coder: coder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,15 +76,15 @@ class MainViewController: NSViewController {
                 unowned let unownedSelf: MainViewController = self
                 DispatchQueue.main.async {
                     FeedController.shared.updateFeedsArray()
-                    unownedSelf.sidebarDataSource.allFeeds = FeedController.shared.allFeeds ?? []
+                    unownedSelf.sidebarDataSource?.allFeeds = FeedController.shared.allFeeds ?? []
                     unownedSelf.outlineview.reloadData()
                 }
                 return
         }
         unowned let unownedSelf: MainViewController = self
         DispatchQueue.main.async {
-            unownedSelf.sidebarDataSource.allFeeds.append(feed)
-            let index: Int = unownedSelf.sidebarDataSource.allFeeds.count
+            unownedSelf.sidebarDataSource?.allFeeds.append(feed)
+            let index: Int = unownedSelf.sidebarDataSource?.allFeeds.count ?? 0
             let parentItem = unownedSelf.outlineview.item(atRow: 0)
             
                 unownedSelf.outlineview.insertItems(at: [index - 1 >= 0 ? index - 1 : 0],
@@ -117,9 +97,9 @@ class MainViewController: NSViewController {
     @objc func didReceaveNewGroup(aNotification: Notification) {
         unowned let unownedSelf: MainViewController = self
         DispatchQueue.main.async {
-            let index: Int = unownedSelf.sidebarDataSource.allGroups.count
+            let index: Int = unownedSelf.sidebarDataSource?.allGroups.count ?? 0
             unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
-            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource.allGroups.first)
+            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allGroups.first)
             if parentItem != nil {
                 unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
                                                     inParent: parentItem,
@@ -135,9 +115,9 @@ class MainViewController: NSViewController {
     @objc func didReceaveNewPlaylist(aNotification: Notification) {
         unowned let unownedSelf: MainViewController = self
         DispatchQueue.main.async {
-            let index: Int = unownedSelf.sidebarDataSource.allPlaylists.count
+            let index: Int = unownedSelf.sidebarDataSource?.allPlaylists.count ?? 0
             unownedSelf.sidebarDataSource = unownedSelf.populateDataSource()
-            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource.allPlaylists.first)
+            let parentItem = unownedSelf.outlineview.parent(forItem: unownedSelf.sidebarDataSource?.allPlaylists.first)
             if parentItem != nil && unownedSelf.outlineview.isItemExpanded(parentItem) {
                 unownedSelf.outlineview.insertItems(at: NSIndexSet(index: index) as IndexSet,
                                                     inParent: parentItem,

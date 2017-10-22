@@ -12,9 +12,9 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate, NS
     
     
     func populateDataSource() -> sourceData {
-        let allFeeds: [ManagedFeed] = FeedController.shared.allFeeds ?? []
-        let allGroups: [ManagedGroup] = GroupController.shared.allGroups ?? []
-        let allPlaylists: [ManagedPlaylist] = PlaylistController.shared.allPlatlists ?? []
+        let allFeeds: [ManagedFeed] = FeedController.shared.allFeeds ?? [ManagedFeed]()
+        let allGroups: [ManagedGroup] = GroupController.shared.allGroups ?? [ManagedGroup]()
+        let allPlaylists: [ManagedPlaylist] = PlaylistController.shared.allPlatlists ?? [ManagedPlaylist]()
         
         return sourceData(allFeeds: allFeeds, allGroups: allGroups, allPlaylists: allPlaylists)
     }
@@ -104,23 +104,23 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate, NS
         if item == nil {
             switch index {
             case 0:
-                return sidebarDataSource.allFeeds as Any
+                return sidebarDataSource?.allFeeds as Any
             case 1:
-                return sidebarDataSource.allGroups as Any
+                return sidebarDataSource?.allGroups as Any
             case 2:
-                return sidebarDataSource.allPlaylists as Any
+                return sidebarDataSource?.allPlaylists as Any
             default:
                 return ()
             }
         }
         if let _: [ManagedFeed] = item as? [ManagedFeed] {
-            return sidebarDataSource.allFeeds[index] as Any
+            return sidebarDataSource?.allFeeds[index] as Any
         }
         if let _: [ManagedGroup] = item as? [ManagedGroup] {
-            return sidebarDataSource.allGroups[index] as Any
+            return sidebarDataSource?.allGroups[index] as Any
         }
         if let _: [ManagedPlaylist] = item as? [ManagedPlaylist] {
-            return sidebarDataSource.allPlaylists[index] as Any
+            return sidebarDataSource?.allPlaylists[index] as Any
         }
         if let group: ManagedGroup = item as? ManagedGroup {
             let feeds: NSSet = group.feeds ?? []
@@ -251,7 +251,7 @@ extension MainViewController: NSOutlineViewDataSource, NSOutlineViewDelegate, NS
         if let feed: ManagedFeed = selectedItem as? ManagedFeed {
             let childIndex: Int = outlineview.childIndex(forItem: feed)
             let parentItem = outlineview.parent(forItem: feed)
-            if let _: [ManagedFeed] = parentItem as? [ManagedFeed] {
+            if let feeds: [ManagedFeed] = parentItem as? [ManagedFeed] {
                 removeFeedFromGroups(feed: feed)
                 FeedController.shared.remove(feed: feed)
                 FeedController.shared.saveContext()
